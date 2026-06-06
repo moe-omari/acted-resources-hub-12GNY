@@ -2373,6 +2373,10 @@ export default function Home() {
                     site_name: siteNameValue,
                     location: selectedLocation || 'all',
                   });
+                } else {
+                  trackEvent('site_dropdown_clear', {
+                    location: selectedLocation || 'all',
+                  });
                 }
               }}
               options={siteNameOptions.map(siteName => ({ value: siteName, label: translateSiteName(siteName) }))}
@@ -2397,6 +2401,18 @@ export default function Home() {
                 const serviceNameValue = option ? option.value : null;
                 setSelectedServiceName(serviceNameValue);
                 setSelectedService(null);
+                if (serviceNameValue) {
+                  trackEvent('service_dropdown_select', {
+                    service_name: serviceNameValue,
+                    location: selectedLocation || 'all',
+                    site_name: selectedSiteName || 'all',
+                  });
+                } else {
+                  trackEvent('service_dropdown_clear', {
+                    location: selectedLocation || 'all',
+                    site_name: selectedSiteName || 'all',
+                  });
+                }
               }}
               options={serviceNameOptions.map(serviceName => ({
                 value: serviceName,
