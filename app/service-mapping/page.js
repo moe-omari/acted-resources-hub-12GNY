@@ -523,6 +523,7 @@ const rawServiceTranslations = [
     key: 'Nutrition Center',
     en: 'Nutrition Center',
     ar: 'مركز تغذية',
+    aliases: ['Nutrition Centre'],
   },
   {
     key: 'Nutrition Center - Ard Al-Insan x IRC',
@@ -667,6 +668,7 @@ const rawServiceNameTranslations = [
   { key: 'Saline Water  Distribution Point', en: 'Saline Water Distribution Point', ar: 'نقطة توزيع المياه المالحة' },
   { key: 'Takiyya', en: 'Takiyya', ar: 'تكية' },
   { key: 'Aid distribution center', en: 'Aid Distribution Center', ar: 'مركز توزيع المساعدات' },
+  { key: 'Nutrition Centre', en: 'Nutrition Center', ar: 'مركز تغذية' },
   { key: 'Bakery for bread in Bakar Yunis', en: 'Bakery for Bread in Bakar Yunis', ar: 'مخبز الخبز في بكر يونس' },
 ];
 
@@ -1741,7 +1743,7 @@ export default function Home() {
           const boundaryLayer = L.geoJSON(normalizedCollection, {
             style: getBoundaryFeatureStyle,
             onEachFeature: (feature, layer) => {
-              const label = getBoundaryFeatureLabel(feature);
+              const label = getBoundaryFeatureLabel(feature, translateSiteName);
               if (label) layer.bindPopup(label);
               layer.on('click', () => {
                 const siteName = getBoundaryFeatureSiteName(feature);
@@ -1777,7 +1779,7 @@ export default function Home() {
       setIsSatelliteView(false);
       setMapReady(false);
     };
-  }, [leafletReady, userLocation, services, loading]);
+  }, [leafletReady, loading, services, translateSiteName, userLocation]);
 
   const filteredServices = useMemo(() => services.filter((service) => (
     (!selectedLocation || service.location === selectedLocation) &&
