@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Suspense } from "react";
 import Script from "next/script";
 import AnalyticsPageTracker from "./AnalyticsPageTracker";
 import { GA_MEASUREMENT_ID } from "../lib/analytics";
@@ -23,7 +24,9 @@ export default function RootLayout({ children }) {
         </Script>
       </head>
       <body>
-        <AnalyticsPageTracker />
+        <Suspense fallback={null}>
+          <AnalyticsPageTracker />
+        </Suspense>
         {children}
       </body>
     </html>
