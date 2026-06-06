@@ -1,0 +1,1135 @@
+{
+  "name": "IOM new selected 20 Sites GAZA City ",
+  "placemarks": [
+    {
+      "name": "GZA5220",
+      "description": "Site Name: Al-Rageen<br>الوصف: <br>y: <br>x: <br>Site code: ",
+      "styleUrl": "#poly-0288D1-1200-76",
+      "properties": {
+        "Site Name": "Al-Rageen",
+        "الوصف": null,
+        "y": null,
+        "x": null,
+        "Site code": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "outerBoundary": [
+          {
+            "longitude": 34.4561082,
+            "latitude": 31.5256298,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4558132,
+            "latitude": 31.525879,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.454346,
+            "latitude": 31.5246581,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.454633,
+            "latitude": 31.5243563,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4561082,
+            "latitude": 31.5256298,
+            "altitude": 0.0
+          }
+        ],
+        "innerBoundaries": []
+      }
+    },
+    {
+      "name": "GZA4388",
+      "description": "Site Name: Ministry of Labor<br>الوصف: <br>y: <br>x: <br>Site code: ",
+      "styleUrl": "#poly-0288D1-1200-76",
+      "properties": {
+        "Site Name": "Ministry of Labor",
+        "الوصف": null,
+        "y": null,
+        "x": null,
+        "Site code": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "outerBoundary": [
+          {
+            "longitude": 34.4499696,
+            "latitude": 31.5208416,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4497157,
+            "latitude": 31.5210717,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4494825,
+            "latitude": 31.520871,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4496946,
+            "latitude": 31.5206263,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4499696,
+            "latitude": 31.5208416,
+            "altitude": 0.0
+          }
+        ],
+        "innerBoundaries": []
+      }
+    },
+    {
+      "name": "GZA6027‏",
+      "description": "Site Name: Al-Salam Site<br>الوصف: <br>y: <br>x: <br>Site code: ",
+      "styleUrl": "#poly-0288D1-1200-76",
+      "properties": {
+        "Site Name": "Al-Salam Site",
+        "الوصف": null,
+        "y": null,
+        "x": null,
+        "Site code": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "outerBoundary": [
+          {
+            "longitude": 34.450778,
+            "latitude": 31.5207582,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4523671,
+            "latitude": 31.5218521,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.452673,
+            "latitude": 31.5216382,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4529144,
+            "latitude": 31.5218165,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4515787,
+            "latitude": 31.5230923,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4501786,
+            "latitude": 31.5218897,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4509135,
+            "latitude": 31.5211809,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4511549,
+            "latitude": 31.5213455,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.450479,
+            "latitude": 31.5219217,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4514714,
+            "latitude": 31.5228134,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4522492,
+            "latitude": 31.5221549,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4511871,
+            "latitude": 31.521341,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4505863,
+            "latitude": 31.5209568,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.450778,
+            "latitude": 31.5207582,
+            "altitude": 0.0
+          }
+        ],
+        "innerBoundaries": []
+      }
+    },
+    {
+      "name": "GZA2136‏",
+      "description": "Site Name: Al-Mu'tasim Billah Shelter Center<br>الوصف: <br>y: <br>x: <br>Site code: ",
+      "styleUrl": "#poly-0288D1-1200-76",
+      "properties": {
+        "Site Name": "Al-Mu'tasim Billah Shelter Center",
+        "الوصف": null,
+        "y": null,
+        "x": null,
+        "Site code": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "outerBoundary": [
+          {
+            "longitude": 34.4561031,
+            "latitude": 31.5160753,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4554638,
+            "latitude": 31.5165433,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4547388,
+            "latitude": 31.5159058,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4553405,
+            "latitude": 31.5154458,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4561031,
+            "latitude": 31.5160753,
+            "altitude": 0.0
+          }
+        ],
+        "innerBoundaries": []
+      }
+    },
+    {
+      "name": "6009‏ GZA",
+      "description": "Site Name: Atfalouna<br>الوصف: <br>y: <br>x: <br>Site code: ",
+      "styleUrl": "#poly-0288D1-1200-76",
+      "properties": {
+        "Site Name": "Atfalouna",
+        "الوصف": null,
+        "y": null,
+        "x": null,
+        "Site code": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "outerBoundary": [
+          {
+            "longitude": 34.4563435,
+            "latitude": 31.5226115,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4565401,
+            "latitude": 31.5224549,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.456643,
+            "latitude": 31.5225263,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4566756,
+            "latitude": 31.5225757,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4567029,
+            "latitude": 31.5226251,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4567472,
+            "latitude": 31.5227281,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4567834,
+            "latitude": 31.5228081,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4568236,
+            "latitude": 31.5229064,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4567914,
+            "latitude": 31.5230985,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4567338,
+            "latitude": 31.5232265,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4566118,
+            "latitude": 31.523334,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.456541,
+            "latitude": 31.5233311,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4564811,
+            "latitude": 31.5233031,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4564159,
+            "latitude": 31.5232471,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4563596,
+            "latitude": 31.5231259,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4563596,
+            "latitude": 31.522999,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.456369,
+            "latitude": 31.5228949,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4563529,
+            "latitude": 31.5227464,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4563435,
+            "latitude": 31.5226115,
+            "altitude": 0.0
+          }
+        ],
+        "innerBoundaries": []
+      }
+    },
+    {
+      "name": "GZA4353",
+      "description": "Site Name: Al-Majida School Wasila Bani Ammar<br>الوصف: <br>y: <br>x: <br>Site code: ",
+      "styleUrl": "#poly-0288D1-1200-76",
+      "properties": {
+        "Site Name": "Al-Majida School Wasila Bani Ammar",
+        "الوصف": null,
+        "y": null,
+        "x": null,
+        "Site code": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "outerBoundary": [
+          {
+            "longitude": 34.458525,
+            "latitude": 31.5230008,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4578148,
+            "latitude": 31.5235899,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.457163,
+            "latitude": 31.5229611,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4578035,
+            "latitude": 31.5224268,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.458525,
+            "latitude": 31.5230008,
+            "altitude": 0.0
+          }
+        ],
+        "innerBoundaries": []
+      }
+    },
+    {
+      "name": "GZA4838",
+      "description": "Site Name: Haratuna Site<br>الوصف: <br>y: <br>x: <br>Site code: ",
+      "styleUrl": "#poly-0288D1-1200-76",
+      "properties": {
+        "Site Name": "Haratuna Site",
+        "الوصف": null,
+        "y": null,
+        "x": null,
+        "Site code": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "outerBoundary": [
+          {
+            "longitude": 34.4604969,
+            "latitude": 31.5225772,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4614786,
+            "latitude": 31.5217495,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4615162,
+            "latitude": 31.5217907,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4616932,
+            "latitude": 31.5219324,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4621706,
+            "latitude": 31.5222662,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4631899,
+            "latitude": 31.5226001,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4629353,
+            "latitude": 31.5229021,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4619399,
+            "latitude": 31.5237661,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.460979,
+            "latitude": 31.5229754,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4604969,
+            "latitude": 31.5225772,
+            "altitude": 0.0
+          }
+        ],
+        "innerBoundaries": []
+      }
+    },
+    {
+      "name": "GZA6018",
+      "description": "Site Name: Al-Jawad Site<br>الوصف: <br>y: <br>x: <br>Site code: ",
+      "styleUrl": "#poly-0288D1-1200-76",
+      "properties": {
+        "Site Name": "Al-Jawad Site",
+        "الوصف": null,
+        "y": null,
+        "x": null,
+        "Site code": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "outerBoundary": [
+          {
+            "longitude": 34.4540867,
+            "latitude": 31.5166201,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4547413,
+            "latitude": 31.5171619,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4534699,
+            "latitude": 31.5181428,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4528879,
+            "latitude": 31.5176672,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4540867,
+            "latitude": 31.5166201,
+            "altitude": 0.0
+          }
+        ],
+        "innerBoundaries": []
+      }
+    },
+    {
+      "name": "GZA5443",
+      "description": "Site Name: Nisr Al-Shamali<br>الوصف: <br>y: <br>x: <br>Site code: ",
+      "styleUrl": "#poly-0288D1-1200-76",
+      "properties": {
+        "Site Name": "Nisr Al-Shamali",
+        "الوصف": null,
+        "y": null,
+        "x": null,
+        "Site code": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "outerBoundary": [
+          {
+            "longitude": 34.463347,
+            "latitude": 31.5302858,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.463839,
+            "latitude": 31.530653,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4645731,
+            "latitude": 31.5301206,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.464781,
+            "latitude": 31.530284,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4640819,
+            "latitude": 31.5308451,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4624492,
+            "latitude": 31.5322462,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.461673,
+            "latitude": 31.5316416,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.463347,
+            "latitude": 31.5302858,
+            "altitude": 0.0
+          }
+        ],
+        "innerBoundaries": []
+      }
+    },
+    {
+      "name": "GZA4817",
+      "description": "Site Name: Al-Rahma Site<br>الوصف: 1 <br> <br> Field <Null> <br> sitecode GZA4817 ‏<br>y: <br>x: <br>Site code: ",
+      "styleUrl": "#poly-0288D1-1200-76",
+      "properties": {
+        "Site Name": "Al-Rahma Site",
+        "الوصف": "1 \n \n Field <Null> \n sitecode GZA4817 ‏",
+        "y": null,
+        "x": null,
+        "Site code": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "outerBoundary": [
+          {
+            "longitude": 34.450772,
+            "latitude": 31.52287,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.450649,
+            "latitude": 31.523002,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.449679,
+            "latitude": 31.523325,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.44955,
+            "latitude": 31.523097,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.450157,
+            "latitude": 31.522588,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.449861,
+            "latitude": 31.5224,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.450035,
+            "latitude": 31.52227,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.450772,
+            "latitude": 31.52287,
+            "altitude": 0.0
+          }
+        ],
+        "innerBoundaries": []
+      }
+    },
+    {
+      "name": "GZA5444 ",
+      "description": "Site Name: Ahel Al khair<br>الوصف: 2 <br> <br> Field <Null> <br> sitecode GZA5444 ‏<br>y: <br>x: <br>Site code: ",
+      "styleUrl": "#poly-0288D1-1200-76",
+      "properties": {
+        "Site Name": "Ahel Al khair",
+        "الوصف": "2 \n \n Field <Null> \n sitecode GZA5444 ‏",
+        "y": null,
+        "x": null,
+        "Site code": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "outerBoundary": [
+          {
+            "longitude": 34.4645731,
+            "latitude": 31.5301206,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.463839,
+            "latitude": 31.530653,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.462382,
+            "latitude": 31.529526,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.463097,
+            "latitude": 31.528949,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4645731,
+            "latitude": 31.5301206,
+            "altitude": 0.0
+          }
+        ],
+        "innerBoundaries": []
+      }
+    },
+    {
+      "name": "GZA5287",
+      "description": "Site Name: Mukhayam Alshabab Walriyda<br>الوصف: 3 <br> <br> Field <Null> <br>‏<br>y: <br>x: <br>Site code: ",
+      "styleUrl": "#poly-0288D1-1200-76",
+      "properties": {
+        "Site Name": "Mukhayam Alshabab Walriyda",
+        "الوصف": "3 \n \n Field <Null> \n‏",
+        "y": null,
+        "x": null,
+        "Site code": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "outerBoundary": [
+          {
+            "longitude": 34.459493,
+            "latitude": 31.535712,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.459805,
+            "latitude": 31.536075,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.459383,
+            "latitude": 31.536423,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4590636,
+            "latitude": 31.5363671,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4588087,
+            "latitude": 31.5365214,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4584017,
+            "latitude": 31.5361243,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.458558,
+            "latitude": 31.535878,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.45905,
+            "latitude": 31.535377,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.459493,
+            "latitude": 31.535712,
+            "altitude": 0.0
+          }
+        ],
+        "innerBoundaries": []
+      }
+    },
+    {
+      "name": "ACT7444 ",
+      "description": "Site Name: An Naser School Site<br>الوصف: 5 <br> <br> Field <Null> <br> sitecode ACT7444 ‏<br>y: <br>x: <br>Site code: ",
+      "styleUrl": "#poly-0288D1-1200-76",
+      "properties": {
+        "Site Name": "An Naser School Site",
+        "الوصف": "5 \n \n Field <Null> \n sitecode ACT7444 ‏",
+        "y": null,
+        "x": null,
+        "Site code": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "outerBoundary": [
+          {
+            "longitude": 34.457251,
+            "latitude": 31.532102,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.457539,
+            "latitude": 31.532062,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.457876,
+            "latitude": 31.532054,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.458191,
+            "latitude": 31.53203,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.45815,
+            "latitude": 31.532405,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.458114,
+            "latitude": 31.532568,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.457787,
+            "latitude": 31.53256,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.457473,
+            "latitude": 31.532307,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.457251,
+            "latitude": 31.532102,
+            "altitude": 0.0
+          }
+        ],
+        "innerBoundaries": []
+      }
+    },
+    {
+      "name": "GZA5270",
+      "description": "Site Name: Hsan Selema School<br>الوصف: <br>y: <br>x: <br>Site code: ",
+      "styleUrl": "#poly-0288D1-1200-76",
+      "properties": {
+        "Site Name": "Hsan Selema School",
+        "الوصف": null,
+        "y": null,
+        "x": null,
+        "Site code": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "outerBoundary": [
+          {
+            "longitude": 34.4614177,
+            "latitude": 31.5314469,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4609378,
+            "latitude": 31.531898,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4602796,
+            "latitude": 31.5313823,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4607579,
+            "latitude": 31.5308982,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4614177,
+            "latitude": 31.5314469,
+            "altitude": 0.0
+          }
+        ],
+        "innerBoundaries": []
+      }
+    },
+    {
+      "name": "GZA5007",
+      "description": "Site Name: Aman 3<br>الوصف: <br>y: <br>x: <br>Site code: ",
+      "styleUrl": "#poly-0288D1-1200-76",
+      "properties": {
+        "Site Name": "Aman 3",
+        "الوصف": null,
+        "y": null,
+        "x": null,
+        "Site code": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "outerBoundary": [
+          {
+            "longitude": 34.467888,
+            "latitude": 31.5291225,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4667616,
+            "latitude": 31.5301929,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4652399,
+            "latitude": 31.5288686,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4664825,
+            "latitude": 31.5279062,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.467888,
+            "latitude": 31.5291225,
+            "altitude": 0.0
+          }
+        ],
+        "innerBoundaries": []
+      }
+    },
+    {
+      "name": "GAZ5031",
+      "description": "Site Name: Jesser Alhayat Site<br>الوصف: <br>y: <br>x: <br>Site code: ",
+      "styleUrl": "#poly-0288D1-1200-76",
+      "properties": {
+        "Site Name": "Jesser Alhayat Site",
+        "الوصف": null,
+        "y": null,
+        "x": null,
+        "Site code": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "outerBoundary": [
+          {
+            "longitude": 34.4667616,
+            "latitude": 31.5301929,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4657302,
+            "latitude": 31.5310098,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.463798,
+            "latitude": 31.5295099,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4652399,
+            "latitude": 31.5288686,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4667616,
+            "latitude": 31.5301929,
+            "altitude": 0.0
+          }
+        ],
+        "innerBoundaries": []
+      }
+    },
+    {
+      "name": "GZA5343 ",
+      "description": "Site Name: Al Qastal camp<br>الوصف: 1 <br> <br> SHAPE Polygon <br> SITEDCODE GZA5343 ‏<br>y: <br>x: <br>Site code: ",
+      "styleUrl": "#poly-0288D1-1200-76",
+      "properties": {
+        "Site Name": "Al Qastal camp",
+        "الوصف": "1 \n \n SHAPE Polygon \n SITEDCODE GZA5343 ‏",
+        "y": null,
+        "x": null,
+        "Site code": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "outerBoundary": [
+          {
+            "longitude": 34.460697,
+            "latitude": 31.530499,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.460407,
+            "latitude": 31.530817,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.459931,
+            "latitude": 31.531151,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.459629,
+            "latitude": 31.531351,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.459421,
+            "latitude": 31.531121,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.459633,
+            "latitude": 31.530901,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.459738,
+            "latitude": 31.530737,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.460024,
+            "latitude": 31.530606,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.460216,
+            "latitude": 31.530422,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.460364,
+            "latitude": 31.530244,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.460697,
+            "latitude": 31.530499,
+            "altitude": 0.0
+          }
+        ],
+        "innerBoundaries": []
+      }
+    },
+    {
+      "name": "GZA4437 ",
+      "description": "Site Name: Al-Zaharna site<br>الوصف: 2 <br> <br> SHAPE Polygon <br> SITEDCODE GZA4437 ‏<br>y: <br>x: <br>Site code: ",
+      "styleUrl": "#poly-0288D1-1200-76",
+      "properties": {
+        "Site Name": "Al-Zaharna site",
+        "الوصف": "2 \n \n SHAPE Polygon \n SITEDCODE GZA4437 ‏",
+        "y": null,
+        "x": null,
+        "Site code": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "outerBoundary": [
+          {
+            "longitude": 34.457242,
+            "latitude": 31.519904,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.457866,
+            "latitude": 31.520378,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.45779,
+            "latitude": 31.520472,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.457506,
+            "latitude": 31.520259,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.457054,
+            "latitude": 31.520614,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.456795,
+            "latitude": 31.520394,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.457242,
+            "latitude": 31.519904,
+            "altitude": 0.0
+          }
+        ],
+        "innerBoundaries": []
+      }
+    },
+    {
+      "name": "ACT8999 ",
+      "description": "Site Name: Al Jalaa Site<br>الوصف: 3 <br> <br> SHAPE Polygon <br> SITEDCODE ACT8999 ‏<br>y: <br>x: <br>Site code: ",
+      "styleUrl": "#poly-0288D1-1200-76",
+      "properties": {
+        "Site Name": "Al Jalaa Site",
+        "الوصف": "3 \n \n SHAPE Polygon \n SITEDCODE ACT8999 ‏",
+        "y": null,
+        "x": null,
+        "Site code": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "outerBoundary": [
+          {
+            "longitude": 34.4664825,
+            "latitude": 31.5279062,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4652399,
+            "latitude": 31.5288686,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4648774,
+            "latitude": 31.5290217,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.462884,
+            "latitude": 31.526598,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.463981,
+            "latitude": 31.525714,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4664825,
+            "latitude": 31.5279062,
+            "altitude": 0.0
+          }
+        ],
+        "innerBoundaries": []
+      }
+    },
+    {
+      "name": "GZA4123",
+      "description": "Site Name: Al-Aila Al-Muqaddasa School Shelter<br>الوصف: <br>y: <br>x: <br>Site code: ",
+      "styleUrl": "#poly-0288D1-1200-76",
+      "properties": {
+        "Site Name": "Al-Aila Al-Muqaddasa School Shelter",
+        "الوصف": null,
+        "y": null,
+        "x": null,
+        "Site code": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "outerBoundary": [
+          {
+            "longitude": 34.4517816,
+            "latitude": 31.524176,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4524267,
+            "latitude": 31.5235952,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4530691,
+            "latitude": 31.5230487,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4535653,
+            "latitude": 31.5234786,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.452825,
+            "latitude": 31.5240925,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4531066,
+            "latitude": 31.5243337,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4524924,
+            "latitude": 31.5248138,
+            "altitude": 0.0
+          },
+          {
+            "longitude": 34.4517816,
+            "latitude": 31.524176,
+            "altitude": 0.0
+          }
+        ],
+        "innerBoundaries": []
+      }
+    }
+  ]
+}

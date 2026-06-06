@@ -1,0 +1,577 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": null,
+            "properties": {
+                "description": {
+                    "@type": "html",
+                    "value": "Y: <br>X: Amir Al-Mansi School<br>الوصف: "
+                },
+                "Y": "",
+                "X": "Amir Al-Mansi School",
+                "الوصف": ""
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": null,
+            "properties": {
+                "description": {
+                    "@type": "html",
+                    "value": "Y: <br>X: Amir Al- Mansi School<br>الوصف: "
+                },
+                "Y": "",
+                "X": "Amir Al- Mansi School",
+                "الوصف": ""
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            34.45068,
+                            31.5201177
+                        ],
+                        [
+                            34.4502937,
+                            31.5204561
+                        ],
+                        [
+                            34.4499719,
+                            31.5201635
+                        ],
+                        [
+                            34.4492209,
+                            31.5208768
+                        ],
+                        [
+                            34.4485342,
+                            31.5202915
+                        ],
+                        [
+                            34.4498968,
+                            31.5192123
+                        ],
+                        [
+                            34.450352,
+                            31.519663
+                        ],
+                        [
+                            34.45068,
+                            31.5201177
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "name": "Al Amal college Site",
+                "description": {
+                    "@type": "html",
+                    "value": "Y: <br>X: <br>الوصف: "
+                },
+                "styleUrl": "#poly-FFEA00-1200-76",
+                "fill-opacity": 0.2980392156862745,
+                "fill": "#ffea00",
+                "stroke-opacity": 1,
+                "stroke": "#ffea00",
+                "stroke-width": 1.2,
+                "Y": "",
+                "X": "",
+                "الوصف": ""
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            34.45135,
+                            31.5205461
+                        ],
+                        [
+                            34.4509047,
+                            31.520162
+                        ],
+                        [
+                            34.4512614,
+                            31.519883
+                        ],
+                        [
+                            34.4516772,
+                            31.5202123
+                        ],
+                        [
+                            34.45135,
+                            31.5205461
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "name": "Amir Al-Mansi School Site",
+                "description": {
+                    "@type": "html",
+                    "value": "Y: <br>X: <br>الوصف: "
+                },
+                "styleUrl": "#poly-FFEA00-1200-76",
+                "fill-opacity": 0.2980392156862745,
+                "fill": "#ffea00",
+                "stroke-opacity": 1,
+                "stroke": "#ffea00",
+                "stroke-width": 1.2,
+                "Y": "",
+                "X": "",
+                "الوصف": ""
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            34.4555085,
+                            31.5222164
+                        ],
+                        [
+                            34.4550122,
+                            31.5226714
+                        ],
+                        [
+                            34.4548433,
+                            31.5225365
+                        ],
+                        [
+                            34.4553985,
+                            31.5219763
+                        ],
+                        [
+                            34.4556131,
+                            31.5221295
+                        ],
+                        [
+                            34.4555085,
+                            31.5222164
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "name": "Al Waad Site",
+                "description": {
+                    "@type": "html",
+                    "value": "Y: <br>X: <br>الوصف: "
+                },
+                "styleUrl": "#poly-FFEA00-1200-76",
+                "fill-opacity": 0.2980392156862745,
+                "fill": "#ffea00",
+                "stroke-opacity": 1,
+                "stroke": "#ffea00",
+                "stroke-width": 1.2,
+                "Y": "",
+                "X": "",
+                "الوصف": ""
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            34.4549945,
+                            31.5236852
+                        ],
+                        [
+                            34.4544527,
+                            31.5240739
+                        ],
+                        [
+                            34.4536297,
+                            31.5234065
+                        ],
+                        [
+                            34.4543561,
+                            31.5228392
+                        ],
+                        [
+                            34.4546941,
+                            31.5230816
+                        ],
+                        [
+                            34.4547638,
+                            31.5232508
+                        ],
+                        [
+                            34.4549301,
+                            31.5235709
+                        ],
+                        [
+                            34.4549945,
+                            31.5236852
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "name": "Al Haya 2 Site",
+                "description": {
+                    "@type": "html",
+                    "value": "Y: <br>X: <br>الوصف: "
+                },
+                "styleUrl": "#poly-FFEA00-1200-76",
+                "fill-opacity": 0.2980392156862745,
+                "fill": "#ffea00",
+                "stroke-opacity": 1,
+                "stroke": "#ffea00",
+                "stroke-width": 1.2,
+                "Y": "",
+                "X": "",
+                "الوصف": ""
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            34.4539018,
+                            31.5141941
+                        ],
+                        [
+                            34.4532419,
+                            31.5146457
+                        ],
+                        [
+                            34.4527668,
+                            31.5142064
+                        ],
+                        [
+                            34.4529636,
+                            31.5140104
+                        ],
+                        [
+                            34.4531619,
+                            31.5139647
+                        ],
+                        [
+                            34.4534096,
+                            31.5137413
+                        ],
+                        [
+                            34.453593,
+                            31.5138705
+                        ],
+                        [
+                            34.4536637,
+                            31.51397
+                        ],
+                        [
+                            34.4539018,
+                            31.5141941
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "name": "Watan Site",
+                "description": {
+                    "@type": "html",
+                    "value": "Y: <br>X: <br>الوصف: "
+                },
+                "styleUrl": "#poly-FFEA00-1200-76",
+                "fill-opacity": 0.2980392156862745,
+                "fill": "#ffea00",
+                "stroke-opacity": 1,
+                "stroke": "#ffea00",
+                "stroke-width": 1.2,
+                "Y": "",
+                "X": "",
+                "الوصف": ""
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            34.4566236,
+                            31.5246473
+                        ],
+                        [
+                            34.4558029,
+                            31.5253516
+                        ],
+                        [
+                            34.4550304,
+                            31.5248097
+                        ],
+                        [
+                            34.4551471,
+                            31.5247091
+                        ],
+                        [
+                            34.4559377,
+                            31.5240358
+                        ],
+                        [
+                            34.4559987,
+                            31.5240712
+                        ],
+                        [
+                            34.4566236,
+                            31.5246473
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "name": "Al Buraq School Site",
+                "description": {
+                    "@type": "html",
+                    "value": "Y: <br>X: <br>الوصف: "
+                },
+                "styleUrl": "#poly-FFEA00-1200-76",
+                "fill-opacity": 0.2980392156862745,
+                "fill": "#ffea00",
+                "stroke-opacity": 1,
+                "stroke": "#ffea00",
+                "stroke-width": 1.2,
+                "Y": "",
+                "X": "",
+                "الوصف": ""
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            34.450968,
+                            31.5211455
+                        ],
+                        [
+                            34.4503056,
+                            31.5217664
+                        ],
+                        [
+                            34.4496511,
+                            31.5212416
+                        ],
+                        [
+                            34.4504021,
+                            31.5206677
+                        ],
+                        [
+                            34.450968,
+                            31.5211455
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "name": "Insurance and Pensions Site",
+                "description": {
+                    "@type": "html",
+                    "value": "Y: <br>X: <br>الوصف: "
+                },
+                "styleUrl": "#poly-FFEA00-1200-76",
+                "fill-opacity": 0.2980392156862745,
+                "fill": "#ffea00",
+                "stroke-opacity": 1,
+                "stroke": "#ffea00",
+                "stroke-width": 1.2,
+                "Y": "",
+                "X": "",
+                "الوصف": ""
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            34.4518226,
+                            31.5202554
+                        ],
+                        [
+                            34.451372,
+                            31.5198439
+                        ],
+                        [
+                            34.4515088,
+                            31.5197204
+                        ],
+                        [
+                            34.45171,
+                            31.51958
+                        ],
+                        [
+                            34.4518218,
+                            31.519629
+                        ],
+                        [
+                            34.4519403,
+                            31.5196867
+                        ],
+                        [
+                            34.4519959,
+                            31.5196347
+                        ],
+                        [
+                            34.452225,
+                            31.5198301
+                        ],
+                        [
+                            34.4518226,
+                            31.5202554
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "name": "Palestine Secondary School Site",
+                "description": {
+                    "@type": "html",
+                    "value": "Y: <br>X: <br>الوصف: "
+                },
+                "styleUrl": "#poly-FFEA00-1200-76",
+                "fill-opacity": 0.2980392156862745,
+                "fill": "#ffea00",
+                "stroke-opacity": 1,
+                "stroke": "#ffea00",
+                "stroke-width": 1.2,
+                "Y": "",
+                "X": "",
+                "الوصف": ""
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            34.455578,
+                            31.5140511
+                        ],
+                        [
+                            34.4552132,
+                            31.5143861
+                        ],
+                        [
+                            34.4543817,
+                            31.5137504
+                        ],
+                        [
+                            34.4547974,
+                            31.5133877
+                        ],
+                        [
+                            34.455578,
+                            31.5140511
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "name": "Esaad Altofola Site",
+                "description": {
+                    "@type": "html",
+                    "value": "Y: <br>X: <br>الوصف: "
+                },
+                "styleUrl": "#poly-FFEA00-1200-76",
+                "fill-opacity": 0.2980392156862745,
+                "fill": "#ffea00",
+                "stroke-opacity": 1,
+                "stroke": "#ffea00",
+                "stroke-width": 1.2,
+                "Y": "",
+                "X": "",
+                "الوصف": ""
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            34.4562872,
+                            31.5180311
+                        ],
+                        [
+                            34.4563623,
+                            31.5180814
+                        ],
+                        [
+                            34.4558849,
+                            31.5185844
+                        ],
+                        [
+                            34.4543346,
+                            31.5172399
+                        ],
+                        [
+                            34.4547584,
+                            31.5168604
+                        ],
+                        [
+                            34.4562872,
+                            31.5180311
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "name": "Ayam Almassrah Site",
+                "description": {
+                    "@type": "html",
+                    "value": "Y: <br>X: <br>الوصف: "
+                },
+                "styleUrl": "#poly-FFEA00-1200-76",
+                "fill-opacity": 0.2980392156862745,
+                "fill": "#ffea00",
+                "stroke-opacity": 1,
+                "stroke": "#ffea00",
+                "stroke-width": 1.2,
+                "Y": "",
+                "X": "",
+                "الوصف": ""
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": null,
+            "properties": {
+                "name": "Palestine Secondary School for Boys Shelter",
+                "description": {
+                    "@type": "html",
+                    "value": "Y: <br>X: <br>الوصف: "
+                },
+                "Y": "",
+                "X": "",
+                "الوصف": ""
+            }
+        }
+    ]
+}

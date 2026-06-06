@@ -1,0 +1,113 @@
+@font-face {
+  font-family: 'Branding';
+  src: url('/BRANDING%20LIGHT.OTF') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Branding';
+  src: url('/BRANDING%20MEDIUM.OTF') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Branding';
+  src: url('/BRANDING%20SEMIBOLD.OTF') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Branding';
+  src: url('/BRANDING%20BOLD.OTF') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.custom-marker-icon,
+.custom-marker-icon svg {
+  overflow: visible !important;
+}
+
+.leaflet-marker-icon .marker-outline,
+.leaflet-marker-icon .marker-glow {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.leaflet-marker-icon.selected-marker {
+  --marker-stroke-color: #2563eb;
+  --marker-stroke-width: 1.5;
+  --marker-outline-color: rgba(37, 99, 235, 0.8);
+  --marker-outline-width: 4;
+  filter: drop-shadow(0 0 6px rgba(37, 99, 235, 0.35));
+}
+
+.leaflet-marker-icon.marker-health {
+  --marker-outline-color: rgba(248, 113, 113, 0.4);
+  --marker-outline-width: 2;
+  --marker-glow-color: rgba(239, 68, 68, 0.85);
+}
+
+.leaflet-marker-icon.marker-health .marker-glow {
+  animation: clinicGlow 2.2s ease-out infinite;
+}
+
+.leaflet-marker-icon.marker-health.selected-marker {
+  --marker-outline-color: rgba(37, 99, 235, 0.85);
+  --marker-outline-width: 5;
+  --marker-stroke-color: #2563eb;
+  --marker-stroke-width: 1.5;
+  filter: drop-shadow(0 0 12px rgba(37, 99, 235, 0.45));
+}
+
+@keyframes clinicGlow {
+  0% {
+    stroke-width: 2;
+    stroke-opacity: 0.9;
+  }
+  60% {
+    stroke-width: 7;
+    stroke-opacity: 0.3;
+  }
+  100% {
+    stroke-width: 11;
+    stroke-opacity: 0;
+  }
+}
