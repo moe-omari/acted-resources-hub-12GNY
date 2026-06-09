@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Noto_Sans_Arabic } from 'next/font/google';
 import { trackEvent } from '../../lib/analytics';
+import ResourceHeader from './ResourceHeader';
 
 const notoArabic = Noto_Sans_Arabic({ subsets: ['arabic'], weight: ['400', '500', '600', '700'] });
 
@@ -273,27 +274,7 @@ export default function ResourcesLandingPage() {
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
       style={{ fontFamily: lang === 'ar' ? undefined : 'Branding, sans-serif' }}
     >
-      <header className="shadow-md border-b border-gray-200 dark:border-zinc-800 px-1 sm:px-6 py-1 sm:py-2" style={{ backgroundColor: '#1b1464' }}>
-        <div className="flex items-center justify-center gap-1 sm:gap-3 w-full">
-          <img src="/acted-logo.png" alt="ACTED Logo" className="h-10 sm:h-16 w-auto" />
-          <h1 className="text-base sm:text-2xl font-bold text-center w-full whitespace-nowrap" style={{ color: '#fff' }}>
-            {lang === 'ar' ? 'بوابة الموارد' : 'Resources Hub'}
-          </h1>
-          <div style={{ minWidth: isMobile ? 90 : 120 }} className="sm:min-w-[160px] flex justify-end">
-            <button
-              type="button"
-              onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}
-              className="inline-flex items-center gap-2 rounded-full bg-white text-[#1b1464] px-3 py-2 font-semibold text-xs sm:text-sm shadow focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-              aria-label={lang === 'ar' ? 'تغيير اللغة' : 'Change language'}
-            >
-              <img src="/translate.png" alt="" className="h-4 w-4 sm:h-5 sm:w-5" />
-              <span className={lang === 'en' ? notoArabic.className : ''}>
-                {lang === 'en' ? 'العربية' : 'English'}
-              </span>
-            </button>
-          </div>
-        </div>
-      </header>
+      <ResourceHeader lang={lang} onLangChange={setLang} />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 space-y-10">
         <div className="text-center">

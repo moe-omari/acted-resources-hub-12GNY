@@ -1,6 +1,7 @@
 "use client";
 
 import { Noto_Sans_Arabic } from 'next/font/google';
+import Link from 'next/link';
 
 const notoArabic = Noto_Sans_Arabic({ subsets: ['arabic'], weight: ['400', '500', '600', '700'] });
 
@@ -13,7 +14,9 @@ export default function ResourceHeader({ lang = 'en', onLangChange }) {
       style={{ backgroundColor: '#1b1464' }}
     >
       <div className="flex items-center gap-2 sm:gap-4 w-full max-w-6xl mx-auto">
-        <img src="/acted-logo.png" alt="ACTED Logo" className="h-10 sm:h-16 w-auto flex-shrink-0" />
+        <Link href="/">
+          <img src="/acted-logo.png" alt="ACTED Logo" className="h-10 sm:h-16 w-auto flex-shrink-0 cursor-pointer" />
+        </Link>
         <h1 className="flex-1 text-center text-base sm:text-2xl font-bold text-white truncate">
           {lang === 'ar' ? 'بوابة الموارد' : 'Resources Hub'}
         </h1>

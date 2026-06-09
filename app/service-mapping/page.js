@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import Link from 'next/link';
 import Select from 'react-select';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
@@ -1050,6 +1051,7 @@ const createMarkerForServices = (L, mapInstance, servicesAtLoc, onClick) => {
   }
 
   const hasHealthClinic = servicesAtLoc.some((service) => getServiceType(service.name) === 'Health Space/Clinic');
+  if (!mapInstance || !mapInstance._container) return null;
   const marker = L.marker([lat, lng], { icon }).addTo(mapInstance);
 
   if (hasHealthClinic) {
@@ -1080,6 +1082,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [geoError, setGeoError] = useState(null);
   const [leafletReady, setLeafletReady] = useState(false);
+  const [coordinatesLoaded, setCoordinatesLoaded] = useState(false);
   const [lang, setLang] = useState('ar');
   const [isMobile, setIsMobile] = useState(false);
   const [activeMarkerKey, setActiveMarkerKey] = useState(null);
@@ -1096,6 +1099,8 @@ export default function Home() {
   const userMarkerRef = useRef(null);
   const hasCenteredOnUserRef = useRef(false);
   const mapContainerRef = useRef(null);
+  const routingControlRef = useRef(null);
+  const prevFiltersRef = useRef({ location: null, site: null });
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -1107,12 +1112,23 @@ export default function Home() {
     setLang(getStoredLanguage());
   }, []);
 
+  useEffect(() => {
+    if (leafletReady && coordinatesLoaded) {
+      setLoading(false);
+    }
+  }, [leafletReady, coordinatesLoaded]);
+
   const closeMarkerPanel = useCallback(() => {
     setActiveMarkerKey(null);
     setSelectedService(null);
     setShowMarkerPanel(false);
-    if (routingControl && mapRef.current) {
-      mapRef.current.removeControl(routingControl);
+    if (routingControlRef.current && mapRef.current) {
+      try {
+        mapRef.current.removeControl(routingControlRef.current);
+      } catch (e) {
+        console.warn(e);
+      }
+      routingControlRef.current = null;
       setRoutingControl(null);
     }
     if (markerPanelHideTimeout.current) {
@@ -1122,7 +1138,7 @@ export default function Home() {
       setSelectedMarkerInfo(null);
       markerPanelHideTimeout.current = null;
     }, 300);
-  }, [routingControl]);
+  }, []);
 
   const applyMarkerHighlight = useCallback((targetKey) => {
     markersRef.current.forEach((marker, markerKey) => {
@@ -1153,10 +1169,15 @@ export default function Home() {
 
   const showRouteToDestination = useCallback((destinationLatLng) => {
     const L = leafletRef.current;
-    if (!L || !mapRef.current) return;
+    if (!L || !mapRef.current || !mapRef.current._container) return;
 
-    if (routingControl) {
-      mapRef.current.removeControl(routingControl);
+    if (routingControlRef.current) {
+      try {
+        mapRef.current.removeControl(routingControlRef.current);
+      } catch (e) {
+        console.warn(e);
+      }
+      routingControlRef.current = null;
       setRoutingControl(null);
     }
 
@@ -1178,8 +1199,9 @@ export default function Home() {
       createMarker: () => null,
     }).addTo(mapRef.current);
 
+    routingControlRef.current = newRoutingControl;
     setRoutingControl(newRoutingControl);
-  }, [routingControl, userLocation]);
+  }, [userLocation]);
 
   useEffect(() => {
     return () => {
@@ -1535,11 +1557,37 @@ export default function Home() {
     },
   }), []);
 
+  const translateLocation = useCallback((location) => {
+    if (!location) return '';
+    return t[lang].locations?.[location] || location;
+  }, [lang, t]);
+
+  const siteNameLookup = useMemo(() => Object.entries(t[lang].siteNames).reduce((acc, [key, value]) => {
+    acc[key] = value;
+    acc[normalizeLookupKey(key)] = value;
+    return acc;
+  }, {}), [lang, t]);
+
+  const organizationLookup = useMemo(() => Object.entries(organizationTranslations[lang]).reduce((acc, [key, value]) => {
+    acc[key] = value;
+    acc[normalizeLookupKey(key)] = value;
+    return acc;
+  }, {}), [lang]);
+
+  const translateSiteName = useCallback((siteName) => {
+    if (!siteName) return '';
+    return siteNameLookup[siteName] || siteNameLookup[normalizeLookupKey(siteName)] || siteName;
+  }, [siteNameLookup]);
+
+  const translateOrganization = useCallback((organization) => {
+    if (!organization) return '';
+    return organizationLookup[organization] || organizationLookup[normalizeLookupKey(organization)] || organization;
+  }, [organizationLookup]);
+
   // Load user location
   useEffect(() => {
     if (typeof window !== 'undefined' && !window.isSecureContext) {
       setGeoError('geolocationInsecure');
-      setLoading(false);
       return;
     }
     if (navigator.geolocation) {
@@ -1548,7 +1596,6 @@ export default function Home() {
           const { latitude, longitude } = position.coords;
           setUserLocation([latitude, longitude]);
           setGeoError(null);
-          setLoading(false);
         },
         (error) => {
           const errorCode = typeof error?.code === 'number' ? error.code : null;
@@ -1570,7 +1617,6 @@ export default function Home() {
             console.error(`Geolocation error. Code: ${errorCode ?? 'unknown'}. Message: ${errorMessage}`);
             setGeoError('geolocationError');
           }
-          setLoading(false);
         }
         , {
           enableHighAccuracy: true,
@@ -1581,7 +1627,6 @@ export default function Home() {
       // Geolocation not available, use default location
       console.log('Geolocation not supported');
       setGeoError('geolocationUnavailable');
-      setLoading(false);
     }
   }, []);
 
@@ -1658,6 +1703,8 @@ export default function Home() {
         setServices(normalizedData);
       } catch (error) {
         console.error('Error loading coordinates:', error);
+      } finally {
+        setCoordinatesLoaded(true);
       }
     };
     loadCoordinates();
@@ -1736,6 +1783,9 @@ export default function Home() {
       }))
     )
       .then((boundaryCollections) => {
+        if (!mapRef.current || mapRef.current !== mapInstance || !mapInstance._container) {
+          return;
+        }
         boundaryCollections.forEach((boundaryCollection) => {
           const normalizedCollection = normalizeBoundaryFeatureCollection(boundaryCollection);
           if (!normalizedCollection.features.length) return;
@@ -1744,7 +1794,14 @@ export default function Home() {
             style: getBoundaryFeatureStyle,
             onEachFeature: (feature, layer) => {
               const label = getBoundaryFeatureLabel(feature, translateSiteName);
-              if (label) layer.bindPopup(label);
+              if (label) {
+                layer.bindPopup(label);
+                layer.bindTooltip(label, {
+                  permanent: true,
+                  direction: 'center',
+                  className: 'bg-transparent border-none shadow-none text-teal-800 dark:text-teal-200 font-bold text-xs sm:text-sm whitespace-nowrap pointer-events-none'
+                });
+              }
               layer.on('click', () => {
                 const siteName = getBoundaryFeatureSiteName(feature);
                 trackEvent('site_boundary_click', {
@@ -1767,15 +1824,55 @@ export default function Home() {
     mapRef.current = mapInstance;
     setMapReady(true);
     return () => {
+      if (routingControlRef.current) {
+        try {
+          mapInstance.removeControl(routingControlRef.current);
+        } catch (e) {
+          console.warn("Error removing routing control:", e);
+        }
+        routingControlRef.current = null;
+      }
       if (userMarkerRef.current) {
-        mapInstance.removeLayer(userMarkerRef.current);
+        try {
+          mapInstance.removeLayer(userMarkerRef.current);
+        } catch (e) {
+          console.warn(e);
+        }
         userMarkerRef.current = null;
       }
-      hasCenteredOnUserRef.current = false;
+      boundaryLayersRef.current.forEach((layer) => {
+        try {
+          mapInstance.removeLayer(layer);
+        } catch (e) {
+          console.warn(e);
+        }
+      });
       boundaryLayersRef.current = [];
-      mapInstance.remove();
+      markersRef.current.forEach((marker) => {
+        if (marker) {
+          try {
+            marker.off();
+            mapInstance.removeLayer(marker);
+          } catch (e) {
+            console.warn(e);
+          }
+        }
+      });
       markersRef.current.clear();
+      if (baseLayersRef.current.street) {
+        try { mapInstance.removeLayer(baseLayersRef.current.street); } catch (e) {}
+      }
+      if (baseLayersRef.current.satellite) {
+        try { mapInstance.removeLayer(baseLayersRef.current.satellite); } catch (e) {}
+      }
       baseLayersRef.current = { street: null, satellite: null };
+      try {
+        mapInstance.remove();
+      } catch (e) {
+        console.warn(e);
+      }
+      mapRef.current = null;
+      hasCenteredOnUserRef.current = false;
       setIsSatelliteView(false);
       setMapReady(false);
     };
@@ -1818,28 +1915,7 @@ export default function Home() {
 
   const hasActiveFilters = Boolean(selectedLocation || selectedSiteName || selectedServiceName);
   const isArabic = lang === 'ar';
-  const translateLocation = useCallback((location) => {
-    if (!location) return '';
-    return t[lang].locations?.[location] || location;
-  }, [lang, t]);
-  const siteNameLookup = useMemo(() => Object.entries(t[lang].siteNames).reduce((acc, [key, value]) => {
-    acc[key] = value;
-    acc[normalizeLookupKey(key)] = value;
-    return acc;
-  }, {}), [lang, t]);
-  const organizationLookup = useMemo(() => Object.entries(organizationTranslations[lang]).reduce((acc, [key, value]) => {
-    acc[key] = value;
-    acc[normalizeLookupKey(key)] = value;
-    return acc;
-  }, {}), [lang]);
-  const translateSiteName = useCallback((siteName) => {
-    if (!siteName) return '';
-    return siteNameLookup[siteName] || siteNameLookup[normalizeLookupKey(siteName)] || siteName;
-  }, [siteNameLookup]);
-  const translateOrganization = useCallback((organization) => {
-    if (!organization) return '';
-    return organizationLookup[organization] || organizationLookup[normalizeLookupKey(organization)] || organization;
-  }, [organizationLookup]);
+
   const selectStyles = useMemo(() => ({
     control: (base, state) => ({
       ...base,
@@ -1890,7 +1966,18 @@ export default function Home() {
     boundaryLayersRef.current.forEach((boundaryLayer) => {
       boundaryLayer.eachLayer((layer) => {
         const label = getBoundaryFeatureLabel(layer.feature, translateSiteName);
-        if (label) layer.bindPopup(label);
+        if (label) {
+          layer.bindPopup(label);
+          if (layer.getTooltip()) {
+            layer.setTooltipContent(label);
+          } else {
+            layer.bindTooltip(label, {
+              permanent: true,
+              direction: 'center',
+              className: 'bg-transparent border-none shadow-none text-teal-800 dark:text-teal-200 font-bold text-xs sm:text-sm whitespace-nowrap pointer-events-none'
+            });
+          }
+        }
       });
     });
   }, [lang, translateSiteName]);
@@ -1898,11 +1985,13 @@ export default function Home() {
   useEffect(() => {
     const L = leafletRef.current;
     const mapInstance = mapRef.current;
-    if (!mapReady || !L || !mapInstance) return;
+    if (!mapReady || !L || !mapInstance || !mapInstance._container) return;
 
     markersRef.current.forEach((marker) => {
-      marker.off();
-      mapInstance.removeLayer(marker);
+      if (marker) {
+        marker.off();
+        mapInstance.removeLayer(marker);
+      }
     });
     markersRef.current.clear();
 
@@ -1934,7 +2023,9 @@ export default function Home() {
         });
       });
 
-      markersRef.current.set(key, marker);
+      if (marker) {
+        markersRef.current.set(key, marker);
+      }
     }
 
     applyMarkerHighlight(activeMarkerKeyRef.current);
@@ -1967,7 +2058,7 @@ export default function Home() {
   }, [applyMarkerHighlight, closeMarkerPanel, mapReady, mapServices, selectedMarkerInfo, showRouteToDestination]);
 
   useEffect(() => {
-    if (!mapReady || !mapRef.current || !leafletRef.current) return;
+    if (!mapReady || !mapRef.current || !mapRef.current._container || !leafletRef.current) return;
     const mapInstance = mapRef.current;
 
     if (!userLocation) {
@@ -1982,17 +2073,115 @@ export default function Home() {
     const L = leafletRef.current;
     if (userMarkerRef.current) {
       userMarkerRef.current.setLatLng(userLocation);
+      userMarkerRef.current.setPopupContent(`<b>${t[lang].yourLocation}</b>`);
+      if (userMarkerRef.current.getTooltip()) {
+        userMarkerRef.current.setTooltipContent(t[lang].yourLocation);
+      } else {
+        userMarkerRef.current.bindTooltip(t[lang].yourLocation, {
+          permanent: true,
+          direction: 'top',
+          className: 'bg-blue-600 text-white font-bold px-2 py-0.5 rounded-full text-xs shadow-md border-none pointer-events-none'
+        });
+      }
     } else {
       userMarkerRef.current = L.marker(userLocation, { title: 'Your Location' })
         .addTo(mapInstance)
-        .bindPopup('<b>Your Location</b>');
+        .bindPopup(`<b>${t[lang].yourLocation}</b>`)
+        .bindTooltip(t[lang].yourLocation, {
+          permanent: true,
+          direction: 'top',
+          className: 'bg-blue-600 text-white font-bold px-2 py-0.5 rounded-full text-xs shadow-md border-none pointer-events-none'
+        });
     }
 
     if (!hasCenteredOnUserRef.current) {
       mapInstance.flyTo(userLocation, Math.max(mapInstance.getZoom(), USER_LOCATION_ZOOM));
       hasCenteredOnUserRef.current = true;
     }
-  }, [userLocation, mapReady]);
+  }, [userLocation, mapReady, t, lang]);
+
+  // Automatically zoom to selected location/site bounds when filters change
+  useEffect(() => {
+    if (!mapReady || !mapRef.current || !mapRef.current._container || !leafletRef.current) return;
+    
+    const prevLocation = prevFiltersRef.current.location;
+    const prevSite = prevFiltersRef.current.site;
+    
+    if (selectedLocation !== prevLocation || selectedSiteName !== prevSite) {
+      prevFiltersRef.current = { location: selectedLocation, site: selectedSiteName };
+      
+      const L = leafletRef.current;
+      const mapInstance = mapRef.current;
+      
+      if (selectedLocation || selectedSiteName) {
+        // First, if selectedSiteName is set, see if we can find its boundary polygon bounds
+        let siteBoundaryBounds = null;
+        if (selectedSiteName) {
+          for (const boundaryLayer of boundaryLayersRef.current) {
+            boundaryLayer.eachLayer((layer) => {
+              if (layer.feature) {
+                const siteName = getBoundaryFeatureSiteName(layer.feature);
+                if (siteName === selectedSiteName) {
+                  siteBoundaryBounds = layer.getBounds();
+                }
+              }
+            });
+            if (siteBoundaryBounds) break;
+          }
+        }
+
+        if (siteBoundaryBounds) {
+          // Fit to the site polygon boundary exactly with tight padding!
+          mapInstance.fitBounds(siteBoundaryBounds, {
+            padding: [20, 20]
+          });
+        } else {
+          // Fallback to filtered services markers
+          if (!filteredServices || filteredServices.length === 0) return;
+          
+          const coordinatesList = filteredServices
+            .map((s) => s.coordinates)
+            .filter((coords) => coords && Number.isFinite(coords.latitude) && Number.isFinite(coords.longitude));
+            
+          if (coordinatesList.length === 0) return;
+          
+          let isSingleLocation = true;
+          const first = coordinatesList[0];
+          for (let i = 1; i < coordinatesList.length; i++) {
+            if (Math.abs(coordinatesList[i].latitude - first.latitude) > 0.0001 ||
+                Math.abs(coordinatesList[i].longitude - first.longitude) > 0.0001) {
+              isSingleLocation = false;
+              break;
+            }
+          }
+          
+          if (isSingleLocation) {
+            const latLng = L.latLng(first.latitude, first.longitude);
+            mapInstance.flyTo(latLng, SERVICE_FOCUS_ZOOM);
+          } else {
+            const bounds = L.latLngBounds(
+              coordinatesList.map((coords) => L.latLng(coords.latitude, coords.longitude))
+            );
+            // Tight padding for snug fit to edges!
+            mapInstance.fitBounds(bounds, {
+              padding: [20, 20]
+            });
+          }
+        }
+      } else {
+        // Filters cleared: reset view to original state
+        const initialCenter = userLocation || DEFAULT_MAP_CENTER;
+        const initialZoom = userLocation ? USER_LOCATION_ZOOM : DEFAULT_MAP_ZOOM;
+        if (userLocation) {
+          mapInstance.flyTo(initialCenter, initialZoom);
+        } else {
+          mapInstance.fitBounds(DEFAULT_GAZA_BOUNDS, {
+            padding: [24, 24],
+          });
+        }
+      }
+    }
+  }, [selectedLocation, selectedSiteName, filteredServices, mapReady, userLocation]);
 
   // Update marker popups when language changes
   useEffect(() => {
@@ -2065,8 +2254,13 @@ export default function Home() {
     if (selectedService?.id === service.id) {
       setSelectedService(null);
       setActiveMarkerKey(null);
-      if (routingControl) {
-        mapRef.current.removeControl(routingControl);
+      if (routingControlRef.current) {
+        try {
+          mapRef.current.removeControl(routingControlRef.current);
+        } catch (e) {
+          console.warn(e);
+        }
+        routingControlRef.current = null;
         setRoutingControl(null);
       }
       return;
@@ -2086,8 +2280,13 @@ export default function Home() {
     const destinationLatLng = L.latLng(service.coordinates.latitude, service.coordinates.longitude);
     mapRef.current.flyTo(destinationLatLng, Math.max(mapRef.current.getZoom(), SERVICE_FOCUS_ZOOM));
 
-    if (routingControl) {
-      mapRef.current.removeControl(routingControl);
+    if (routingControlRef.current) {
+      try {
+        mapRef.current.removeControl(routingControlRef.current);
+      } catch (e) {
+        console.warn(e);
+      }
+      routingControlRef.current = null;
       setRoutingControl(null);
     }
     showRouteToDestination(destinationLatLng);
@@ -2100,8 +2299,35 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-black">
-        <p className="text-lg text-gray-600 dark:text-gray-400">{t[lang].loading}</p>
+      <div className="flex min-h-screen flex-col items-center justify-center bg-zinc-50 dark:bg-black p-4 transition-all duration-300">
+        <div className="flex flex-col items-center max-w-sm w-full space-y-6 text-center">
+          {/* Logo container with pulsing glow */}
+          <div className="relative flex items-center justify-center">
+            <div className="absolute inset-0 rounded-full bg-blue-600/10 dark:bg-blue-500/15 blur-xl animate-pulse w-24 h-24"></div>
+            <img 
+              src="/acted-logo.png" 
+              alt="ACTED Logo" 
+              className="relative h-14 sm:h-20 w-auto object-contain drop-shadow-[0_4px_12px_rgba(27,20,100,0.15)] dark:drop-shadow-[0_4px_12px_rgba(255,255,255,0.05)] animate-[pulse_2.5s_infinite]" 
+            />
+          </div>
+
+          {/* Premium Spinner and Text */}
+          <div className="flex flex-col items-center space-y-3">
+            <div className="relative w-12 h-12">
+              {/* Outer ring */}
+              <div className="absolute inset-0 rounded-full border-4 border-gray-200 dark:border-zinc-800"></div>
+              {/* Spinning gradient ring */}
+              <div className="absolute inset-0 rounded-full border-4 border-t-[#1b1464] dark:border-t-blue-500 border-r-transparent border-b-transparent border-l-transparent animate-spin"></div>
+            </div>
+            
+            <p className="text-base sm:text-lg font-semibold tracking-wide text-zinc-700 dark:text-zinc-300 animate-[pulse_1.5s_infinite]">
+              {lang === 'ar' ? 'جاري تجهيز خريطة الخدمات...' : 'Preparing the service map...'}
+            </p>
+            <p className="text-xs text-zinc-400 dark:text-zinc-500">
+              {lang === 'ar' ? 'يرجى الانتظار لحظة' : 'Please wait a moment'}
+            </p>
+          </div>
+        </div>
       </div>
     );
   }
@@ -2173,11 +2399,13 @@ export default function Home() {
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
       style={{ fontFamily: lang === 'ar' ? undefined : 'Branding, sans-serif' }}
     >
-      <header className="shadow-md border-b border-gray-200 dark:border-zinc-800 px-1 sm:px-6 py-1 sm:py-2" style={{ backgroundColor: '#1b1464' }}>
-        <div className="flex items-center justify-center gap-1 sm:gap-3 w-full">
-          <img src="/acted-logo.png" alt="ACTED Logo" className="h-10 sm:h-16 w-auto" />
-          <h1 className="text-base sm:text-2xl font-bold text-center w-full whitespace-nowrap" style={{ color: '#fff' }}>{t[lang].appTitle}</h1>
-          <div style={{ minWidth: isMobile ? 72 : 120 }} className="sm:min-w-[160px] flex justify-end">
+      <header className="shadow-md border-b border-gray-200 dark:border-zinc-800 px-2 sm:px-6 py-2" style={{ backgroundColor: '#1b1464' }}>
+        <div className="flex items-center gap-2 sm:gap-4 w-full max-w-6xl mx-auto">
+          <Link href="/">
+            <img src="/acted-logo.png" alt="ACTED Logo" className="h-10 sm:h-16 w-auto flex-shrink-0 cursor-pointer" />
+          </Link>
+          <h1 className="flex-1 text-center text-base sm:text-2xl font-bold text-white truncate">{t[lang].appTitle}</h1>
+          <div className="flex-shrink-0 w-[110px] sm:w-[170px] flex justify-end">
             <button
               type="button"
               onClick={() => {
@@ -2325,8 +2553,18 @@ export default function Home() {
           >
           <h2 className="text-xl sm:text-2xl font-bold mb-4 text-gray-900 dark:text-white">{t[lang].sites}</h2>
           {userLocation && (
-            <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-              <p className="text-sm font-semibold text-blue-900 dark:text-blue-200">{t[lang].yourLocation}</p>
+            <div 
+              onClick={() => {
+                if (mapRef.current && mapReady) {
+                  mapRef.current.flyTo(userLocation, USER_LOCATION_ZOOM);
+                }
+              }}
+              className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800 cursor-pointer hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
+            >
+              <p className="text-sm font-semibold text-blue-900 dark:text-blue-200 flex items-center justify-between">
+                <span>{t[lang].yourLocation}</span>
+                <span className="text-xs text-blue-500 font-normal">📍 {lang === 'ar' ? 'عرض على الخريطة' : 'Show on map'}</span>
+              </p>
               <p className="text-xs text-blue-700 dark:text-blue-300 mt-1">
                 {userLocation[0].toFixed(4)}, {userLocation[1].toFixed(4)}
               </p>
