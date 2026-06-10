@@ -1,0 +1,543 @@
+{
+  "AL Amal college": {
+    "en": "AL Amal college",
+    "ar": "كلية الأمل"
+  },
+  "AL-BAWASIL": {
+    "en": "AL-BAWASIL",
+    "ar": "البواسل"
+  },
+  "AL-FAROUQ": {
+    "en": "AL-FAROUQ",
+    "ar": "الفاروق"
+  },
+  "AL-Haya2": {
+    "en": "AL-Haya2",
+    "ar": "الحياة 2"
+  },
+  "AL-NAKHEEL & ALZAYTOON": {
+    "en": "AL-NAKHEEL & ALZAYTOON",
+    "ar": "النخيل والزيتون"
+  },
+  "AL-QUDS": {
+    "en": "AL-QUDS",
+    "ar": "القدس"
+  },
+  "Ahel Al khair": {
+    "en": "Ahel Al khair",
+    "ar": "أهل الخير"
+  },
+  "Al Qastal camp": {
+    "en": "Al Qastal camp",
+    "ar": "مخيم القسطل"
+  },
+  "Al-Aila Al-Muqaddasa School Shelter": {
+    "en": "Al-Aila Al-Muqaddasa School Shelter",
+    "ar": "مركز إيواء مدرسة العائلة المقدسة"
+  },
+  "Al-Fedaa site": {
+    "en": "Al-Fedaa site",
+    "ar": "موقع الفداء"
+  },
+  "Al-Jawad Site": {
+    "en": "Al-Jawad Site",
+    "ar": "موقع الجواد"
+  },
+  "Al-Jawhari": {
+    "en": "Al-Jawhari",
+    "ar": "الجوهري"
+  },
+  "Al-Majida School Wasila Bani Ammar": {
+    "en": "Al-Majida School Wasila Bani Ammar",
+    "ar": "مدرسة الماجدة وسيلة بني عمار"
+  },
+  "Al-Mu'tasim Billah Shelter Center": {
+    "en": "Al-Mu'tasim Billah Shelter Center",
+    "ar": "مركز إيواء المعتصم بالله"
+  },
+  "Al-Rageen": {
+    "en": "Al-Rageen",
+    "ar": "الراجعين"
+  },
+  "Al-Rahma Site": {
+    "en": "Al-Rahma Site",
+    "ar": "موقع الرحمة"
+  },
+  "Al-Salam Site": {
+    "en": "Al-Salam Site",
+    "ar": "موقع السلام"
+  },
+  "Al-Shaheed Jameel": {
+    "en": "Al-Shaheed Jameel",
+    "ar": "الشهيد جميل"
+  },
+  "Al-rimal Al-Thahabiea": {
+    "en": "Al-rimal Al-Thahabiea",
+    "ar": "الرمال الذهبية"
+  },
+  "Alwaad": {
+    "en": "Alwaad",
+    "ar": "الوعد"
+  },
+  "Aman 3": {
+    "en": "Aman 3",
+    "ar": "أمان 3"
+  },
+  "Amir Al-Mansi School": {
+    "en": "Amir Al-Mansi School",
+    "ar": "مدرسة أمير المنسي"
+  },
+  "An Naser School Site": {
+    "en": "An Naser School Site",
+    "ar": "موقع مدرسة النصر"
+  },
+  "Ayam Almassrah site": {
+    "en": "Ayam Almassrah site",
+    "ar": "موقع أيام المسرح"
+  },
+  "Elboraq school": {
+    "en": "Elboraq school",
+    "ar": "مدرسة البراق"
+  },
+  "Esaad Al-Tufoola": {
+    "en": "Esaad Al-Tufoola",
+    "ar": "إسعاد الطفولة"
+  },
+  "Haratuna Site": {
+    "en": "Haratuna Site",
+    "ar": "موقع حارتنا"
+  },
+  "Housing the building of the insurance and per": {
+    "en": "Housing the building of the insurance and per",
+    "ar": "موقع التأمين والمعاشات"
+  },
+  "Hsan Selema School": {
+    "en": "Hsan Selema School",
+    "ar": "مدرسة حسان سلامة"
+  },
+  "Jesser Alhayat Site": {
+    "en": "Jesser Alhayat Site",
+    "ar": "موقع جسر الحياة"
+  },
+  "Mukhayam Alshabab Walriyda": {
+    "en": "Mukhayam Alshabab Walriyda",
+    "ar": "مخيم الشباب والرياضة"
+  },
+  "Nisr Al-Shamali": {
+    "en": "Nisr Al-Shamali",
+    "ar": "النصر الشمالي"
+  },
+  "Palestine Secondary School for Boys Shelter": {
+    "en": "Palestine Secondary School for Boys Shelter",
+    "ar": "موقع مدرسة فلسطين الثانوية للبنين"
+  },
+  "WIJDAN COMMUNITY": {
+    "en": "WIJDAN COMMUNITY",
+    "ar": "مجتمع وجدان"
+  },
+  "Watan": {
+    "en": "Watan",
+    "ar": "وطن"
+  },
+  "Yafa": {
+    "en": "Yafa",
+    "ar": "يافا"
+  },
+  "Al-Farra Site": {
+    "en": "Al-Farra Site",
+    "ar": "موقع الفرا"
+  },
+  "Al-Shorbaji": {
+    "en": "Al-Shorbaji",
+    "ar": "الشربجي"
+  },
+  "Al-Hayat": {
+    "en": "Al-Hayat",
+    "ar": "الحياة"
+  },
+  "Al Jalaa Site": {
+    "en": "Al Jalaa Site",
+    "ar": "موقع الجلاء"
+  },
+  "Al-Shahri": {
+    "en": "Al-Shahri",
+    "ar": "الشحري"
+  },
+  "Al-Zaharna site": {
+    "en": "Al-Zaharna site",
+    "ar": "موقع الزهارنة"
+  },
+  "Al-Quds Site (Abdeen Area)": {
+    "en": "Al-Quds (Abdeen Area)",
+    "ar": "موقع القدس (منطقة عابدين)"
+  },
+  "Al-Nakheel & Al-Zytoon Site": {
+    "en": "Al-Nakheel & Al-Zytoon Site",
+    "ar": "Al-Nakheel & Al-Zytoon Site"
+  },
+  "Al-Fedaa Site": {
+    "en": "Al-Fedaa Site",
+    "ar": "موقع الفداء"
+  },
+  "Al Amal college Site": {
+    "en": "Al Amal college Site",
+    "ar": "موقع كلية الأمل"
+  },
+  "Amir Al-Mansi School Site": {
+    "en": "Amir Al-Mansi School Site",
+    "ar": "موقع مدرسة أمير المنسي"
+  },
+  "Al Waad Site": {
+    "en": "Al Waad Site",
+    "ar": "موقع الوعد"
+  },
+  "Al Haya 2 Site": {
+    "en": "Al Haya 2 Site",
+    "ar": "موقع الحياة 2"
+  },
+  "Watan Site": {
+    "en": "Watan Site",
+    "ar": "موقع وطن"
+  },
+  "Al Buraq School Site": {
+    "en": "Al Buraq School Site",
+    "ar": "موقع مدرسة البراق"
+  },
+  "Insurance and Pensions Site": {
+    "en": "Insurance and Pensions Site",
+    "ar": "موقع التأمين والمعاشات"
+  },
+  "Palestine Secondary School Site": {
+    "en": "Palestine Secondary School Site",
+    "ar": "موقع مدرسة فلسطين الثانوية"
+  },
+  "Esaad Altofola Site": {
+    "en": "Esaad Altofola Site",
+    "ar": "موقع إسعاد الطفولة"
+  },
+  "Ayam Almassrah Site": {
+    "en": "Ayam Almassrah Site",
+    "ar": "موقع أيام المسرح"
+  },
+  "Al Quds- Abdin Area": {
+    "en": "Al Quds- Abdin Area",
+    "ar": "موقع القدس - منطقة عابدين"
+  },
+  "Al-Nakheel and alzytoon": {
+    "en": "Al-Nakheel and alzytoon",
+    "ar": "موقع النخيل والزيتون"
+  },
+  "Albwasil": {
+    "en": "Albwasil",
+    "ar": "البواسل"
+  },
+  "Wijdan community": {
+    "en": "Wijdan community",
+    "ar": "مجتمع وجدان"
+  },
+  "Al faruq": {
+    "en": "Al faruq",
+    "ar": "الفاروق"
+  },
+  "Wijdan Site": {
+    "en": "Wijdan Site",
+    "ar": "موقع وجدان"
+  },
+  "Yafa Site": {
+    "en": "Yafa Site",
+    "ar": "موقع يافا"
+  },
+  "Al-Karam": {
+    "en": "Al-Karama",
+    "ar": "الكرم"
+  },
+  "Al-Farooq Site (Abu Farooq Area)": {
+    "en": "Al-Farooq Site (Abu Farooq Area)",
+    "ar": "موقع الفاروق (منطقة أبو فاروق)"
+  },
+  "Shady Site": {
+    "en": "Shady Site",
+    "ar": "موقع شادي"
+  },
+  "Al-Mosalla Site": {
+    "en": "Al-Mosalla Site",
+    "ar": "موقع المصلى"
+  },
+  "Al-Quds Site (Al-Hayat Area)": {
+    "en": "Al-Quods Site (Al-Hayat Area)",
+    "ar": "موقع القدس (منطقة الحياة)"
+  },
+  "Al-Shahri Site": {
+    "en": "Al-Shahri Site",
+    "ar": "Al-Shahri Site"
+  },
+  "Al-Jawhari Site": {
+    "en": "Al-Jawhari Site",
+    "ar": "موقع الجوهري"
+  },
+  "Al-Rimal Al-Thahabiea Site": {
+    "en": "Al-Rimal Al-Thahabiea Site",
+    "ar": "موقع الرمال الذهبية"
+  },
+  "Al-Shaheed Jameel Site": {
+    "en": "Al-Shaheed Jameel Site",
+    "ar": "موقع الشهيد جميل"
+  },
+  "Al-Malaab Site": {
+    "en": "Al-Malaab Site",
+    "ar": "موقع الملعب"
+  },
+  "Al Nour Site": {
+    "en": "Al Nour Site",
+    "ar": "موقع النور"
+  },
+  "Atfalouna": {
+    "en": "Atfalouna",
+    "ar": "أطفالنا"
+  },
+  "Hanoon Site": {
+    "en": "Hanoon Site",
+    "ar": "موقع حنون"
+  },
+  "Al-Farooq Site (Al-Hayat Area)": {
+    "en": "Al-Farooq Site (Al-Hayat Area)",
+    "ar": "موقع الفاروق (منطقة الحياة)"
+  },
+  "Garb Al-Shaleh Site": {
+    "en": "Garb Al-Shaleh Site",
+    "ar": "موقع غرب الشاليه"
+  },
+  "Ministry of Labor": {
+    "en": "Ministry of Labor",
+    "ar": "وزارة العمل"
+  },
+  "Ahali AL Junaina": {
+    "en": "Ahali AL Junaina",
+    "ar": "أهالي الجنينة"
+  },
+  "Ajyal Al-Karama site": {
+    "en": "Ajyal Al-Karama site",
+    "ar": "أجيال الكرامة"
+  },
+  "Al-Amoody": {
+    "en": "Al-Amoody",
+    "ar": "العمودي"
+  },
+  "AL Awda": {
+    "en": "AL Awda",
+    "ar": "العودة"
+  },
+  "AL Karama Site": {
+    "en": "AL Karama Site",
+    "ar": "موقع الكرامة"
+  },
+  "AL Rayyan": {
+    "en": "AL Rayyan",
+    "ar": "الريان"
+  },
+  "AL Tahrir Site": {
+    "en": "AL Tahrir Site",
+    "ar": "موقع التحرير"
+  },
+  "AL Zaytoon Site": {
+    "en": "AL Zaytoon Site",
+    "ar": "موقع الزيتون"
+  },
+  "Al_joura": {
+    "en": "Al_joura",
+    "ar": "الجورة"
+  },
+  "Al_Najjar community": {
+    "en": "Al_Najjar community",
+    "ar": "تجمع النجار"
+  },
+  "Alaa Abdeen": {
+    "en": "Alaa Abdeen",
+    "ar": "علاء عابدين"
+  },
+  "Al-Akli Site": {
+    "en": "Al-Akli Site",
+    "ar": "موقع العكلي"
+  },
+  "Al-Amal and haya": {
+    "en": "Al-Amal and haya",
+    "ar": "الأمل والحياة"
+  },
+  "Al-Amal site": {
+    "en": "Al-Amal site",
+    "ar": "موقع الأمل"
+  },
+  "Al-Aqqad": {
+    "en": "Al-Aqqad",
+    "ar": "العقاد"
+  },
+  "Al-Bader": {
+    "en": "Al-Bader",
+    "ar": "البدر"
+  },
+  "Al-Bayari": {
+    "en": "Al-Bayari",
+    "ar": "البياري"
+  },
+  "Al-Bayyari": {
+    "en": "Al-Bayyari",
+    "ar": "البياري"
+  },
+  "Al-Durra": {
+    "en": "Al-Durra",
+    "ar": "الدرة"
+  },
+  "Al-Hurya Site": {
+    "en": "Al-Hurya Site",
+    "ar": "موقع الحرية"
+  },
+  "Al-Ihsan Site": {
+    "en": "Al-Ihsan Site",
+    "ar": "موقع الإحسان"
+  },
+  "Al-Karam Site": {
+    "en": "Al-Karam Site",
+    "ar": "موقع الكرم"
+  },
+  "Al-Karama": {
+    "en": "Al-Karama",
+    "ar": "الكرامة"
+  },
+  "Al-Kareem": {
+    "en": "Al-Kareem",
+    "ar": "الكريم"
+  },
+  "Al-Mostafa": {
+    "en": "Al-Mostafa",
+    "ar": "المصطفى"
+  },
+  "ALMuktar faisal": {
+    "en": "ALMuktar faisal",
+    "ar": "المختار فيصل"
+  },
+  "Alnahda site": {
+    "en": "Alnahda site",
+    "ar": "موقع النهضة"
+  },
+  "Al-Nakheel and Al-Zytoon Site": {
+    "en": "Al-Nakheel and Al-Zytoon Site",
+    "ar": "موقع النخيل والزيتون"
+  },
+  "Al-Nour": {
+    "en": "Al-Nour",
+    "ar": "النور"
+  },
+  "Al-Quds": {
+    "en": "Al-Quds",
+    "ar": "القدس"
+  },
+  "Al-Shaer": {
+    "en": "Al-Shaer",
+    "ar": "الشاعر"
+  },
+  "Al-Suniyah": {
+    "en": "Al-Suniyah",
+    "ar": "السنية"
+  },
+  "Al-Wafa": {
+    "en": "Al-Wafa",
+    "ar": "الوفاء"
+  },
+  "Al-wehda": {
+    "en": "Al-wehda",
+    "ar": "الوحدة"
+  },
+  "Al-Zahraa": {
+    "en": "Al-Zahraa",
+    "ar": "الزهراء"
+  },
+  "Arada": {
+    "en": "Arada",
+    "ar": "عرادة"
+  },
+  "Ard -Aljawafa Site": {
+    "en": "Ard -Aljawafa Site",
+    "ar": "موقع أرض الجوافة"
+  },
+  "Asia": {
+    "en": "Asia",
+    "ar": "آسيا"
+  },
+  "Asqalan": {
+    "en": "Asqalan",
+    "ar": "عسقلان"
+  },
+  "Ayash site": {
+    "en": "Ayash site",
+    "ar": "موقع عياش"
+  },
+  "Basant": {
+    "en": "Basant",
+    "ar": "بيسنت"
+  },
+  "Bilal Bin Rabah": {
+    "en": "Bilal Bin Rabah",
+    "ar": "بلال بن رباح"
+  },
+  "Ghawar Site": {
+    "en": "Ghawar Site",
+    "ar": "موقع غوار"
+  },
+  "Hayat Site": {
+    "en": "Hayat Site",
+    "ar": "موقع حياة"
+  },
+  "Misk and Laian": {
+    "en": "Misk and Laian",
+    "ar": "مسك وليان"
+  },
+  "Musadar Al-Bahar": {
+    "en": "Musadar Al-Bahar",
+    "ar": "مصدر البحر"
+  },
+  "Pioneer Site": {
+    "en": "Pioneer Site",
+    "ar": "موقع بيونير"
+  },
+  "Shams": {
+    "en": "Shams",
+    "ar": "شمس"
+  },
+  "Smile": {
+    "en": "Smile",
+    "ar": "ابتسامة"
+  },
+  "Wajed Site": {
+    "en": "Wajed Site",
+    "ar": "موقع واجد"
+  },
+  "Zorub": {
+    "en": "Zorub",
+    "ar": "زعرب"
+  },
+  "Verification Camp": {
+    "en": "Verification Camp",
+    "ar": "Verification Camp Arabic"
+  },
+  "NH1554": {
+    "en": "Test Neighborhood",
+    "ar": "حي تجربة",
+    "boundaryFile": "/uploads/boundaries/some_neighborhood.geojson",
+    "projectCode": "GNY"
+  },
+  "KH8795": {
+    "en": "Some other neighborhood",
+    "ar": "موقع آخر",
+    "boundaryFile": "/uploads/boundaries/some_neighborhood.geojson",
+    "projectCode": "GNY"
+  },
+  "KHHHHA": {
+    "en": "Test site without pre service providers",
+    "ar": "موقع تجريبي بلا مقدمي خدمات افتراضيًا",
+    "boundaryFile": "/uploads/boundaries/some_neighborhood.geojson",
+    "projectCode": "GNY",
+    "location": "North",
+    "latitude": 31.304398,
+    "longitude": 34.293293
+  }
+}

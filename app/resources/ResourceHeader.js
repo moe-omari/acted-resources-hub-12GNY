@@ -15,7 +15,7 @@ export default function ResourceHeader({ lang = 'en', onLangChange }) {
     >
       <div className="flex items-center gap-2 sm:gap-4 w-full max-w-6xl mx-auto">
         <Link href="/">
-          <img src="/acted-logo.png" alt="ACTED Logo" className="h-10 sm:h-16 w-auto flex-shrink-0 cursor-pointer" />
+          <img src="/assets/acted-logo.png" alt="ACTED Logo" className="h-10 sm:h-16 w-auto flex-shrink-0 cursor-pointer" />
         </Link>
         <h1 className="flex-1 text-center text-base sm:text-2xl font-bold text-white truncate">
           {lang === 'ar' ? 'بوابة الموارد' : 'Resources Hub'}
@@ -28,7 +28,7 @@ export default function ResourceHeader({ lang = 'en', onLangChange }) {
               className="inline-flex items-center gap-2 rounded-full bg-white text-[#1b1464] px-3 py-2 font-semibold text-xs sm:text-sm shadow focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               aria-label={lang === 'ar' ? 'تغيير اللغة' : 'Change language'}
             >
-              <img src="/translate.png" alt="" className="h-4 w-4 sm:h-5 sm:w-5" />
+              <img src="/assets/translate.png" alt="" className="h-4 w-4 sm:h-5 sm:w-5" />
               <span className={lang === 'en' ? notoArabic.className : ''}>
                 {lang === 'en' ? 'العربية' : 'English'}
               </span>

@@ -24,9 +24,9 @@ const GEOLOCATION_ERROR_CODES = {
   TIMEOUT: 3,
 };
 const SITE_BOUNDARY_FILES = [
-  '/Site Extent - North.json',
-  '/Site Extent - South.json',
-  '/IOM_new_selected_20_Sites_GAZA_City.json',
+  '/maps/Site Extent - North.json',
+  '/maps/Site Extent - South.json',
+  '/maps/IOM_new_selected_20_Sites_GAZA_City.json',
 ];
 const DEFAULT_BOUNDARY_STROKE = '#0f766e';
 const DEFAULT_BOUNDARY_FILL = '#14b8a6';
@@ -81,7 +81,7 @@ const createHealthIcon = (L, color = '#ff4444') => {
       <path class="marker-glow" fill="none" stroke="var(--marker-glow-color, transparent)" stroke-width="var(--marker-glow-width, 0)" d="M12 0C7.029 0 3 4.029 3 9c0 7.5 9 18 9 18s9-10.5 9-18c0-4.971-4.029-9-9-9z" />
       <path class="marker-outline" fill="none" stroke="var(--marker-outline-color, transparent)" stroke-width="var(--marker-outline-width, 0)" d="M12 0C7.029 0 3 4.029 3 9c0 7.5 9 18 9 18s9-10.5 9-18c0-4.971-4.029-9-9-9z" />
       <path class="marker-shape" fill="${color}" stroke="var(--marker-stroke-color, #fff)" stroke-width="var(--marker-stroke-width, 1.5)" d="M12 0C7.029 0 3 4.029 3 9c0 7.5 9 18 9 18s9-10.5 9-18c0-4.971-4.029-9-9-9z"/>
-      <image href="/medical.png" x="6" y="6" width="12" height="12" style="filter: brightness(0) invert(1)" />
+      <image href="/assets/medical.png" x="6" y="6" width="12" height="12" style="filter: brightness(0) invert(1)" />
     </svg>
   `;
   return L.divIcon({
@@ -1089,6 +1089,7 @@ export default function Home() {
   const [isSatelliteView, setIsSatelliteView] = useState(false);
   const [mapReady, setMapReady] = useState(false);
   const [showMapHelp, setShowMapHelp] = useState(true);
+  const [dynamicSiteTranslations, setDynamicSiteTranslations] = useState({});
   const mapRef = useRef(null);
   const leafletRef = useRef(null);
   const markerPanelHideTimeout = useRef(null);
@@ -1107,9 +1108,26 @@ export default function Home() {
     window.localStorage.setItem('selectedLang', lang);
   }, [lang]);
 
+  const [isEmbedded, setIsEmbedded] = useState(false);
+
   useEffect(() => {
     if (typeof window === 'undefined') return;
     setLang(getStoredLanguage());
+    
+    // Check for "site" and "service" URL parameter to auto-filter map
+    const urlParams = new URLSearchParams(window.location.search);
+    const siteParam = urlParams.get('site');
+    if (siteParam) {
+      setSelectedSiteName(siteParam);
+    }
+    const serviceParam = urlParams.get('service');
+    if (serviceParam) {
+      setSelectedServiceName(serviceParam);
+    }
+    const embedParam = urlParams.get('embedded');
+    if (embedParam === 'true') {
+      setIsEmbedded(true);
+    }
   }, []);
 
   useEffect(() => {
@@ -1562,11 +1580,21 @@ export default function Home() {
     return t[lang].locations?.[location] || location;
   }, [lang, t]);
 
-  const siteNameLookup = useMemo(() => Object.entries(t[lang].siteNames).reduce((acc, [key, value]) => {
-    acc[key] = value;
-    acc[normalizeLookupKey(key)] = value;
-    return acc;
-  }, {}), [lang, t]);
+  const siteNameLookup = useMemo(() => {
+    const baseLookup = Object.entries(t[lang].siteNames).reduce((acc, [key, value]) => {
+      acc[key] = value;
+      acc[normalizeLookupKey(key)] = value;
+      return acc;
+    }, {});
+    
+    Object.entries(dynamicSiteTranslations || {}).forEach(([engName, transObj]) => {
+      const translatedVal = transObj[lang] || transObj.en || engName;
+      baseLookup[engName] = translatedVal;
+      baseLookup[normalizeLookupKey(engName)] = translatedVal;
+    });
+    
+    return baseLookup;
+  }, [lang, t, dynamicSiteTranslations]);
 
   const organizationLookup = useMemo(() => Object.entries(organizationTranslations[lang]).reduce((acc, [key, value]) => {
     acc[key] = value;
@@ -1586,9 +1614,16 @@ export default function Home() {
 
   // Load user location
   useEffect(() => {
-    if (typeof window !== 'undefined' && !window.isSecureContext) {
-      setGeoError('geolocationInsecure');
-      return;
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('embedded') === 'true') {
+        setGeoError('geolocationUnavailable'); // Fail silently
+        return;
+      }
+      if (!window.isSecureContext) {
+        setGeoError('geolocationInsecure');
+        return;
+      }
     }
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -1644,7 +1679,18 @@ export default function Home() {
   useEffect(() => {
     const loadCoordinates = async () => {
       try {
-        const response = await fetch('/coordinates.json');
+        // Fetch dynamic site translations first
+        try {
+          const transRes = await fetch('/maps/site_translations.json');
+          if (transRes.ok) {
+            const transData = await transRes.json();
+            setDynamicSiteTranslations(transData);
+          }
+        } catch (err) {
+          console.warn('Failed to load dynamic site translations:', err);
+        }
+
+        const response = await fetch('/maps/coordinates.json');
         const data = await response.json();
 
         const normalizeText = (value) => {
@@ -1774,21 +1820,54 @@ export default function Home() {
     baseLayersRef.current = { street: streetLayer, satellite: satelliteLayer };
     setIsSatelliteView(false);
 
-    Promise.all(
-      SITE_BOUNDARY_FILES.map((filePath) => fetch(filePath).then((response) => {
-        if (!response.ok) {
-          throw new Error(`Failed to load site boundary file: ${filePath}`);
-        }
-        return response.json();
-      }))
-    )
+    // Fetch static boundaries
+    const staticBoundariesPromises = SITE_BOUNDARY_FILES.map((filePath) => 
+      fetch(filePath)
+        .then((response) => {
+          if (!response.ok) throw new Error(`Failed to load boundary file: ${filePath}`);
+          return response.json();
+        })
+        .then((data) => normalizeBoundaryFeatureCollection(data))
+        .catch((err) => {
+          console.error(err);
+          return null;
+        })
+    );
+
+    // Fetch dynamic boundaries
+    const dynamicBoundaryFiles = Object.entries(dynamicSiteTranslations || {})
+      .filter(([_, t]) => t.boundaryFile)
+      .map(([siteName, t]) => ({ siteName, filePath: t.boundaryFile }));
+
+    const dynamicBoundariesPromises = dynamicBoundaryFiles.map(({ siteName, filePath }) =>
+      fetch(filePath)
+        .then((response) => {
+          if (!response.ok) throw new Error(`Failed to load dynamic boundary file: ${filePath}`);
+          return response.json();
+        })
+        .then((data) => {
+          const normalized = normalizeBoundaryFeatureCollection(data);
+          normalized.features.forEach((feature) => {
+            if (!feature.properties) feature.properties = {};
+            if (!feature.properties.name) {
+              feature.properties.name = siteName;
+            }
+          });
+          return normalized;
+        })
+        .catch((err) => {
+          console.error(err);
+          return null;
+        })
+    );
+
+    Promise.all([...staticBoundariesPromises, ...dynamicBoundariesPromises])
       .then((boundaryCollections) => {
         if (!mapRef.current || mapRef.current !== mapInstance || !mapInstance._container) {
           return;
         }
-        boundaryCollections.forEach((boundaryCollection) => {
-          const normalizedCollection = normalizeBoundaryFeatureCollection(boundaryCollection);
-          if (!normalizedCollection.features.length) return;
+        boundaryCollections.forEach((normalizedCollection) => {
+          if (!normalizedCollection || !normalizedCollection.features.length) return;
 
           const boundaryLayer = L.geoJSON(normalizedCollection, {
             style: getBoundaryFeatureStyle,
@@ -1816,7 +1895,7 @@ export default function Home() {
         });
       })
       .catch((error) => {
-        console.error('Error loading site boundaries:', error);
+        console.error('Error drawing site boundaries:', error);
       });
 
     markersRef.current = new Map();
@@ -1884,6 +1963,24 @@ export default function Home() {
     (!selectedServiceName || service.name === selectedServiceName)
   )), [services, selectedLocation, selectedSiteName, selectedServiceName]);
   const mapServices = services;
+
+  // Auto-center map on selected site
+  useEffect(() => {
+    if (!mapReady || !mapRef.current || !leafletRef.current) return;
+    if (selectedSiteName && filteredServices.length > 0) {
+      const L = leafletRef.current;
+      const mapInstance = mapRef.current;
+      
+      const timeoutId = setTimeout(() => {
+        const bounds = L.latLngBounds(filteredServices.map(s => [s.coordinates.latitude, s.coordinates.longitude]));
+        if (bounds.isValid()) {
+          mapInstance.flyToBounds(bounds, { padding: [50, 50], maxZoom: 16, duration: 1.5 });
+        }
+      }, 1000);
+      
+      return () => clearTimeout(timeoutId);
+    }
+  }, [selectedSiteName, filteredServices, mapReady]);
 
   const currentServices = useMemo(() => filteredServices.map((service) => {
     const { key: serviceTypeKey, label: serviceTypeLabel } = translateServiceType(service.name, lang);
@@ -2013,7 +2110,8 @@ export default function Home() {
           lat,
           lng,
         });
-        showRouteToDestination(L.latLng(lat, lng));
+        
+        mapInstance.flyTo(L.latLng(lat, lng), Math.max(mapInstance.getZoom(), SERVICE_FOCUS_ZOOM), { duration: 1.0 });
 
         [...new Set(servicesAtLoc.map((service) => getServiceType(service.name)).filter(Boolean))].forEach((serviceType) => {
           trackEvent('marker_click', {
@@ -2095,10 +2193,12 @@ export default function Home() {
     }
 
     if (!hasCenteredOnUserRef.current) {
-      mapInstance.flyTo(userLocation, Math.max(mapInstance.getZoom(), USER_LOCATION_ZOOM));
+      if (!selectedSiteName && !selectedLocation) {
+        mapInstance.flyTo(userLocation, Math.max(mapInstance.getZoom(), USER_LOCATION_ZOOM));
+      }
       hasCenteredOnUserRef.current = true;
     }
-  }, [userLocation, mapReady, t, lang]);
+  }, [userLocation, mapReady, selectedSiteName, selectedLocation, t, lang]);
 
   // Automatically zoom to selected location/site bounds when filters change
   useEffect(() => {
@@ -2106,82 +2206,91 @@ export default function Home() {
     
     const prevLocation = prevFiltersRef.current.location;
     const prevSite = prevFiltersRef.current.site;
+    const prevService = prevFiltersRef.current.service;
     
-    if (selectedLocation !== prevLocation || selectedSiteName !== prevSite) {
-      prevFiltersRef.current = { location: selectedLocation, site: selectedSiteName };
+    if (selectedLocation !== prevLocation || selectedSiteName !== prevSite || selectedServiceName !== prevService) {
+      prevFiltersRef.current = { location: selectedLocation, site: selectedSiteName, service: selectedServiceName };
       
       const L = leafletRef.current;
       const mapInstance = mapRef.current;
       
-      if (selectedLocation || selectedSiteName) {
-        // First, if selectedSiteName is set, see if we can find its boundary polygon bounds
-        let siteBoundaryBounds = null;
-        if (selectedSiteName) {
-          for (const boundaryLayer of boundaryLayersRef.current) {
-            boundaryLayer.eachLayer((layer) => {
-              if (layer.feature) {
-                const siteName = getBoundaryFeatureSiteName(layer.feature);
-                if (siteName === selectedSiteName) {
-                  siteBoundaryBounds = layer.getBounds();
+      const timeoutId = setTimeout(() => {
+        if (selectedLocation || selectedSiteName || selectedServiceName) {
+          // First, if selectedSiteName is set, see if we can find its boundary polygon bounds
+          let siteBoundaryBounds = null;
+          if (selectedSiteName && !selectedServiceName) {
+            for (const boundaryLayer of boundaryLayersRef.current) {
+              boundaryLayer.eachLayer((layer) => {
+                if (layer.feature) {
+                  const siteName = getBoundaryFeatureSiteName(layer.feature);
+                  if (siteName === selectedSiteName) {
+                    siteBoundaryBounds = layer.getBounds();
+                  }
                 }
-              }
-            });
-            if (siteBoundaryBounds) break;
-          }
-        }
-
-        if (siteBoundaryBounds) {
-          // Fit to the site polygon boundary exactly with tight padding!
-          mapInstance.fitBounds(siteBoundaryBounds, {
-            padding: [20, 20]
-          });
-        } else {
-          // Fallback to filtered services markers
-          if (!filteredServices || filteredServices.length === 0) return;
-          
-          const coordinatesList = filteredServices
-            .map((s) => s.coordinates)
-            .filter((coords) => coords && Number.isFinite(coords.latitude) && Number.isFinite(coords.longitude));
-            
-          if (coordinatesList.length === 0) return;
-          
-          let isSingleLocation = true;
-          const first = coordinatesList[0];
-          for (let i = 1; i < coordinatesList.length; i++) {
-            if (Math.abs(coordinatesList[i].latitude - first.latitude) > 0.0001 ||
-                Math.abs(coordinatesList[i].longitude - first.longitude) > 0.0001) {
-              isSingleLocation = false;
-              break;
+              });
+              if (siteBoundaryBounds) break;
             }
           }
-          
-          if (isSingleLocation) {
-            const latLng = L.latLng(first.latitude, first.longitude);
-            mapInstance.flyTo(latLng, SERVICE_FOCUS_ZOOM);
+
+          if (siteBoundaryBounds) {
+            // Fit to the site polygon boundary exactly with tight padding!
+            mapInstance.fitBounds(siteBoundaryBounds, {
+              padding: [20, 20],
+              maxZoom: 16,
+              duration: 1.5
+            });
           } else {
-            const bounds = L.latLngBounds(
-              coordinatesList.map((coords) => L.latLng(coords.latitude, coords.longitude))
-            );
-            // Tight padding for snug fit to edges!
-            mapInstance.fitBounds(bounds, {
-              padding: [20, 20]
+            // Fallback to filtered services markers
+            if (!filteredServices || filteredServices.length === 0) return;
+            
+            const coordinatesList = filteredServices
+              .map((s) => s.coordinates)
+              .filter((coords) => coords && Number.isFinite(coords.latitude) && Number.isFinite(coords.longitude));
+              
+            if (coordinatesList.length === 0) return;
+            
+            let isSingleLocation = true;
+            const first = coordinatesList[0];
+            for (let i = 1; i < coordinatesList.length; i++) {
+              if (Math.abs(coordinatesList[i].latitude - first.latitude) > 0.0001 ||
+                  Math.abs(coordinatesList[i].longitude - first.longitude) > 0.0001) {
+                isSingleLocation = false;
+                break;
+              }
+            }
+            
+            if (isSingleLocation) {
+              const latLng = L.latLng(first.latitude, first.longitude);
+              mapInstance.flyTo(latLng, SERVICE_FOCUS_ZOOM, { duration: 1.5 });
+            } else {
+              const bounds = L.latLngBounds(
+                coordinatesList.map((coords) => L.latLng(coords.latitude, coords.longitude))
+              );
+              // Tight padding for snug fit to edges!
+              mapInstance.fitBounds(bounds, {
+                padding: [20, 20],
+                maxZoom: 16,
+                duration: 1.5
+              });
+            }
+          }
+        } else {
+          // Filters cleared: reset view to original state
+          const initialCenter = userLocation || DEFAULT_MAP_CENTER;
+          const initialZoom = userLocation ? USER_LOCATION_ZOOM : DEFAULT_MAP_ZOOM;
+          if (userLocation) {
+            mapInstance.flyTo(initialCenter, initialZoom, { duration: 1.5 });
+          } else {
+            mapInstance.fitBounds(DEFAULT_GAZA_BOUNDS, {
+              padding: [24, 24],
             });
           }
         }
-      } else {
-        // Filters cleared: reset view to original state
-        const initialCenter = userLocation || DEFAULT_MAP_CENTER;
-        const initialZoom = userLocation ? USER_LOCATION_ZOOM : DEFAULT_MAP_ZOOM;
-        if (userLocation) {
-          mapInstance.flyTo(initialCenter, initialZoom);
-        } else {
-          mapInstance.fitBounds(DEFAULT_GAZA_BOUNDS, {
-            padding: [24, 24],
-          });
-        }
-      }
+      }, 1000);
+
+      return () => clearTimeout(timeoutId);
     }
-  }, [selectedLocation, selectedSiteName, filteredServices, mapReady, userLocation]);
+  }, [selectedLocation, selectedSiteName, selectedServiceName, filteredServices, mapReady, userLocation]);
 
   // Update marker popups when language changes
   useEffect(() => {
@@ -2305,7 +2414,7 @@ export default function Home() {
           <div className="relative flex items-center justify-center">
             <div className="absolute inset-0 rounded-full bg-blue-600/10 dark:bg-blue-500/15 blur-xl animate-pulse w-24 h-24"></div>
             <img 
-              src="/acted-logo.png" 
+              src="/assets/acted-logo.png" 
               alt="ACTED Logo" 
               className="relative h-14 sm:h-20 w-auto object-contain drop-shadow-[0_4px_12px_rgba(27,20,100,0.15)] dark:drop-shadow-[0_4px_12px_rgba(255,255,255,0.05)] animate-[pulse_2.5s_infinite]" 
             />
@@ -2388,6 +2497,24 @@ export default function Home() {
               </div>
             );
           })}
+          
+          {userLocation && (
+            <div className="mt-6 pt-4 border-t border-gray-200 dark:border-zinc-800">
+              <button
+                onClick={() => {
+                  if (typeof window !== 'undefined' && leafletRef.current) {
+                    showRouteToDestination(leafletRef.current.latLng(selectedMarkerInfo.lat, selectedMarkerInfo.lng));
+                  }
+                }}
+                className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors flex items-center justify-center gap-2 text-sm shadow-md cursor-pointer"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+                </svg>
+                {lang === 'ar' ? 'عرض مسار الوصول للموقع' : 'Get Directions'}
+              </button>
+            </div>
+          )}
         </div>
       </>
     );
@@ -2399,31 +2526,33 @@ export default function Home() {
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
       style={{ fontFamily: lang === 'ar' ? undefined : 'Branding, sans-serif' }}
     >
-      <header className="shadow-md border-b border-gray-200 dark:border-zinc-800 px-2 sm:px-6 py-2" style={{ backgroundColor: '#1b1464' }}>
-        <div className="flex items-center gap-2 sm:gap-4 w-full max-w-6xl mx-auto">
-          <Link href="/">
-            <img src="/acted-logo.png" alt="ACTED Logo" className="h-10 sm:h-16 w-auto flex-shrink-0 cursor-pointer" />
-          </Link>
-          <h1 className="flex-1 text-center text-base sm:text-2xl font-bold text-white truncate">{t[lang].appTitle}</h1>
-          <div className="flex-shrink-0 w-[110px] sm:w-[170px] flex justify-end">
-            <button
-              type="button"
-              onClick={() => {
-                const nextLang = lang === 'en' ? 'ar' : 'en';
-                setLang(nextLang);
-                trackEvent('language_change', { language: nextLang });
-              }}
-              className="inline-flex items-center gap-2 rounded-full bg-white text-[#1b1464] px-3 py-2 font-semibold text-xs sm:text-sm shadow focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-              aria-label={lang === 'ar' ? 'تغيير اللغة' : 'Change language'}
-            >
-              <img src="/translate.png" alt="" className="h-4 w-4 sm:h-5 sm:w-5" />
-              <span className={!isMobile && lang === 'en' ? notoArabic.className : ''}>
-                {isMobile ? (lang === 'en' ? 'AR' : 'EN') : (lang === 'en' ? 'العربية' : 'English')}
-              </span>
-            </button>
+      {!isEmbedded && (
+        <header className="shadow-md border-b border-gray-200 dark:border-zinc-800 px-2 sm:px-6 py-2" style={{ backgroundColor: '#1b1464' }}>
+          <div className="flex items-center gap-2 sm:gap-4 w-full max-w-6xl mx-auto">
+            <Link href="/">
+              <img src="/assets/acted-logo.png" alt="ACTED Logo" className="h-10 sm:h-16 w-auto flex-shrink-0 cursor-pointer" />
+            </Link>
+            <h1 className="flex-1 text-center text-base sm:text-2xl font-bold text-white truncate">{t[lang].appTitle}</h1>
+            <div className="flex-shrink-0 w-[110px] sm:w-[170px] flex justify-end">
+              <button
+                type="button"
+                onClick={() => {
+                  const nextLang = lang === 'en' ? 'ar' : 'en';
+                  setLang(nextLang);
+                  trackEvent('language_change', { language: nextLang });
+                }}
+                className="inline-flex items-center gap-2 rounded-full bg-white text-[#1b1464] px-3 py-2 font-semibold text-xs sm:text-sm shadow focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                aria-label={lang === 'ar' ? 'تغيير اللغة' : 'Change language'}
+              >
+                <img src="/assets/translate.png" alt="" className="h-4 w-4 sm:h-5 sm:w-5" />
+                <span className={!isMobile && lang === 'en' ? notoArabic.className : ''}>
+                  {isMobile ? (lang === 'en' ? 'AR' : 'EN') : (lang === 'en' ? 'العربية' : 'English')}
+                </span>
+              </button>
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
+      )}
 
       <div className="flex flex-col lg:flex-row flex-1 gap-4 p-4 overflow-hidden">
         {/* Map Section */}
@@ -2479,7 +2608,7 @@ export default function Home() {
               className="fixed bottom-6 left-6 z-[1100] bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg p-4 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
               aria-label="Show Details"
             >
-              <img src="/filtersvg.svg" alt="Filter" className="w-7 h-7 filter brightness-0 invert" />
+              <img src="/assets/filtersvg.svg" alt="Filter" className="w-7 h-7 filter brightness-0 invert" />
             </button>
           )}
           <div className="absolute bottom-2 right-2 lg:bottom-4 lg:right-4 bg-white dark:bg-zinc-900 p-2 lg:p-3 rounded-lg shadow-lg border border-gray-200 dark:border-zinc-800 z-[1000] max-w-xs lg:max-w-none">

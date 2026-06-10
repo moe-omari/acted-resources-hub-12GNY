@@ -1,0 +1,23 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Test Boundary Camp"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [34.421, 31.511],
+            [34.425, 31.511],
+            [34.425, 31.515],
+            [34.421, 31.515],
+            [34.421, 31.511]
+          ]
+        ]
+      }
+    }
+  ]
+}
