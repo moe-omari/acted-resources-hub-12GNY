@@ -1697,9 +1697,59 @@ export default function AdminControlPanel() {
 
   // Creatable options for Service Name combobox
   const serviceTypeOptions = useMemo(() => {
-    const types = [...new Set(coordinates.map((c) => c.name).filter(Boolean))];
-    return types.map((t) => ({ value: t, label: t }));
-  }, [coordinates]);
+    const mainCategories = [
+      'Water Trucking - Distribution Point',
+      'Health Space/Clinic',
+      'Community Kitchen/Tekeya',
+      'Bakery',
+      'TLS/School',
+      'Community Space',
+      'Safe space',
+      'Nutrition Center',
+      'Distribution Point',
+      'Social Activity',
+      'Other'
+    ];
+    
+    const categoryLabels = {
+      en: {
+        'Water Trucking - Distribution Point': 'Water Trucking - Distribution Point',
+        'Health Space/Clinic': 'Health Space/Clinic',
+        'Community Kitchen/Tekeya': 'Community Kitchen/Tekeya',
+        Bakery: 'Bakery',
+        'TLS/School': 'TLS/School',
+        'Community Space': 'Community Space',
+        'Safe space': 'Safe space',
+        'Nutrition Center': 'Nutrition Center',
+        'Distribution Point': 'Distribution Point',
+        'Social Activity': 'Social Activity',
+        'Other': 'Other',
+      },
+      ar: {
+        'Water Trucking - Distribution Point': 'نقطة توزيع مياه (Water Trucking)',
+        'Health Space/Clinic': 'مساحة صحية / عيادة (Health Space/Clinic)',
+        'Community Kitchen/Tekeya': 'مطبخ مجتمعي / تكية (Community Kitchen)',
+        Bakery: 'مخبز (Bakery)',
+        'TLS/School': 'مدرسة / مساحة تعليمية (TLS/School)',
+        'Community Space': 'مساحة مجتمعية (Community Space)',
+        'Safe space': 'مساحة آمنة (Safe space)',
+        'Nutrition Center': 'مركز تغذية (Nutrition Center)',
+        'Distribution Point': 'نقطة توزيع (Distribution Point)',
+        'Social Activity': 'نشاط اجتماعي (Social Activity)',
+        'Other': 'أخرى (Other)',
+      }
+    };
+
+    const existingTypes = coordinates.map((c) => c.name).filter(Boolean);
+    const combined = [...new Set([...mainCategories, ...existingTypes])];
+    
+    return combined.map((t) => {
+      const label = isArabic 
+        ? (categoryLabels.ar[t] || t) 
+        : (categoryLabels.en[t] || t);
+      return { value: t, label };
+    });
+  }, [coordinates, isArabic]);
 
   // Style helper for react-select combobox (dark mode matching ACTED theme)
   const reactSelectStyles = {
@@ -2319,6 +2369,16 @@ export default function AdminControlPanel() {
                                   className="px-2.5 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 hover:text-white font-bold transition-all text-[11px] cursor-pointer"
                                 >
                                   {t.btnEditRename}
+                                </button>
+                                 <button
+                                  onClick={() => {
+                                    setCoordSiteFilter(site.name);
+                                    setCoordPage(1);
+                                    setActiveTab('coordinates');
+                                  }}
+                                  className="px-2.5 py-1.5 rounded-lg bg-blue-950/20 border border-blue-900/30 hover:bg-blue-900/30 text-blue-400 hover:text-blue-350 font-bold transition-all text-[11px] flex items-center justify-center cursor-pointer"
+                                >
+                                  {isArabic ? 'الخدمات' : 'Services'}
                                 </button>
                                 <button
                                   onClick={() => setPreviewMapUrl(`/service-mapping?site=${encodeURIComponent(site.name)}&embedded=true`)}

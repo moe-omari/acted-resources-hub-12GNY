@@ -1870,6 +1870,23 @@ export default function Home() {
           if (!normalizedCollection || !normalizedCollection.features.length) return;
 
           const boundaryLayer = L.geoJSON(normalizedCollection, {
+            filter: (feature) => {
+              const siteName = getBoundaryFeatureSiteName(feature);
+              if (!siteName) return false;
+
+              const hasServices = services.some(s => {
+                const sName = s.siteName || s['site name'] || '';
+                return sName === siteName || normalizeLookupKey(sName) === normalizeLookupKey(siteName);
+              });
+
+              const hasTranslation = dynamicSiteTranslations && (
+                dynamicSiteTranslations[siteName] !== undefined ||
+                dynamicSiteTranslations[normalizeLookupKey(siteName)] !== undefined ||
+                Object.keys(dynamicSiteTranslations).some(k => normalizeLookupKey(k) === normalizeLookupKey(siteName))
+              );
+
+              return hasServices || hasTranslation;
+            },
             style: getBoundaryFeatureStyle,
             onEachFeature: (feature, layer) => {
               const label = getBoundaryFeatureLabel(feature, translateSiteName);
