@@ -1,0 +1,100 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              34.257299,
+              31.350932
+            ],
+            [
+              34.256947,
+              31.351479
+            ],
+            [
+              34.256556,
+              31.35127
+            ],
+            [
+              34.256265,
+              31.351094
+            ],
+            [
+              34.256004,
+              31.350948
+            ],
+            [
+              34.255234,
+              31.350611
+            ],
+            [
+              34.255024,
+              31.350541
+            ],
+            [
+              34.25496,
+              31.350498
+            ],
+            [
+              34.255103,
+              31.350323
+            ],
+            [
+              34.255146,
+              31.350145
+            ],
+            [
+              34.255203,
+              31.350099
+            ],
+            [
+              34.255406,
+              31.350149
+            ],
+            [
+              34.255469,
+              31.349966
+            ],
+            [
+              34.255719,
+              31.35001
+            ],
+            [
+              34.25595,
+              31.350112
+            ],
+            [
+              34.256496,
+              31.350302
+            ],
+            [
+              34.256544,
+              31.350381
+            ],
+            [
+              34.256448,
+              31.350498
+            ],
+            [
+              34.256995,
+              31.350761
+            ],
+            [
+              34.257299,
+              31.350932
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "site_code": "KYS0110",
+        "name": "KYS0110",
+        "description": "Al-Awda    <br>       <br>   OID   21    <br>   Name   Al-Awda    <br>   FolderPath   Sites_for_GFM    <br>   SymbolID   0    <br>   AltMode   0    <br>   Base   0    <br>   Clamped   -1    <br>   Extruded   0    <br>   Snippet       <br>   PopupInfo   Al-Awda    <br>       <br>   SHAPE   Polygon    <br>   Name   Al-Awda    <br>   Area       <br>   Site Code   KYS0110    <br>   SHAPE_Length   0.006041    <br>   SHAPE_Area   0.000002"
+      }
+    }
+  ]
+}

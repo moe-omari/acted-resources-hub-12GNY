@@ -1,0 +1,68 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              34.263761,
+              31.355747
+            ],
+            [
+              34.263247,
+              31.356116
+            ],
+            [
+              34.262985,
+              31.356299
+            ],
+            [
+              34.261739,
+              31.355232
+            ],
+            [
+              34.261851,
+              31.355151
+            ],
+            [
+              34.262167,
+              31.354726
+            ],
+            [
+              34.263032,
+              31.355251
+            ],
+            [
+              34.263282,
+              31.355417
+            ],
+            [
+              34.263497,
+              31.355164
+            ],
+            [
+              34.263649,
+              31.355257
+            ],
+            [
+              34.263788,
+              31.355346
+            ],
+            [
+              34.263761,
+              31.355747
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "site_code": "KYS1928",
+        "name": "KYS1928",
+        "description": "Wajed camp    <br>       <br>   OID   7    <br>   Name   Wajed camp    <br>   FolderPath   Sites_for_GFM    <br>   SymbolID   0    <br>   AltMode   0    <br>   Base   0    <br>   Clamped   -1    <br>   Extruded   0    <br>   Snippet       <br>   PopupInfo   Wajed camp     <br>       <br>   SHAPE   Polygon    <br>   Name   Wajed camp    <br>   Area       <br>   Site Code   KYS1928    <br>   SHAPE_Length   0.00565    <br>   SHAPE_Area   0.000002"
+      }
+    }
+  ]
+}

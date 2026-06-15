@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import Link from 'next/link';
 import Select from 'react-select';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
@@ -23,9 +24,9 @@ const GEOLOCATION_ERROR_CODES = {
   TIMEOUT: 3,
 };
 const SITE_BOUNDARY_FILES = [
-  '/Site Extent - North.json',
-  '/Site Extent - South.json',
-  '/IOM_new_selected_20_Sites_GAZA_City.json',
+  '/maps/Site Extent - North.json',
+  '/maps/Site Extent - South.json',
+  '/maps/IOM_new_selected_20_Sites_GAZA_City.json',
 ];
 const DEFAULT_BOUNDARY_STROKE = '#0f766e';
 const DEFAULT_BOUNDARY_FILL = '#14b8a6';
@@ -60,12 +61,26 @@ const getColorFromService = (serviceName) => {
   const lowerName = serviceName.toLowerCase();
   let color;
   if (lowerName.includes('water trucking') && lowerName.includes('distribution point')) color = '#1e90ff';
+  else if (lowerName.startsWith('water trucking')) color = '#1e90ff';
   else if (lowerName.includes('health space') && lowerName.includes('clinic')) color = '#ff4444';
+  else if (lowerName.startsWith('health space/clinic')) color = '#ff4444';
   else if (lowerName.includes('community kitchen')) color = '#ff8800';
+  else if (lowerName.startsWith('community kitchen')) color = '#ff8800';
   else if (lowerName.includes('bakery')) color = '#b45309';
   else if (lowerName.includes('tls') || lowerName.includes('school')) color = '#9933ff';
   else if (lowerName.includes('community space')) color = '#4BB272';
-  else if (lowerName.includes('safe space')) color = '#ec4899';
+  else if (
+    lowerName.includes('wgss') || 
+    lowerName.includes('women and girls') || 
+    lowerName.startsWith('safe spaces for women and girls') ||
+    lowerName.includes('للنساء والفتيات') ||
+    lowerName.includes('النساء والفتيات') ||
+    lowerName.includes('مساحات آمنة للنساء') ||
+    lowerName.includes('مساحة آمنة للنساء')
+  ) {
+    color = '#ec4899'; // Pink
+  }
+  else if (lowerName.includes('safe space') || lowerName.includes('مساحة آمنة')) color = '#ec4899'; // Pink
   else if (lowerName.includes('nutrition center') || lowerName.includes('nutrition centre')) color = '#fbbf24';
   else if (lowerName.includes('distribution point')) color = '#545454';
   else if (lowerName.includes('social activity')) color = '#93c01f';
@@ -80,7 +95,7 @@ const createHealthIcon = (L, color = '#ff4444') => {
       <path class="marker-glow" fill="none" stroke="var(--marker-glow-color, transparent)" stroke-width="var(--marker-glow-width, 0)" d="M12 0C7.029 0 3 4.029 3 9c0 7.5 9 18 9 18s9-10.5 9-18c0-4.971-4.029-9-9-9z" />
       <path class="marker-outline" fill="none" stroke="var(--marker-outline-color, transparent)" stroke-width="var(--marker-outline-width, 0)" d="M12 0C7.029 0 3 4.029 3 9c0 7.5 9 18 9 18s9-10.5 9-18c0-4.971-4.029-9-9-9z" />
       <path class="marker-shape" fill="${color}" stroke="var(--marker-stroke-color, #fff)" stroke-width="var(--marker-stroke-width, 1.5)" d="M12 0C7.029 0 3 4.029 3 9c0 7.5 9 18 9 18s9-10.5 9-18c0-4.971-4.029-9-9-9z"/>
-      <image href="/medical.png" x="6" y="6" width="12" height="12" style="filter: brightness(0) invert(1)" />
+      <image href="/assets/medical.png" x="6" y="6" width="12" height="12" style="filter: brightness(0) invert(1)" />
     </svg>
   `;
   return L.divIcon({
@@ -174,11 +189,22 @@ const getServiceType = (serviceName = '') => {
   const normalized = serviceName.toLowerCase();
   if (normalized.startsWith('water trucking')) return 'Water Trucking - Distribution Point';
   if (normalized.startsWith('health space/clinic')) return 'Health Space/Clinic';
-  if (normalized.startsWith('community kitchen')) return 'Community Kitchen';
+  if (normalized.startsWith('community kitchen')) return 'Community Kitchen/Tekeya';
   if (normalized.startsWith('bakery')) return 'Bakery';
   if (normalized.startsWith('tls/school')) return 'TLS/School';
   if (normalized.startsWith('community space')) return 'Community Space';
-  if (normalized.startsWith('safe space')) return 'Safe space';
+  if (
+    normalized.includes('wgss') || 
+    normalized.includes('women and girls') || 
+    normalized.startsWith('safe spaces for women and girls') ||
+    normalized.includes('للنساء والفتيات') ||
+    normalized.includes('النساء والفتيات') ||
+    normalized.includes('مساحات آمنة للنساء') ||
+    normalized.includes('مساحة آمنة للنساء')
+  ) {
+    return 'Safe Spaces for Women and Girls (WGSS)';
+  }
+  if (normalized.startsWith('safe space') || normalized.includes('مساحة آمنة') || normalized.includes('مساحات آمنة')) return 'Safe space';
   if (normalized.startsWith('nutrition center') || normalized.startsWith('nutrition centre')) return 'Nutrition Center';
   if (normalized.startsWith('distribution point')) return 'Distribution Point';
   if (normalized.startsWith('social activity')) return 'Social Activity';
@@ -236,6 +262,12 @@ const rawServiceTranslations = [
     key: 'Safe space',
     en: 'Safe space',
     ar: 'مساحة آمنة',
+  },
+  {
+    key: 'Safe Spaces for Women and Girls (WGSS)',
+    en: 'Safe Spaces for Women and Girls (WGSS)',
+    ar: 'مساحات آمنة للنساء والفتيات (WGSS)',
+    aliases: ['Safe Spaces for Women and Girls', 'مساحات آمنة للنساء والفتيات', 'مساحة آمنة للنساء والفتيات', 'Safe Spaces for women and girls (WGSS)', 'مساحات آمنة للنساء والفتيات (WGSS)']
   },
   {
     key: 'Community Kitchen/Tekeya',
@@ -851,6 +883,7 @@ const serviceTypeTranslations = {
     Bakery: 'Bakery',
     'TLS/School': 'TLS/School',
     'Community Space': 'Community Space',
+    'Safe Spaces for Women and Girls (WGSS)': 'Safe Spaces for Women and Girls (WGSS)',
     'Safe space': 'Safe space',
     'Nutrition Center': 'Nutrition Center',
     'Distribution Point': 'Distribution Point',
@@ -864,6 +897,7 @@ const serviceTypeTranslations = {
     Bakery: 'مخبز',
     'TLS/School': 'مساحة تعليمية مؤقتة / مدرسة',
     'Community Space': 'مساحة مجتمعية',
+    'Safe Spaces for Women and Girls (WGSS)': 'مساحات آمنة للنساء والفتيات (WGSS)',
     'Safe space': 'مساحة آمنة',
     'Nutrition Center': 'مركز تغذية',
     'Distribution Point': 'نقطة توزيع',
@@ -1050,6 +1084,7 @@ const createMarkerForServices = (L, mapInstance, servicesAtLoc, onClick) => {
   }
 
   const hasHealthClinic = servicesAtLoc.some((service) => getServiceType(service.name) === 'Health Space/Clinic');
+  if (!mapInstance || !mapInstance._container) return null;
   const marker = L.marker([lat, lng], { icon }).addTo(mapInstance);
 
   if (hasHealthClinic) {
@@ -1073,6 +1108,8 @@ export default function Home() {
   const [showMobilePanel, setShowMobilePanel] = useState(false);
   const [services, setServices] = useState([]);
   const [selectedService, setSelectedService] = useState(null);
+  const [hoveredCardId, setHoveredCardId] = useState(null);
+  const [visibleServiceTypesInViewport, setVisibleServiceTypesInViewport] = useState(new Set());
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedSiteName, setSelectedSiteName] = useState(null);
   const [selectedServiceName, setSelectedServiceName] = useState(null);
@@ -1080,12 +1117,14 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [geoError, setGeoError] = useState(null);
   const [leafletReady, setLeafletReady] = useState(false);
+  const [coordinatesLoaded, setCoordinatesLoaded] = useState(false);
   const [lang, setLang] = useState('ar');
   const [isMobile, setIsMobile] = useState(false);
   const [activeMarkerKey, setActiveMarkerKey] = useState(null);
   const [isSatelliteView, setIsSatelliteView] = useState(false);
   const [mapReady, setMapReady] = useState(false);
   const [showMapHelp, setShowMapHelp] = useState(true);
+  const [dynamicSiteTranslations, setDynamicSiteTranslations] = useState({});
   const mapRef = useRef(null);
   const leafletRef = useRef(null);
   const markerPanelHideTimeout = useRef(null);
@@ -1096,23 +1135,53 @@ export default function Home() {
   const userMarkerRef = useRef(null);
   const hasCenteredOnUserRef = useRef(false);
   const mapContainerRef = useRef(null);
+  const routingControlRef = useRef(null);
+  const prevFiltersRef = useRef({ location: null, site: null });
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
     window.localStorage.setItem('selectedLang', lang);
   }, [lang]);
 
+  const [isEmbedded, setIsEmbedded] = useState(false);
+
   useEffect(() => {
     if (typeof window === 'undefined') return;
     setLang(getStoredLanguage());
+    
+    // Check for "site" and "service" URL parameter to auto-filter map
+    const urlParams = new URLSearchParams(window.location.search);
+    const siteParam = urlParams.get('site');
+    if (siteParam) {
+      setSelectedSiteName(siteParam);
+    }
+    const serviceParam = urlParams.get('service');
+    if (serviceParam) {
+      setSelectedServiceName(serviceParam);
+    }
+    const embedParam = urlParams.get('embedded');
+    if (embedParam === 'true') {
+      setIsEmbedded(true);
+    }
   }, []);
+
+  useEffect(() => {
+    if (leafletReady && coordinatesLoaded) {
+      setLoading(false);
+    }
+  }, [leafletReady, coordinatesLoaded]);
 
   const closeMarkerPanel = useCallback(() => {
     setActiveMarkerKey(null);
     setSelectedService(null);
     setShowMarkerPanel(false);
-    if (routingControl && mapRef.current) {
-      mapRef.current.removeControl(routingControl);
+    if (routingControlRef.current && mapRef.current) {
+      try {
+        mapRef.current.removeControl(routingControlRef.current);
+      } catch (e) {
+        console.warn(e);
+      }
+      routingControlRef.current = null;
       setRoutingControl(null);
     }
     if (markerPanelHideTimeout.current) {
@@ -1122,7 +1191,7 @@ export default function Home() {
       setSelectedMarkerInfo(null);
       markerPanelHideTimeout.current = null;
     }, 300);
-  }, [routingControl]);
+  }, []);
 
   const applyMarkerHighlight = useCallback((targetKey) => {
     markersRef.current.forEach((marker, markerKey) => {
@@ -1153,10 +1222,15 @@ export default function Home() {
 
   const showRouteToDestination = useCallback((destinationLatLng) => {
     const L = leafletRef.current;
-    if (!L || !mapRef.current) return;
+    if (!L || !mapRef.current || !mapRef.current._container) return;
 
-    if (routingControl) {
-      mapRef.current.removeControl(routingControl);
+    if (routingControlRef.current) {
+      try {
+        mapRef.current.removeControl(routingControlRef.current);
+      } catch (e) {
+        console.warn(e);
+      }
+      routingControlRef.current = null;
       setRoutingControl(null);
     }
 
@@ -1178,8 +1252,9 @@ export default function Home() {
       createMarker: () => null,
     }).addTo(mapRef.current);
 
+    routingControlRef.current = newRoutingControl;
     setRoutingControl(newRoutingControl);
-  }, [routingControl, userLocation]);
+  }, [userLocation]);
 
   useEffect(() => {
     return () => {
@@ -1535,12 +1610,55 @@ export default function Home() {
     },
   }), []);
 
+  const translateLocation = useCallback((location) => {
+    if (!location) return '';
+    return t[lang].locations?.[location] || location;
+  }, [lang, t]);
+
+  const siteNameLookup = useMemo(() => {
+    const baseLookup = Object.entries(t[lang].siteNames).reduce((acc, [key, value]) => {
+      acc[key] = value;
+      acc[normalizeLookupKey(key)] = value;
+      return acc;
+    }, {});
+    
+    Object.entries(dynamicSiteTranslations || {}).forEach(([engName, transObj]) => {
+      const translatedVal = transObj[lang] || transObj.en || engName;
+      baseLookup[engName] = translatedVal;
+      baseLookup[normalizeLookupKey(engName)] = translatedVal;
+    });
+    
+    return baseLookup;
+  }, [lang, t, dynamicSiteTranslations]);
+
+  const organizationLookup = useMemo(() => Object.entries(organizationTranslations[lang]).reduce((acc, [key, value]) => {
+    acc[key] = value;
+    acc[normalizeLookupKey(key)] = value;
+    return acc;
+  }, {}), [lang]);
+
+  const translateSiteName = useCallback((siteName) => {
+    if (!siteName) return '';
+    return siteNameLookup[siteName] || siteNameLookup[normalizeLookupKey(siteName)] || siteName;
+  }, [siteNameLookup]);
+
+  const translateOrganization = useCallback((organization) => {
+    if (!organization) return '';
+    return organizationLookup[organization] || organizationLookup[normalizeLookupKey(organization)] || organization;
+  }, [organizationLookup]);
+
   // Load user location
   useEffect(() => {
-    if (typeof window !== 'undefined' && !window.isSecureContext) {
-      setGeoError('geolocationInsecure');
-      setLoading(false);
-      return;
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('embedded') === 'true') {
+        setGeoError('geolocationUnavailable'); // Fail silently
+        return;
+      }
+      if (!window.isSecureContext) {
+        setGeoError('geolocationInsecure');
+        return;
+      }
     }
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -1548,7 +1666,6 @@ export default function Home() {
           const { latitude, longitude } = position.coords;
           setUserLocation([latitude, longitude]);
           setGeoError(null);
-          setLoading(false);
         },
         (error) => {
           const errorCode = typeof error?.code === 'number' ? error.code : null;
@@ -1570,7 +1687,6 @@ export default function Home() {
             console.error(`Geolocation error. Code: ${errorCode ?? 'unknown'}. Message: ${errorMessage}`);
             setGeoError('geolocationError');
           }
-          setLoading(false);
         }
         , {
           enableHighAccuracy: true,
@@ -1581,7 +1697,6 @@ export default function Home() {
       // Geolocation not available, use default location
       console.log('Geolocation not supported');
       setGeoError('geolocationUnavailable');
-      setLoading(false);
     }
   }, []);
 
@@ -1599,7 +1714,18 @@ export default function Home() {
   useEffect(() => {
     const loadCoordinates = async () => {
       try {
-        const response = await fetch('/coordinates.json');
+        // Fetch dynamic site translations first
+        try {
+          const transRes = await fetch('/maps/site_translations.json');
+          if (transRes.ok) {
+            const transData = await transRes.json();
+            setDynamicSiteTranslations(transData);
+          }
+        } catch (err) {
+          console.warn('Failed to load dynamic site translations:', err);
+        }
+
+        const response = await fetch('/maps/coordinates.json');
         const data = await response.json();
 
         const normalizeText = (value) => {
@@ -1658,6 +1784,8 @@ export default function Home() {
         setServices(normalizedData);
       } catch (error) {
         console.error('Error loading coordinates:', error);
+      } finally {
+        setCoordinatesLoaded(true);
       }
     };
     loadCoordinates();
@@ -1701,7 +1829,6 @@ export default function Home() {
   useEffect(() => {
     const L = leafletRef.current;
     if (!leafletReady || loading || !L || mapRef.current || !mapContainerRef.current) return;
-    if (!services.length) return; // wait for data before drawing markers
 
     const initialCenter = userLocation || DEFAULT_MAP_CENTER;
     const initialZoom = userLocation ? USER_LOCATION_ZOOM : DEFAULT_MAP_ZOOM;
@@ -1727,24 +1854,84 @@ export default function Home() {
     baseLayersRef.current = { street: streetLayer, satellite: satelliteLayer };
     setIsSatelliteView(false);
 
-    Promise.all(
-      SITE_BOUNDARY_FILES.map((filePath) => fetch(filePath).then((response) => {
-        if (!response.ok) {
-          throw new Error(`Failed to load site boundary file: ${filePath}`);
-        }
-        return response.json();
-      }))
-    )
+    // Fetch static boundaries
+    const staticBoundariesPromises = SITE_BOUNDARY_FILES.map((filePath) => 
+      fetch(filePath)
+        .then((response) => {
+          if (!response.ok) throw new Error(`Failed to load boundary file: ${filePath}`);
+          return response.json();
+        })
+        .then((data) => normalizeBoundaryFeatureCollection(data))
+        .catch((err) => {
+          console.error(err);
+          return null;
+        })
+    );
+
+    // Fetch dynamic boundaries
+    const dynamicBoundaryFiles = Object.entries(dynamicSiteTranslations || {})
+      .filter(([_, t]) => t.boundaryFile)
+      .map(([siteName, t]) => ({ siteName, filePath: t.boundaryFile }));
+
+    const dynamicBoundariesPromises = dynamicBoundaryFiles.map(({ siteName, filePath }) =>
+      fetch(filePath)
+        .then((response) => {
+          if (!response.ok) throw new Error(`Failed to load dynamic boundary file: ${filePath}`);
+          return response.json();
+        })
+        .then((data) => {
+          const normalized = normalizeBoundaryFeatureCollection(data);
+          normalized.features.forEach((feature) => {
+            if (!feature.properties) feature.properties = {};
+            if (!feature.properties.name) {
+              feature.properties.name = siteName;
+            }
+          });
+          return normalized;
+        })
+        .catch((err) => {
+          console.error(err);
+          return null;
+        })
+    );
+
+    Promise.all([...staticBoundariesPromises, ...dynamicBoundariesPromises])
       .then((boundaryCollections) => {
-        boundaryCollections.forEach((boundaryCollection) => {
-          const normalizedCollection = normalizeBoundaryFeatureCollection(boundaryCollection);
-          if (!normalizedCollection.features.length) return;
+        if (!mapRef.current || mapRef.current !== mapInstance || !mapInstance._container) {
+          return;
+        }
+        boundaryCollections.forEach((normalizedCollection) => {
+          if (!normalizedCollection || !normalizedCollection.features.length) return;
 
           const boundaryLayer = L.geoJSON(normalizedCollection, {
+            filter: (feature) => {
+              const siteName = getBoundaryFeatureSiteName(feature);
+              if (!siteName) return false;
+
+              const hasServices = services.some(s => {
+                const sName = s.siteName || s['site name'] || '';
+                return sName === siteName || normalizeLookupKey(sName) === normalizeLookupKey(siteName);
+              });
+
+              const hasTranslation = dynamicSiteTranslations && (
+                dynamicSiteTranslations[siteName] !== undefined ||
+                dynamicSiteTranslations[normalizeLookupKey(siteName)] !== undefined ||
+                Object.keys(dynamicSiteTranslations).some(k => normalizeLookupKey(k) === normalizeLookupKey(siteName))
+              );
+
+              return hasServices || hasTranslation;
+            },
             style: getBoundaryFeatureStyle,
             onEachFeature: (feature, layer) => {
               const label = getBoundaryFeatureLabel(feature, translateSiteName);
-              if (label) layer.bindPopup(label);
+              if (label) {
+                layer.bindPopup(label);
+                layer.bindTooltip(label, {
+                  permanent: true,
+                  direction: 'center',
+                  className: 'bg-transparent border-none shadow-none text-teal-800 dark:text-teal-200 font-bold text-xs sm:text-sm whitespace-nowrap pointer-events-none'
+                });
+              }
               layer.on('click', () => {
                 const siteName = getBoundaryFeatureSiteName(feature);
                 trackEvent('site_boundary_click', {
@@ -1759,7 +1946,7 @@ export default function Home() {
         });
       })
       .catch((error) => {
-        console.error('Error loading site boundaries:', error);
+        console.error('Error drawing site boundaries:', error);
       });
 
     markersRef.current = new Map();
@@ -1767,15 +1954,55 @@ export default function Home() {
     mapRef.current = mapInstance;
     setMapReady(true);
     return () => {
+      if (routingControlRef.current) {
+        try {
+          mapInstance.removeControl(routingControlRef.current);
+        } catch (e) {
+          console.warn("Error removing routing control:", e);
+        }
+        routingControlRef.current = null;
+      }
       if (userMarkerRef.current) {
-        mapInstance.removeLayer(userMarkerRef.current);
+        try {
+          mapInstance.removeLayer(userMarkerRef.current);
+        } catch (e) {
+          console.warn(e);
+        }
         userMarkerRef.current = null;
       }
-      hasCenteredOnUserRef.current = false;
+      boundaryLayersRef.current.forEach((layer) => {
+        try {
+          mapInstance.removeLayer(layer);
+        } catch (e) {
+          console.warn(e);
+        }
+      });
       boundaryLayersRef.current = [];
-      mapInstance.remove();
+      markersRef.current.forEach((marker) => {
+        if (marker) {
+          try {
+            marker.off();
+            mapInstance.removeLayer(marker);
+          } catch (e) {
+            console.warn(e);
+          }
+        }
+      });
       markersRef.current.clear();
+      if (baseLayersRef.current.street) {
+        try { mapInstance.removeLayer(baseLayersRef.current.street); } catch (e) {}
+      }
+      if (baseLayersRef.current.satellite) {
+        try { mapInstance.removeLayer(baseLayersRef.current.satellite); } catch (e) {}
+      }
       baseLayersRef.current = { street: null, satellite: null };
+      try {
+        mapInstance.remove();
+      } catch (e) {
+        console.warn(e);
+      }
+      mapRef.current = null;
+      hasCenteredOnUserRef.current = false;
       setIsSatelliteView(false);
       setMapReady(false);
     };
@@ -1786,7 +2013,25 @@ export default function Home() {
     (!selectedSiteName || service.siteName === selectedSiteName) &&
     (!selectedServiceName || service.name === selectedServiceName)
   )), [services, selectedLocation, selectedSiteName, selectedServiceName]);
-  const mapServices = services;
+  const mapServices = filteredServices;
+
+  // Auto-center map on selected site
+  useEffect(() => {
+    if (!mapReady || !mapRef.current || !leafletRef.current) return;
+    if (selectedSiteName && filteredServices.length > 0) {
+      const L = leafletRef.current;
+      const mapInstance = mapRef.current;
+      
+      const timeoutId = setTimeout(() => {
+        const bounds = L.latLngBounds(filteredServices.map(s => [s.coordinates.latitude, s.coordinates.longitude]));
+        if (bounds.isValid()) {
+          mapInstance.flyToBounds(bounds, { padding: [50, 50], maxZoom: 16, duration: 1.5 });
+        }
+      }, 1000);
+      
+      return () => clearTimeout(timeoutId);
+    }
+  }, [selectedSiteName, filteredServices, mapReady]);
 
   const currentServices = useMemo(() => filteredServices.map((service) => {
     const { key: serviceTypeKey, label: serviceTypeLabel } = translateServiceType(service.name, lang);
@@ -1799,14 +2044,76 @@ export default function Home() {
     };
   }), [filteredServices, lang]);
 
-  const locationOptions = useMemo(() => [...new Set(services.map((service) => service.location).filter(Boolean))], [services]);
+  const updateLegendFromViewport = useCallback(() => {
+    const mapInstance = mapRef.current;
+    if (!mapInstance) return;
+    try {
+      const bounds = mapInstance.getBounds();
+      const visibleTypes = new Set();
+      filteredServices.forEach((service) => {
+        const lat = service?.coordinates?.latitude;
+        const lng = service?.coordinates?.longitude;
+        if (lat !== undefined && lng !== undefined && bounds.contains([lat, lng])) {
+          const type = getServiceType(service.name);
+          if (type) {
+            visibleTypes.add(type);
+          }
+        }
+      });
+      setVisibleServiceTypesInViewport(visibleTypes);
+    } catch (e) {
+      console.warn('Error updating legend from viewport:', e);
+    }
+  }, [filteredServices]);
+
+  useEffect(() => {
+    const mapInstance = mapRef.current;
+    if (!mapReady || !mapInstance) return;
+
+    mapInstance.on('moveend', updateLegendFromViewport);
+    updateLegendFromViewport();
+
+    return () => {
+      mapInstance.off('moveend', updateLegendFromViewport);
+    };
+  }, [mapReady, updateLegendFromViewport]);
+
+  const visibleLegendItems = useMemo(() => {
+    const allLegendItems = [
+      { type: 'Water Trucking - Distribution Point', color: '#1e90ff' },
+      { type: 'Health Space/Clinic', color: '#ff4444' },
+      { type: 'Community Kitchen/Tekeya', color: '#ff8800' },
+      { type: 'Bakery', color: '#b45309' },
+      { type: 'TLS/School', color: '#9933ff' },
+      { type: 'Community Space', color: '#4BB272' },
+      { type: 'Safe Spaces for Women and Girls (WGSS)', color: '#ec4899' },
+      { type: 'Safe space', color: '#ec4899' },
+      { type: 'Nutrition Center', color: '#fbbf24' },
+      { type: 'Distribution Point', color: '#545454' },
+      { type: 'Social Activity', color: '#93c01f' },
+      { type: 'Other', color: '#808080' },
+    ];
+    return allLegendItems.filter(item => visibleServiceTypesInViewport.has(item.type));
+  }, [visibleServiceTypesInViewport]);
+
+  const locationOptions = useMemo(() => {
+    const serviceLocs = services.map((s) => s.location).filter(Boolean);
+    const dynamicLocs = Object.values(dynamicSiteTranslations || {}).map((s) => s.location).filter(Boolean);
+    return [...new Set([...serviceLocs, ...dynamicLocs])];
+  }, [services, dynamicSiteTranslations]);
 
   const siteNameOptions = useMemo(() => {
-    const scopedServices = selectedLocation
-      ? services.filter((service) => service.location === selectedLocation)
-      : services;
-    return [...new Set(scopedServices.map((service) => service.siteName).filter(Boolean))];
-  }, [services, selectedLocation]);
+    const serviceSites = selectedLocation
+      ? services.filter((s) => s.location === selectedLocation).map((s) => s.siteName).filter(Boolean)
+      : services.map((s) => s.siteName).filter(Boolean);
+      
+    const dynamicSites = Object.entries(dynamicSiteTranslations || {}).map(([siteCode, site]) => {
+      if (selectedLocation && site.location !== selectedLocation) return null;
+      return siteCode;
+    }).filter(Boolean);
+
+    return [...new Set([...serviceSites, ...dynamicSites])];
+  }, [services, dynamicSiteTranslations, selectedLocation]);
 
   const serviceNameOptions = useMemo(() => {
     const scopedServices = services.filter((service) => (
@@ -1818,28 +2125,7 @@ export default function Home() {
 
   const hasActiveFilters = Boolean(selectedLocation || selectedSiteName || selectedServiceName);
   const isArabic = lang === 'ar';
-  const translateLocation = useCallback((location) => {
-    if (!location) return '';
-    return t[lang].locations?.[location] || location;
-  }, [lang, t]);
-  const siteNameLookup = useMemo(() => Object.entries(t[lang].siteNames).reduce((acc, [key, value]) => {
-    acc[key] = value;
-    acc[normalizeLookupKey(key)] = value;
-    return acc;
-  }, {}), [lang, t]);
-  const organizationLookup = useMemo(() => Object.entries(organizationTranslations[lang]).reduce((acc, [key, value]) => {
-    acc[key] = value;
-    acc[normalizeLookupKey(key)] = value;
-    return acc;
-  }, {}), [lang]);
-  const translateSiteName = useCallback((siteName) => {
-    if (!siteName) return '';
-    return siteNameLookup[siteName] || siteNameLookup[normalizeLookupKey(siteName)] || siteName;
-  }, [siteNameLookup]);
-  const translateOrganization = useCallback((organization) => {
-    if (!organization) return '';
-    return organizationLookup[organization] || organizationLookup[normalizeLookupKey(organization)] || organization;
-  }, [organizationLookup]);
+
   const selectStyles = useMemo(() => ({
     control: (base, state) => ({
       ...base,
@@ -1890,7 +2176,18 @@ export default function Home() {
     boundaryLayersRef.current.forEach((boundaryLayer) => {
       boundaryLayer.eachLayer((layer) => {
         const label = getBoundaryFeatureLabel(layer.feature, translateSiteName);
-        if (label) layer.bindPopup(label);
+        if (label) {
+          layer.bindPopup(label);
+          if (layer.getTooltip()) {
+            layer.setTooltipContent(label);
+          } else {
+            layer.bindTooltip(label, {
+              permanent: true,
+              direction: 'center',
+              className: 'bg-transparent border-none shadow-none text-teal-800 dark:text-teal-200 font-bold text-xs sm:text-sm whitespace-nowrap pointer-events-none'
+            });
+          }
+        }
       });
     });
   }, [lang, translateSiteName]);
@@ -1898,11 +2195,13 @@ export default function Home() {
   useEffect(() => {
     const L = leafletRef.current;
     const mapInstance = mapRef.current;
-    if (!mapReady || !L || !mapInstance) return;
+    if (!mapReady || !L || !mapInstance || !mapInstance._container) return;
 
     markersRef.current.forEach((marker) => {
-      marker.off();
-      mapInstance.removeLayer(marker);
+      if (marker) {
+        marker.off();
+        mapInstance.removeLayer(marker);
+      }
     });
     markersRef.current.clear();
 
@@ -1924,7 +2223,8 @@ export default function Home() {
           lat,
           lng,
         });
-        showRouteToDestination(L.latLng(lat, lng));
+        
+        mapInstance.flyTo(L.latLng(lat, lng), Math.max(mapInstance.getZoom(), SERVICE_FOCUS_ZOOM), { duration: 1.0 });
 
         [...new Set(servicesAtLoc.map((service) => getServiceType(service.name)).filter(Boolean))].forEach((serviceType) => {
           trackEvent('marker_click', {
@@ -1934,7 +2234,9 @@ export default function Home() {
         });
       });
 
-      markersRef.current.set(key, marker);
+      if (marker) {
+        markersRef.current.set(key, marker);
+      }
     }
 
     applyMarkerHighlight(activeMarkerKeyRef.current);
@@ -1967,7 +2269,7 @@ export default function Home() {
   }, [applyMarkerHighlight, closeMarkerPanel, mapReady, mapServices, selectedMarkerInfo, showRouteToDestination]);
 
   useEffect(() => {
-    if (!mapReady || !mapRef.current || !leafletRef.current) return;
+    if (!mapReady || !mapRef.current || !mapRef.current._container || !leafletRef.current) return;
     const mapInstance = mapRef.current;
 
     if (!userLocation) {
@@ -1982,17 +2284,126 @@ export default function Home() {
     const L = leafletRef.current;
     if (userMarkerRef.current) {
       userMarkerRef.current.setLatLng(userLocation);
+      userMarkerRef.current.setPopupContent(`<b>${t[lang].yourLocation}</b>`);
+      if (userMarkerRef.current.getTooltip()) {
+        userMarkerRef.current.setTooltipContent(t[lang].yourLocation);
+      } else {
+        userMarkerRef.current.bindTooltip(t[lang].yourLocation, {
+          permanent: true,
+          direction: 'top',
+          className: 'bg-blue-600 text-white font-bold px-2 py-0.5 rounded-full text-xs shadow-md border-none pointer-events-none'
+        });
+      }
     } else {
       userMarkerRef.current = L.marker(userLocation, { title: 'Your Location' })
         .addTo(mapInstance)
-        .bindPopup('<b>Your Location</b>');
+        .bindPopup(`<b>${t[lang].yourLocation}</b>`)
+        .bindTooltip(t[lang].yourLocation, {
+          permanent: true,
+          direction: 'top',
+          className: 'bg-blue-600 text-white font-bold px-2 py-0.5 rounded-full text-xs shadow-md border-none pointer-events-none'
+        });
     }
 
     if (!hasCenteredOnUserRef.current) {
-      mapInstance.flyTo(userLocation, Math.max(mapInstance.getZoom(), USER_LOCATION_ZOOM));
+      if (!selectedSiteName && !selectedLocation) {
+        mapInstance.flyTo(userLocation, Math.max(mapInstance.getZoom(), USER_LOCATION_ZOOM));
+      }
       hasCenteredOnUserRef.current = true;
     }
-  }, [userLocation, mapReady]);
+  }, [userLocation, mapReady, selectedSiteName, selectedLocation, t, lang]);
+
+  // Automatically zoom to selected location/site bounds when filters change
+  useEffect(() => {
+    if (!mapReady || !mapRef.current || !mapRef.current._container || !leafletRef.current) return;
+    
+    const prevLocation = prevFiltersRef.current.location;
+    const prevSite = prevFiltersRef.current.site;
+    const prevService = prevFiltersRef.current.service;
+    
+    if (selectedLocation !== prevLocation || selectedSiteName !== prevSite || selectedServiceName !== prevService) {
+      prevFiltersRef.current = { location: selectedLocation, site: selectedSiteName, service: selectedServiceName };
+      
+      const L = leafletRef.current;
+      const mapInstance = mapRef.current;
+      
+      const timeoutId = setTimeout(() => {
+        if (selectedLocation || selectedSiteName || selectedServiceName) {
+          // First, if selectedSiteName is set, see if we can find its boundary polygon bounds
+          let siteBoundaryBounds = null;
+          if (selectedSiteName && !selectedServiceName) {
+            for (const boundaryLayer of boundaryLayersRef.current) {
+              boundaryLayer.eachLayer((layer) => {
+                if (layer.feature) {
+                  const siteName = getBoundaryFeatureSiteName(layer.feature);
+                  if (siteName === selectedSiteName) {
+                    siteBoundaryBounds = layer.getBounds();
+                  }
+                }
+              });
+              if (siteBoundaryBounds) break;
+            }
+          }
+
+          if (siteBoundaryBounds) {
+            // Fit to the site polygon boundary exactly with tight padding!
+            mapInstance.fitBounds(siteBoundaryBounds, {
+              padding: [20, 20],
+              maxZoom: 16,
+              duration: 1.5
+            });
+          } else {
+            // Fallback to filtered services markers
+            if (!filteredServices || filteredServices.length === 0) return;
+            
+            const coordinatesList = filteredServices
+              .map((s) => s.coordinates)
+              .filter((coords) => coords && Number.isFinite(coords.latitude) && Number.isFinite(coords.longitude));
+              
+            if (coordinatesList.length === 0) return;
+            
+            let isSingleLocation = true;
+            const first = coordinatesList[0];
+            for (let i = 1; i < coordinatesList.length; i++) {
+              if (Math.abs(coordinatesList[i].latitude - first.latitude) > 0.0001 ||
+                  Math.abs(coordinatesList[i].longitude - first.longitude) > 0.0001) {
+                isSingleLocation = false;
+                break;
+              }
+            }
+            
+            if (isSingleLocation) {
+              const latLng = L.latLng(first.latitude, first.longitude);
+              mapInstance.flyTo(latLng, SERVICE_FOCUS_ZOOM, { duration: 1.5 });
+            } else {
+              const bounds = L.latLngBounds(
+                coordinatesList.map((coords) => L.latLng(coords.latitude, coords.longitude))
+              );
+              // Tight padding for snug fit to edges!
+              mapInstance.fitBounds(bounds, {
+                padding: [20, 20],
+                maxZoom: 16,
+                duration: 1.5
+              });
+            }
+          }
+        } else {
+          // Filters cleared: reset view to original state
+          const initialCenter = userLocation || DEFAULT_MAP_CENTER;
+          const initialZoom = userLocation ? USER_LOCATION_ZOOM : DEFAULT_MAP_ZOOM;
+          if (userLocation) {
+            mapInstance.flyTo(initialCenter, initialZoom, { duration: 1.5 });
+          } else {
+            mapInstance.fitBounds(DEFAULT_GAZA_BOUNDS, {
+              padding: [24, 24],
+            });
+          }
+        }
+      }, 1000);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [selectedLocation, selectedSiteName, selectedServiceName, filteredServices, mapReady, userLocation]);
 
   // Update marker popups when language changes
   useEffect(() => {
@@ -2065,8 +2476,13 @@ export default function Home() {
     if (selectedService?.id === service.id) {
       setSelectedService(null);
       setActiveMarkerKey(null);
-      if (routingControl) {
-        mapRef.current.removeControl(routingControl);
+      if (routingControlRef.current) {
+        try {
+          mapRef.current.removeControl(routingControlRef.current);
+        } catch (e) {
+          console.warn(e);
+        }
+        routingControlRef.current = null;
         setRoutingControl(null);
       }
       return;
@@ -2086,8 +2502,13 @@ export default function Home() {
     const destinationLatLng = L.latLng(service.coordinates.latitude, service.coordinates.longitude);
     mapRef.current.flyTo(destinationLatLng, Math.max(mapRef.current.getZoom(), SERVICE_FOCUS_ZOOM));
 
-    if (routingControl) {
-      mapRef.current.removeControl(routingControl);
+    if (routingControlRef.current) {
+      try {
+        mapRef.current.removeControl(routingControlRef.current);
+      } catch (e) {
+        console.warn(e);
+      }
+      routingControlRef.current = null;
       setRoutingControl(null);
     }
     showRouteToDestination(destinationLatLng);
@@ -2100,8 +2521,35 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-black">
-        <p className="text-lg text-gray-600 dark:text-gray-400">{t[lang].loading}</p>
+      <div className="flex min-h-screen flex-col items-center justify-center bg-zinc-50 dark:bg-black p-4 transition-all duration-300">
+        <div className="flex flex-col items-center max-w-sm w-full space-y-6 text-center">
+          {/* Logo container with pulsing glow */}
+          <div className="relative flex items-center justify-center">
+            <div className="absolute inset-0 rounded-full bg-blue-600/10 dark:bg-blue-500/15 blur-xl animate-pulse w-24 h-24"></div>
+            <img 
+              src="/assets/acted-logo.png" 
+              alt="ACTED Logo" 
+              className="relative h-14 sm:h-20 w-auto object-contain drop-shadow-[0_4px_12px_rgba(27,20,100,0.15)] dark:drop-shadow-[0_4px_12px_rgba(255,255,255,0.05)] animate-[pulse_2.5s_infinite]" 
+            />
+          </div>
+
+          {/* Premium Spinner and Text */}
+          <div className="flex flex-col items-center space-y-3">
+            <div className="relative w-12 h-12">
+              {/* Outer ring */}
+              <div className="absolute inset-0 rounded-full border-4 border-gray-200 dark:border-zinc-800"></div>
+              {/* Spinning gradient ring */}
+              <div className="absolute inset-0 rounded-full border-4 border-t-[#1b1464] dark:border-t-blue-500 border-r-transparent border-b-transparent border-l-transparent animate-spin"></div>
+            </div>
+            
+            <p className="text-base sm:text-lg font-semibold tracking-wide text-zinc-700 dark:text-zinc-300 animate-[pulse_1.5s_infinite]">
+              {lang === 'ar' ? 'جاري تجهيز خريطة الخدمات...' : 'Preparing the service map...'}
+            </p>
+            <p className="text-xs text-zinc-400 dark:text-zinc-500">
+              {lang === 'ar' ? 'يرجى الانتظار لحظة' : 'Please wait a moment'}
+            </p>
+          </div>
+        </div>
       </div>
     );
   }
@@ -2162,6 +2610,24 @@ export default function Home() {
               </div>
             );
           })}
+          
+          {userLocation && (
+            <div className="mt-6 pt-4 border-t border-gray-200 dark:border-zinc-800">
+              <button
+                onClick={() => {
+                  if (typeof window !== 'undefined' && leafletRef.current) {
+                    showRouteToDestination(leafletRef.current.latLng(selectedMarkerInfo.lat, selectedMarkerInfo.lng));
+                  }
+                }}
+                className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors flex items-center justify-center gap-2 text-sm shadow-md cursor-pointer"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+                </svg>
+                {lang === 'ar' ? 'عرض مسار الوصول للموقع' : 'Get Directions'}
+              </button>
+            </div>
+          )}
         </div>
       </>
     );
@@ -2173,29 +2639,33 @@ export default function Home() {
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
       style={{ fontFamily: lang === 'ar' ? undefined : 'Branding, sans-serif' }}
     >
-      <header className="shadow-md border-b border-gray-200 dark:border-zinc-800 px-1 sm:px-6 py-1 sm:py-2" style={{ backgroundColor: '#1b1464' }}>
-        <div className="flex items-center justify-center gap-1 sm:gap-3 w-full">
-          <img src="/acted-logo.png" alt="ACTED Logo" className="h-10 sm:h-16 w-auto" />
-          <h1 className="text-base sm:text-2xl font-bold text-center w-full whitespace-nowrap" style={{ color: '#fff' }}>{t[lang].appTitle}</h1>
-          <div style={{ minWidth: isMobile ? 72 : 120 }} className="sm:min-w-[160px] flex justify-end">
-            <button
-              type="button"
-              onClick={() => {
-                const nextLang = lang === 'en' ? 'ar' : 'en';
-                setLang(nextLang);
-                trackEvent('language_change', { language: nextLang });
-              }}
-              className="inline-flex items-center gap-2 rounded-full bg-white text-[#1b1464] px-3 py-2 font-semibold text-xs sm:text-sm shadow focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-              aria-label={lang === 'ar' ? 'تغيير اللغة' : 'Change language'}
-            >
-              <img src="/translate.png" alt="" className="h-4 w-4 sm:h-5 sm:w-5" />
-              <span className={!isMobile && lang === 'en' ? notoArabic.className : ''}>
-                {isMobile ? (lang === 'en' ? 'AR' : 'EN') : (lang === 'en' ? 'العربية' : 'English')}
-              </span>
-            </button>
+      {!isEmbedded && (
+        <header className="shadow-md border-b border-gray-200 dark:border-zinc-800 px-2 sm:px-6 py-2" style={{ backgroundColor: '#1b1464' }}>
+          <div className="flex items-center gap-2 sm:gap-4 w-full max-w-6xl mx-auto">
+            <Link href="/">
+              <img src="/assets/acted-logo.png" alt="ACTED Logo" className="h-10 sm:h-16 w-auto flex-shrink-0 cursor-pointer" />
+            </Link>
+            <h1 className="flex-1 text-center text-base sm:text-2xl font-bold text-white truncate">{t[lang].appTitle}</h1>
+            <div className="flex-shrink-0 w-[110px] sm:w-[170px] flex justify-end">
+              <button
+                type="button"
+                onClick={() => {
+                  const nextLang = lang === 'en' ? 'ar' : 'en';
+                  setLang(nextLang);
+                  trackEvent('language_change', { language: nextLang });
+                }}
+                className="inline-flex items-center gap-2 rounded-full bg-white text-[#1b1464] px-3 py-2 font-semibold text-xs sm:text-sm shadow focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                aria-label={lang === 'ar' ? 'تغيير اللغة' : 'Change language'}
+              >
+                <img src="/assets/translate.png" alt="" className="h-4 w-4 sm:h-5 sm:w-5" />
+                <span className={!isMobile && lang === 'en' ? notoArabic.className : ''}>
+                  {isMobile ? (lang === 'en' ? 'AR' : 'EN') : (lang === 'en' ? 'العربية' : 'English')}
+                </span>
+              </button>
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
+      )}
 
       <div className="flex flex-col lg:flex-row flex-1 gap-4 p-4 overflow-hidden">
         {/* Map Section */}
@@ -2251,54 +2721,22 @@ export default function Home() {
               className="fixed bottom-6 left-6 z-[1100] bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg p-4 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
               aria-label="Show Details"
             >
-              <img src="/filtersvg.svg" alt="Filter" className="w-7 h-7 filter brightness-0 invert" />
+              <img src="/assets/filtersvg.svg" alt="Filter" className="w-7 h-7 filter brightness-0 invert" />
             </button>
           )}
-          <div className="absolute bottom-2 right-2 lg:bottom-4 lg:right-4 bg-white dark:bg-zinc-900 p-2 lg:p-3 rounded-lg shadow-lg border border-gray-200 dark:border-zinc-800 z-[1000] max-w-xs lg:max-w-none">
-            <p className="font-bold text-xs lg:text-sm mb-1 lg:mb-2 text-gray-900 dark:text-white">{t[lang].legend}</p>
-            <div className="space-y-0.5 lg:space-y-1 text-xs grid grid-cols-2 lg:grid-cols-1 gap-1 lg:gap-0">
-              <div className="flex items-center gap-1 lg:gap-2">
-                <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full flex-shrink-0" style={{ backgroundColor: '#1e90ff' }}></div>
-                <span className="text-gray-700 dark:text-gray-300 truncate text-xs">{t[lang].legend_services["Water Trucking - Distribution Point"]}</span>
-              </div>
-              <div className="flex items-center gap-1 lg:gap-2">
-                <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full flex-shrink-0" style={{ backgroundColor: '#ff4444' }}></div>
-                <span className="text-gray-700 dark:text-gray-300 truncate text-xs">{t[lang].legend_services["Health Space/Clinic"]}</span>
-              </div>
-              <div className="flex items-center gap-1 lg:gap-2">
-                <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full flex-shrink-0" style={{ backgroundColor: '#ff8800' }}></div>
-                <span className="text-gray-700 dark:text-gray-300 truncate text-xs">{t[lang].legend_services["Community Kitchen/Tekeya"]}</span>
-              </div>
-              <div className="flex items-center gap-1 lg:gap-2">
-                <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full flex-shrink-0" style={{ backgroundColor: '#b45309' }}></div>
-                <span className="text-gray-700 dark:text-gray-300 truncate text-xs">{t[lang].legend_services["Bakery"]}</span>
-              </div>
-              <div className="flex items-center gap-1 lg:gap-2">
-                <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full flex-shrink-0" style={{ backgroundColor: '#9933ff' }}></div>
-                <span className="text-gray-700 dark:text-gray-300 truncate text-xs">{t[lang].legend_services["TLS/School"]}</span>
-              </div>
-              <div className="flex items-center gap-1 lg:gap-2">
-                <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full flex-shrink-0" style={{ backgroundColor: '#4BB272' }}></div>
-                <span className="text-gray-700 dark:text-gray-300 truncate text-xs">{t[lang].legend_services["Community Space"]}</span>
-              </div>
-              <div className="flex items-center gap-1 lg:gap-2">
-                <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full flex-shrink-0" style={{ backgroundColor: '#ec4899' }}></div>
-                <span className="text-gray-700 dark:text-gray-300 truncate text-xs">{t[lang].legend_services["Safe space"]}</span>
-              </div>
-              <div className="flex items-center gap-1 lg:gap-2">
-                <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full flex-shrink-0" style={{ backgroundColor: '#fbbf24' }}></div>
-                <span className="text-gray-700 dark:text-gray-300 truncate text-xs">{t[lang].legend_services["Nutrition Center"]}</span>
-              </div>
-              <div className="flex items-center gap-1 lg:gap-2">
-                <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full flex-shrink-0" style={{ backgroundColor: '#545454' }}></div>
-                <span className="text-gray-700 dark:text-gray-300 truncate text-xs">{t[lang].legend_services["Distribution Point"]}</span>
-              </div>
-              <div className="flex items-center gap-1 lg:gap-2">
-                <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full flex-shrink-0" style={{ backgroundColor: '#93c01f' }}></div>
-                <span className="text-gray-700 dark:text-gray-300 truncate text-xs">{t[lang].legend_services["Social Activity"]}</span>
+          {visibleLegendItems.length > 0 && (
+            <div className="absolute bottom-2 right-2 lg:bottom-4 lg:right-4 bg-white dark:bg-zinc-900 p-2 lg:p-3 rounded-lg shadow-lg border border-gray-200 dark:border-zinc-800 z-[1000] max-w-xs lg:max-w-none">
+              <p className="font-bold text-xs lg:text-sm mb-1 lg:mb-2 text-gray-900 dark:text-white">{t[lang].legend}</p>
+              <div className="space-y-0.5 lg:space-y-1 text-xs grid grid-cols-2 lg:grid-cols-1 gap-1 lg:gap-0">
+                {visibleLegendItems.map((item) => (
+                  <div key={item.type} className="flex items-center gap-1 lg:gap-2">
+                    <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full flex-shrink-0" style={{ backgroundColor: item.color }}></div>
+                    <span className="text-gray-700 dark:text-gray-300 truncate text-xs">{t[lang].legend_services[item.type] || item.type}</span>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
+          )}
         </div>
         {/* Details/Panel Section */}
         <div className="relative w-full lg:w-80 flex-shrink-0 min-h-0 flex flex-col lg:h-full">
@@ -2325,8 +2763,18 @@ export default function Home() {
           >
           <h2 className="text-xl sm:text-2xl font-bold mb-4 text-gray-900 dark:text-white">{t[lang].sites}</h2>
           {userLocation && (
-            <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-              <p className="text-sm font-semibold text-blue-900 dark:text-blue-200">{t[lang].yourLocation}</p>
+            <div 
+              onClick={() => {
+                if (mapRef.current && mapReady) {
+                  mapRef.current.flyTo(userLocation, USER_LOCATION_ZOOM);
+                }
+              }}
+              className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800 cursor-pointer hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
+            >
+              <p className="text-sm font-semibold text-blue-900 dark:text-blue-200 flex items-center justify-between">
+                <span>{t[lang].yourLocation}</span>
+                <span className="text-xs text-blue-500 font-normal">📍 {lang === 'ar' ? 'عرض على الخريطة' : 'Show on map'}</span>
+              </p>
               <p className="text-xs text-blue-700 dark:text-blue-300 mt-1">
                 {userLocation[0].toFixed(4)}, {userLocation[1].toFixed(4)}
               </p>
@@ -2441,42 +2889,38 @@ export default function Home() {
               ) : (
                 <div className="space-y-2">
                   {currentServices.map((service) => {
-                  const serviceType = service.serviceTypeKey || getServiceType(service.name);
-                  const serviceTypeLabel = service.serviceTypeLabel || serviceType;
-                  const translatedServiceName = service.translatedServiceName || translateServiceNameValue(service, lang);
                   const translatedOrg = translateOrganization(service.Org || service.org);
-                  let badgeColor = 'bg-gray-200 dark:bg-zinc-700';
-                  if (serviceType === 'Water Trucking - Distribution Point') badgeColor = 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
-                  if (serviceType === 'Health Space/Clinic') badgeColor = 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200';
-                  if (serviceType === 'Community Kitchen') badgeColor = 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200';
-                  if (serviceType === 'Bakery') badgeColor = 'bg-amber-700/15 text-amber-900 dark:bg-amber-800/30 dark:text-amber-200';
-                  if (serviceType === 'TLS/School') badgeColor = 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200';
-                  if (serviceType === 'Community Space') badgeColor = 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
-                  if (serviceType === 'Safe space') badgeColor = 'bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200';
-                  if (serviceType === 'Nutrition Center') badgeColor = 'bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200';
-                  if (serviceType === 'Social Activity') badgeColor = 'bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-200';
+                  const serviceColor = getColorFromService(service.name);
+                  const isSelected = selectedService?.id === service.id;
+                  const isHovered = hoveredCardId === service.id;
+                  const contrastColor = isSelected ? (serviceColor.toLowerCase() === '#fbbf24' ? '#000000' : '#ffffff') : undefined;
 
                     return (
                     <button
                       key={service.id}
                       onClick={() => handleServiceClick(service)}
-                      className={`w-full p-3 rounded-lg transition-colors ${isArabic ? 'text-right' : 'text-left'} ${selectedService?.id === service.id
-                          ? 'bg-green-500 text-white dark:bg-green-600'
-                          : 'bg-gray-100 text-gray-900 hover:bg-gray-200 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700'
-                        }`}
+                      onMouseEnter={() => setHoveredCardId(service.id)}
+                      onMouseLeave={() => setHoveredCardId(null)}
+                      className={`w-full p-3 rounded-lg transition-all border border-gray-200/50 dark:border-zinc-800/50 text-gray-900 dark:text-white ${isArabic ? 'text-right' : 'text-left'} ${
+                        isSelected
+                          ? 'scale-[1.02] shadow-md ring-2 ring-emerald-500 dark:ring-emerald-400 font-bold'
+                          : ''
+                      }`}
+                      style={{
+                        borderInlineStart: `5px solid ${serviceColor}`,
+                        backgroundColor: isSelected ? serviceColor : (isHovered ? `${serviceColor}2e` : `${serviceColor}15`),
+                        color: contrastColor,
+                      }}
                     >
                       <p className="font-semibold text-sm">{service.translatedName}</p>
-                      <p className={`text-xs ${selectedService?.id === service.id ? 'text-white/90' : 'text-gray-600 dark:text-gray-300'}`}>
+                      <p className={`text-xs ${isSelected ? 'text-white/90' : 'text-gray-600 dark:text-gray-300'}`}>
                         {translateSiteName(service.siteName)}
                       </p>
                       {translatedOrg && (
-                        <p className={`text-xs ${selectedService?.id === service.id ? 'text-white/85' : 'text-gray-500 dark:text-gray-400'}`}>
+                        <p className={`text-xs ${isSelected ? 'text-white/85' : 'text-gray-500 dark:text-gray-400'}`}>
                           {translatedOrg}
                         </p>
                       )}
-                      <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${selectedService?.id === service.id ? 'bg-white/20' : badgeColor}`}>
-                        {serviceTypeLabel}
-                      </span>
                     </button>
                   );
                   })}

@@ -1,0 +1,100 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              34.256737,
+              31.353491
+            ],
+            [
+              34.256547,
+              31.353779
+            ],
+            [
+              34.25626,
+              31.35414
+            ],
+            [
+              34.255966,
+              31.353891
+            ],
+            [
+              34.255594,
+              31.353588
+            ],
+            [
+              34.255253,
+              31.353167
+            ],
+            [
+              34.255019,
+              31.352749
+            ],
+            [
+              34.254839,
+              31.352275
+            ],
+            [
+              34.255175,
+              31.351871
+            ],
+            [
+              34.25554,
+              31.351449
+            ],
+            [
+              34.256004,
+              31.350948
+            ],
+            [
+              34.256284,
+              31.351105
+            ],
+            [
+              34.256556,
+              31.35127
+            ],
+            [
+              34.256947,
+              31.351479
+            ],
+            [
+              34.256513,
+              31.352103
+            ],
+            [
+              34.256324,
+              31.352405
+            ],
+            [
+              34.256142,
+              31.352703
+            ],
+            [
+              34.256433,
+              31.353084
+            ],
+            [
+              34.256581,
+              31.353264
+            ],
+            [
+              34.256737,
+              31.353491
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "site_code": "KYS1734",
+        "name": "KYS1734",
+        "description": "Al-Karama site    <br>       <br>   OID   18    <br>   Name   Al-Karama site    <br>   FolderPath   Sites_for_GFM    <br>   SymbolID   0    <br>   AltMode   0    <br>   Base   0    <br>   Clamped   -1    <br>   Extruded   0    <br>   Snippet       <br>   PopupInfo   Al-Karama site    <br>       <br>   SHAPE   Polygon    <br>   Name   Al-Karama site    <br>   Area       <br>   Site Code   KYS1734    <br>   SHAPE_Length   0.0085    <br>   SHAPE_Area   0.000004"
+      }
+    }
+  ]
+}

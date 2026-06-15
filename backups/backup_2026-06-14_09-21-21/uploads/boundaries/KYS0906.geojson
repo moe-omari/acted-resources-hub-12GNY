@@ -1,0 +1,64 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              34.267008,
+              31.355597
+            ],
+            [
+              34.266533,
+              31.355367
+            ],
+            [
+              34.266401,
+              31.355255
+            ],
+            [
+              34.266145,
+              31.355037
+            ],
+            [
+              34.266049,
+              31.355021
+            ],
+            [
+              34.265658,
+              31.35448
+            ],
+            [
+              34.266876,
+              31.35421
+            ],
+            [
+              34.267653,
+              31.353985
+            ],
+            [
+              34.268357,
+              31.353416
+            ],
+            [
+              34.268931,
+              31.353969
+            ],
+            [
+              34.267008,
+              31.355597
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "site_code": "KYS0906",
+        "name": "KYS0906",
+        "description": "Aiash camp    <br>       <br>   OID   8    <br>   Name   Aiash camp    <br>   FolderPath   Sites_for_GFM    <br>   SymbolID   0    <br>   AltMode   0    <br>   Base   0    <br>   Clamped   -1    <br>   Extruded   0    <br>   Snippet       <br>   PopupInfo   Aiash camp    <br>       <br>   SHAPE   Polygon    <br>   Name   Aiash camp    <br>   Area       <br>   Site Code   KYS0906    <br>   SHAPE_Length   0.008079    <br>   SHAPE_Area   0.000003"
+      }
+    }
+  ]
+}

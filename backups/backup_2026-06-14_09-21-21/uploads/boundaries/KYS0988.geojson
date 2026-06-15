@@ -1,0 +1,72 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              34.264233,
+              31.354761
+            ],
+            [
+              34.264353,
+              31.354859
+            ],
+            [
+              34.264151,
+              31.354986
+            ],
+            [
+              34.263788,
+              31.355346
+            ],
+            [
+              34.262474,
+              31.354558
+            ],
+            [
+              34.262167,
+              31.354726
+            ],
+            [
+              34.261756,
+              31.354483
+            ],
+            [
+              34.262066,
+              31.354237
+            ],
+            [
+              34.262306,
+              31.354066
+            ],
+            [
+              34.262411,
+              31.353987
+            ],
+            [
+              34.262463,
+              31.353879
+            ],
+            [
+              34.262569,
+              31.353817
+            ],
+            [
+              34.264233,
+              31.354761
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "site_code": "KYS0988",
+        "name": "KYS0988",
+        "description": "Al-Nahda    <br>       <br>   OID   26    <br>   Name   Al-Nahda    <br>   FolderPath   Sites_for_GFM    <br>   SymbolID   0    <br>   AltMode   0    <br>   Base   0    <br>   Clamped   -1    <br>   Extruded   0    <br>   Snippet       <br>   PopupInfo   Al-Nahda    <br>       <br>   SHAPE   Polygon    <br>   Name   Al-Nahda    <br>   Area       <br>   Site Code   KYS0988    <br>   SHAPE_Length   0.007574    <br>   SHAPE_Area   0.000002"
+      }
+    }
+  ]
+}

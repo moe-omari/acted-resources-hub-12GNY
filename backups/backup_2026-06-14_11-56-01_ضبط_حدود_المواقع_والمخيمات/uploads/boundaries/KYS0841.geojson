@@ -1,0 +1,100 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              34.264047,
+              31.352864
+            ],
+            [
+              34.263894,
+              31.352929
+            ],
+            [
+              34.263743,
+              31.353001
+            ],
+            [
+              34.263552,
+              31.353159
+            ],
+            [
+              34.263411,
+              31.353297
+            ],
+            [
+              34.263218,
+              31.353525
+            ],
+            [
+              34.262222,
+              31.352754
+            ],
+            [
+              34.261683,
+              31.352274
+            ],
+            [
+              34.26185,
+              31.352162
+            ],
+            [
+              34.262108,
+              31.352363
+            ],
+            [
+              34.262358,
+              31.352058
+            ],
+            [
+              34.26205,
+              31.351617
+            ],
+            [
+              34.262288,
+              31.351404
+            ],
+            [
+              34.262326,
+              31.351312
+            ],
+            [
+              34.262421,
+              31.351223
+            ],
+            [
+              34.262606,
+              31.351457
+            ],
+            [
+              34.262934,
+              31.351905
+            ],
+            [
+              34.263162,
+              31.351866
+            ],
+            [
+              34.263581,
+              31.352135
+            ],
+            [
+              34.264047,
+              31.352864
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "site_code": "KYS0841",
+        "name": "KYS0841",
+        "description": "Kareem    <br>       <br>   OID   11    <br>   Name   Kareem    <br>   FolderPath   Sites_for_GFM    <br>   SymbolID   0    <br>   AltMode   0    <br>   Base   0    <br>   Clamped   -1    <br>   Extruded   0    <br>   Snippet       <br>   PopupInfo   Al-Kareem    <br>       <br>   SHAPE   Polygon    <br>   Name   Al-Kareem    <br>   Area       <br>   Site Code   KYS0841    <br>   SHAPE_Length   0.007491    <br>   SHAPE_Area   0.000003"
+      }
+    }
+  ]
+}

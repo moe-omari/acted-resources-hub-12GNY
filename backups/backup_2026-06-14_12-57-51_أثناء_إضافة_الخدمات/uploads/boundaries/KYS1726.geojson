@@ -1,0 +1,76 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              34.265278,
+              31.354337
+            ],
+            [
+              34.26551,
+              31.354455
+            ],
+            [
+              34.264721,
+              31.354628
+            ],
+            [
+              34.264353,
+              31.354859
+            ],
+            [
+              34.262569,
+              31.353817
+            ],
+            [
+              34.262655,
+              31.353784
+            ],
+            [
+              34.262838,
+              31.353715
+            ],
+            [
+              34.263052,
+              31.353637
+            ],
+            [
+              34.263218,
+              31.353525
+            ],
+            [
+              34.263415,
+              31.353305
+            ],
+            [
+              34.263743,
+              31.353001
+            ],
+            [
+              34.264531,
+              31.353804
+            ],
+            [
+              34.264759,
+              31.354036
+            ],
+            [
+              34.265278,
+              31.354337
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "site_code": "KYS1726",
+        "name": "KYS1726",
+        "description": "Al-Akli Camp    <br>       <br>   OID   13    <br>   Name   Al-Akli Camp    <br>   FolderPath   Sites_for_GFM    <br>   SymbolID   0    <br>   AltMode   0    <br>   Base   0    <br>   Clamped   -1    <br>   Extruded   0    <br>   Snippet       <br>   PopupInfo   Al-Akli Camp    <br>       <br>   SHAPE   Polygon    <br>   Name   Al-Akli Camp    <br>   Area       <br>   Site Code   KYS1726    <br>   SHAPE_Length   0.006244    <br>   SHAPE_Area   0.000002"
+      }
+    }
+  ]
+}

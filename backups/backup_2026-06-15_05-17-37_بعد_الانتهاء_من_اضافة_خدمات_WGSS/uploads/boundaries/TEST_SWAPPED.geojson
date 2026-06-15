@@ -1,0 +1,39 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              34.26742,
+              31.360003,
+              0
+            ],
+            [
+              34.266474,
+              31.359212,
+              0
+            ],
+            [
+              34.267411,
+              31.358588,
+              0
+            ],
+            [
+              34.26742,
+              31.360003,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "site_code": "TEST_SWAPPED",
+        "name": "TEST_SWAPPED"
+      }
+    }
+  ]
+}
