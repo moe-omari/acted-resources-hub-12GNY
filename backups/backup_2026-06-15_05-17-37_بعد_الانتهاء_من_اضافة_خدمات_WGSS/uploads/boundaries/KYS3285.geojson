@@ -1,0 +1,76 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              34.264759,
+              31.354036
+            ],
+            [
+              34.26422,
+              31.353487
+            ],
+            [
+              34.26446,
+              31.35341
+            ],
+            [
+              34.264618,
+              31.353318
+            ],
+            [
+              34.264494,
+              31.352848
+            ],
+            [
+              34.264877,
+              31.352707
+            ],
+            [
+              34.265225,
+              31.352615
+            ],
+            [
+              34.265229,
+              31.352613
+            ],
+            [
+              34.265519,
+              31.353271
+            ],
+            [
+              34.265734,
+              31.353591
+            ],
+            [
+              34.266224,
+              31.35394
+            ],
+            [
+              34.266045,
+              31.354095
+            ],
+            [
+              34.26551,
+              31.354455
+            ],
+            [
+              34.264759,
+              31.354036
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "site_code": "KYS3285",
+        "name": "KYS3285",
+        "description": "Al-Hurya    <br>       <br>   OID   15    <br>   Name   Al-Hurya    <br>   FolderPath   Sites_for_GFM    <br>   SymbolID   0    <br>   AltMode   0    <br>   Base   0    <br>   Clamped   -1    <br>   Extruded   0    <br>   Snippet       <br>   PopupInfo   Al-Hurya    <br>       <br>   SHAPE   Polygon    <br>   Name   Al-Hurya    <br>   Area       <br>   Site Code   KYS3285    <br>   SHAPE_Length   0.003446    <br>   SHAPE_Area   0"
+      }
+    }
+  ]
+}

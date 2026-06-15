@@ -1,0 +1,52 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              34.265611,
+              31.357259
+            ],
+            [
+              34.265198,
+              31.357633
+            ],
+            [
+              34.264482,
+              31.358161
+            ],
+            [
+              34.263932,
+              31.356843
+            ],
+            [
+              34.264878,
+              31.356264
+            ],
+            [
+              34.265859,
+              31.356445
+            ],
+            [
+              34.266317,
+              31.356623
+            ],
+            [
+              34.265611,
+              31.357259
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "site_code": "KYS3962",
+        "name": "KYS3962",
+        "description": "Pioneers camp    <br>       <br>   OID   6    <br>   Name   Pioneers camp    <br>   FolderPath   Sites_for_GFM    <br>   SymbolID   0    <br>   AltMode   0    <br>   Base   0    <br>   Clamped   -1    <br>   Extruded   0    <br>   Snippet       <br>   PopupInfo   Pioneers camp    <br>       <br>   SHAPE   Polygon    <br>   Name   Pioneers camp    <br>   Area       <br>   Site Code   KYS3962    <br>   SHAPE_Length   0.004679    <br>   SHAPE_Area   0.000001"
+      }
+    }
+  ]
+}

@@ -1,0 +1,2467 @@
+[
+  {
+    "siteCode": "KYS1711",
+    "en": "Al-Nakheel and alzytoon",
+    "ar": "النخيل والزيتون",
+    "boundaryFile": "/uploads/boundaries/KYS1711.geojson",
+    "projectCode": "12GNY",
+    "location": "South",
+    "latitude": 31.361032,
+    "longitude": 34.265947,
+    "servicesCount": 7,
+    "services": [
+      {
+        "id": 137,
+        "name": "TLS/School",
+        "location": "South",
+        "site name": "KYS1711",
+        "siteName": "KYS1711",
+        "coordinates": {
+          "latitude": 31.361033,
+          "longitude": 34.266025
+        },
+        "Org": ""
+      },
+      {
+        "id": 136,
+        "name": "TLS/School",
+        "location": "South",
+        "site name": "KYS1711",
+        "siteName": "KYS1711",
+        "coordinates": {
+          "latitude": 31.360455,
+          "longitude": 34.266651
+        },
+        "Org": ""
+      },
+      {
+        "id": 135,
+        "name": "Health Space/Clinic",
+        "location": "South",
+        "site name": "KYS1711",
+        "siteName": "KYS1711",
+        "coordinates": {
+          "latitude": 31.360849,
+          "longitude": 34.267192
+        },
+        "Org": ""
+      },
+      {
+        "id": 134,
+        "name": "Health Space/Clinic",
+        "location": "South",
+        "site name": "KYS1711",
+        "siteName": "KYS1711",
+        "coordinates": {
+          "latitude": 31.361074,
+          "longitude": 34.270628
+        },
+        "Org": ""
+      },
+      {
+        "id": 133,
+        "name": "Social Activity",
+        "location": "South",
+        "site name": "KYS1711",
+        "siteName": "KYS1711",
+        "coordinates": {
+          "latitude": 31.360696,
+          "longitude": 34.264876
+        },
+        "Org": ""
+      },
+      {
+        "id": 132,
+        "name": "Community Space",
+        "location": "South",
+        "site name": "KYS1711",
+        "siteName": "KYS1711",
+        "coordinates": {
+          "latitude": 31.360696,
+          "longitude": 34.264876
+        },
+        "Org": ""
+      },
+      {
+        "id": 131,
+        "name": "Distribution Point",
+        "location": "South",
+        "site name": "KYS1711",
+        "siteName": "KYS1711",
+        "coordinates": {
+          "latitude": 31.3599386,
+          "longitude": 34.2656155
+        },
+        "Org": ""
+      }
+    ]
+  },
+  {
+    "siteCode": "KYS1715",
+    "en": "Al Quds- Abdin Area",
+    "ar": "منطقة عابدين-القدس",
+    "boundaryFile": "/uploads/boundaries/KYS1715.geojson",
+    "projectCode": "12GNY",
+    "location": "South",
+    "latitude": 31.359957,
+    "longitude": 34.265227,
+    "servicesCount": 8,
+    "services": [
+      {
+        "id": 130,
+        "name": "TLS/School",
+        "location": "South",
+        "site name": "KYS1715",
+        "siteName": "KYS1715",
+        "coordinates": {
+          "latitude": 31.361033,
+          "longitude": 34.266025
+        },
+        "Org": ""
+      },
+      {
+        "id": 129,
+        "name": "TLS/School",
+        "location": "South",
+        "site name": "KYS1715",
+        "siteName": "KYS1715",
+        "coordinates": {
+          "latitude": 31.360455,
+          "longitude": 34.266651
+        },
+        "Org": ""
+      },
+      {
+        "id": 128,
+        "name": "Community Kitchen/Tekeya",
+        "location": "South",
+        "site name": "KYS1715",
+        "siteName": "KYS1715",
+        "coordinates": {
+          "latitude": 31.3598587,
+          "longitude": 34.2645573
+        },
+        "Org": ""
+      },
+      {
+        "id": 127,
+        "name": "Health Space/Clinic",
+        "location": "South",
+        "site name": "KYS1715",
+        "siteName": "KYS1715",
+        "coordinates": {
+          "latitude": 31.360849,
+          "longitude": 34.267192
+        },
+        "Org": ""
+      },
+      {
+        "id": 126,
+        "name": "Health Space/Clinic",
+        "location": "South",
+        "site name": "KYS1715",
+        "siteName": "KYS1715",
+        "coordinates": {
+          "latitude": 31.361074,
+          "longitude": 34.270628
+        },
+        "Org": ""
+      },
+      {
+        "id": 125,
+        "name": "Social Activity",
+        "location": "South",
+        "site name": "KYS1715",
+        "siteName": "KYS1715",
+        "coordinates": {
+          "latitude": 31.360696,
+          "longitude": 34.264876
+        },
+        "Org": ""
+      },
+      {
+        "id": 124,
+        "name": "Community Space",
+        "location": "South",
+        "site name": "KYS1715",
+        "siteName": "KYS1715",
+        "coordinates": {
+          "latitude": 31.360696,
+          "longitude": 34.264876
+        },
+        "Org": ""
+      },
+      {
+        "id": 123,
+        "name": "Distribution Point",
+        "location": "South",
+        "site name": "KYS1715",
+        "siteName": "KYS1715",
+        "coordinates": {
+          "latitude": 31.3599386,
+          "longitude": 34.2656155
+        },
+        "Org": ""
+      }
+    ]
+  },
+  {
+    "siteCode": "KYS1926",
+    "en": "Albwasil",
+    "ar": "البواسل",
+    "boundaryFile": "/uploads/boundaries/KYS1926.geojson",
+    "projectCode": "12GNY",
+    "location": "South",
+    "latitude": 31.359353,
+    "longitude": 34.266102,
+    "servicesCount": 8,
+    "services": [
+      {
+        "id": 145,
+        "name": "TLS/School",
+        "location": "South",
+        "site name": "KYS1926",
+        "siteName": "KYS1926",
+        "coordinates": {
+          "latitude": 31.361033,
+          "longitude": 34.266025
+        },
+        "Org": ""
+      },
+      {
+        "id": 144,
+        "name": "TLS/School",
+        "location": "South",
+        "site name": "KYS1926",
+        "siteName": "KYS1926",
+        "coordinates": {
+          "latitude": 31.360455,
+          "longitude": 34.266651
+        },
+        "Org": ""
+      },
+      {
+        "id": 143,
+        "name": "Community Kitchen/Tekeya",
+        "location": "South",
+        "site name": "KYS1926",
+        "siteName": "KYS1926",
+        "coordinates": {
+          "latitude": 31.3597419,
+          "longitude": 34.2667561
+        },
+        "Org": ""
+      },
+      {
+        "id": 142,
+        "name": "Health Space/Clinic",
+        "location": "South",
+        "site name": "KYS1926",
+        "siteName": "KYS1926",
+        "coordinates": {
+          "latitude": 31.360849,
+          "longitude": 34.267192
+        },
+        "Org": ""
+      },
+      {
+        "id": 141,
+        "name": "Health Space/Clinic",
+        "location": "South",
+        "site name": "KYS1926",
+        "siteName": "KYS1926",
+        "coordinates": {
+          "latitude": 31.361074,
+          "longitude": 34.270628
+        },
+        "Org": ""
+      },
+      {
+        "id": 140,
+        "name": "Social Activity",
+        "location": "South",
+        "site name": "KYS1926",
+        "siteName": "KYS1926",
+        "coordinates": {
+          "latitude": 31.360696,
+          "longitude": 34.264876
+        },
+        "Org": ""
+      },
+      {
+        "id": 139,
+        "name": "Community Space",
+        "location": "South",
+        "site name": "KYS1926",
+        "siteName": "KYS1926",
+        "coordinates": {
+          "latitude": 31.360696,
+          "longitude": 34.264876
+        },
+        "Org": ""
+      },
+      {
+        "id": 138,
+        "name": "Distribution Point",
+        "location": "South",
+        "site name": "KYS1926",
+        "siteName": "KYS1926",
+        "coordinates": {
+          "latitude": 31.3599386,
+          "longitude": 34.2656155
+        },
+        "Org": ""
+      }
+    ]
+  },
+  {
+    "siteCode": "KYS0100",
+    "en": "Wijdan community",
+    "ar": "مجتمع وجدان",
+    "boundaryFile": "/uploads/boundaries/KYS0100.geojson",
+    "projectCode": "12GNY",
+    "location": "South",
+    "latitude": 31.358696,
+    "longitude": 34.267799,
+    "servicesCount": 9,
+    "services": [
+      {
+        "id": 154,
+        "name": "TLS/School",
+        "location": "South",
+        "site name": "KYS0100",
+        "siteName": "KYS0100",
+        "coordinates": {
+          "latitude": 31.361033,
+          "longitude": 34.266025
+        },
+        "Org": ""
+      },
+      {
+        "id": 153,
+        "name": "TLS/School",
+        "location": "South",
+        "site name": "KYS0100",
+        "siteName": "KYS0100",
+        "coordinates": {
+          "latitude": 31.360455,
+          "longitude": 34.266651
+        },
+        "Org": ""
+      },
+      {
+        "id": 152,
+        "name": "Community Kitchen/Tekeya",
+        "location": "South",
+        "site name": "KYS0100",
+        "siteName": "KYS0100",
+        "coordinates": {
+          "latitude": 31.3586413,
+          "longitude": 34.2687459
+        },
+        "Org": ""
+      },
+      {
+        "id": 151,
+        "name": "Health Space/Clinic",
+        "location": "South",
+        "site name": "KYS0100",
+        "siteName": "KYS0100",
+        "coordinates": {
+          "latitude": 31.360849,
+          "longitude": 34.267192
+        },
+        "Org": ""
+      },
+      {
+        "id": 150,
+        "name": "Health Space/Clinic",
+        "location": "South",
+        "site name": "KYS0100",
+        "siteName": "KYS0100",
+        "coordinates": {
+          "latitude": 31.361074,
+          "longitude": 34.270628
+        },
+        "Org": ""
+      },
+      {
+        "id": 149,
+        "name": "Social Activity",
+        "location": "South",
+        "site name": "KYS0100",
+        "siteName": "KYS0100",
+        "coordinates": {
+          "latitude": 31.360696,
+          "longitude": 34.264876
+        },
+        "Org": ""
+      },
+      {
+        "id": 148,
+        "name": "Water Trucking - Distribution Point",
+        "location": "South",
+        "site name": "KYS0100",
+        "siteName": "KYS0100",
+        "coordinates": {
+          "latitude": 31.3586413,
+          "longitude": 34.2687459
+        },
+        "Org": ""
+      },
+      {
+        "id": 147,
+        "name": "Community Space",
+        "location": "South",
+        "site name": "KYS0100",
+        "siteName": "KYS0100",
+        "coordinates": {
+          "latitude": 31.360696,
+          "longitude": 34.264876
+        },
+        "Org": ""
+      },
+      {
+        "id": 146,
+        "name": "Distribution Point",
+        "location": "South",
+        "site name": "KYS0100",
+        "siteName": "KYS0100",
+        "coordinates": {
+          "latitude": 31.3599386,
+          "longitude": 34.2656155
+        },
+        "Org": ""
+      }
+    ]
+  },
+  {
+    "siteCode": "KYS1933",
+    "en": "Al faruq",
+    "ar": "الفاروق",
+    "boundaryFile": "/uploads/boundaries/KYS1933.geojson",
+    "projectCode": "12GNY",
+    "location": "South",
+    "latitude": 31.361547,
+    "longitude": 34.266823,
+    "servicesCount": 9,
+    "services": [
+      {
+        "id": 163,
+        "name": "TLS/School",
+        "location": "South",
+        "site name": "KYS1933",
+        "siteName": "KYS1933",
+        "coordinates": {
+          "latitude": 31.361033,
+          "longitude": 34.266025
+        },
+        "Org": ""
+      },
+      {
+        "id": 162,
+        "name": "TLS/School",
+        "location": "South",
+        "site name": "KYS1933",
+        "siteName": "KYS1933",
+        "coordinates": {
+          "latitude": 31.360455,
+          "longitude": 34.266651
+        },
+        "Org": ""
+      },
+      {
+        "id": 161,
+        "name": "Community Kitchen/Tekeya",
+        "location": "South",
+        "site name": "KYS1933",
+        "siteName": "KYS1933",
+        "coordinates": {
+          "latitude": 31.3614476,
+          "longitude": 34.2674058
+        },
+        "Org": ""
+      },
+      {
+        "id": 160,
+        "name": "Health Space/Clinic",
+        "location": "South",
+        "site name": "KYS1933",
+        "siteName": "KYS1933",
+        "coordinates": {
+          "latitude": 31.360849,
+          "longitude": 34.267192
+        },
+        "Org": ""
+      },
+      {
+        "id": 159,
+        "name": "Health Space/Clinic",
+        "location": "South",
+        "site name": "KYS1933",
+        "siteName": "KYS1933",
+        "coordinates": {
+          "latitude": 31.361074,
+          "longitude": 34.270628
+        },
+        "Org": ""
+      },
+      {
+        "id": 158,
+        "name": "Social Activity",
+        "location": "South",
+        "site name": "KYS1933",
+        "siteName": "KYS1933",
+        "coordinates": {
+          "latitude": 31.360696,
+          "longitude": 34.264876
+        },
+        "Org": ""
+      },
+      {
+        "id": 157,
+        "name": "Water Trucking - Distribution Point",
+        "location": "South",
+        "site name": "KYS1933",
+        "siteName": "KYS1933",
+        "coordinates": {
+          "latitude": 31.3617548,
+          "longitude": 34.2672141
+        },
+        "Org": ""
+      },
+      {
+        "id": 156,
+        "name": "Community Space",
+        "location": "South",
+        "site name": "KYS1933",
+        "siteName": "KYS1933",
+        "coordinates": {
+          "latitude": 31.360696,
+          "longitude": 34.264876
+        },
+        "Org": ""
+      },
+      {
+        "id": 155,
+        "name": "Distribution Point",
+        "location": "South",
+        "site name": "KYS1933",
+        "siteName": "KYS1933",
+        "coordinates": {
+          "latitude": 31.3599386,
+          "longitude": 34.2656155
+        },
+        "Org": ""
+      }
+    ]
+  },
+  {
+    "siteCode": "KYS0835",
+    "en": "Yafa",
+    "ar": "يافا",
+    "boundaryFile": "/uploads/boundaries/KYS0835.geojson",
+    "projectCode": "12GNY",
+    "location": "South",
+    "latitude": 31.357268,
+    "longitude": 34.270006,
+    "servicesCount": 13,
+    "services": [
+      {
+        "id": 122,
+        "name": "TLS/School",
+        "location": "South",
+        "site name": "KYS0835",
+        "siteName": "KYS0835",
+        "coordinates": {
+          "latitude": 31.360455,
+          "longitude": 34.266651
+        },
+        "Org": ""
+      },
+      {
+        "id": 121,
+        "name": "TLS/School",
+        "location": "South",
+        "site name": "KYS0835",
+        "siteName": "KYS0835",
+        "coordinates": {
+          "latitude": 31.357792,
+          "longitude": 34.269095
+        },
+        "Org": ""
+      },
+      {
+        "id": 120,
+        "name": "Community Kitchen/Tekeya",
+        "location": "South",
+        "site name": "KYS0835",
+        "siteName": "KYS0835",
+        "coordinates": {
+          "latitude": 31.357012,
+          "longitude": 34.26976
+        },
+        "Org": ""
+      },
+      {
+        "id": 119,
+        "name": "Community Kitchen/Tekeya",
+        "location": "South",
+        "site name": "KYS0835",
+        "siteName": "KYS0835",
+        "coordinates": {
+          "latitude": 31.357905,
+          "longitude": 34.268467
+        },
+        "Org": ""
+      },
+      {
+        "id": 118,
+        "name": "Health Space/Clinic",
+        "location": "South",
+        "site name": "KYS0835",
+        "siteName": "KYS0835",
+        "coordinates": {
+          "latitude": 31.360849,
+          "longitude": 34.267192
+        },
+        "Org": ""
+      },
+      {
+        "id": 117,
+        "name": "Social Activity",
+        "location": "South",
+        "site name": "KYS0835",
+        "siteName": "KYS0835",
+        "coordinates": {
+          "latitude": 31.357012,
+          "longitude": 34.26976
+        },
+        "Org": ""
+      },
+      {
+        "id": 116,
+        "name": "Social Activity",
+        "location": "South",
+        "site name": "KYS0835",
+        "siteName": "KYS0835",
+        "coordinates": {
+          "latitude": 31.357905,
+          "longitude": 34.268467
+        },
+        "Org": ""
+      },
+      {
+        "id": 115,
+        "name": "Water Trucking - Distribution Point",
+        "location": "South",
+        "site name": "KYS0835",
+        "siteName": "KYS0835",
+        "coordinates": {
+          "latitude": 31.357185,
+          "longitude": 34.269455
+        },
+        "Org": ""
+      },
+      {
+        "id": 114,
+        "name": "Water Trucking - Distribution Point",
+        "location": "South",
+        "site name": "KYS0835",
+        "siteName": "KYS0835",
+        "coordinates": {
+          "latitude": 31.357839,
+          "longitude": 34.268016
+        },
+        "Org": ""
+      },
+      {
+        "id": 113,
+        "name": "Community Space",
+        "location": "South",
+        "site name": "KYS0835",
+        "siteName": "KYS0835",
+        "coordinates": {
+          "latitude": 31.357012,
+          "longitude": 34.26976
+        },
+        "Org": ""
+      },
+      {
+        "id": 112,
+        "name": "Community Space",
+        "location": "South",
+        "site name": "KYS0835",
+        "siteName": "KYS0835",
+        "coordinates": {
+          "latitude": 31.357905,
+          "longitude": 34.268467
+        },
+        "Org": ""
+      },
+      {
+        "id": 111,
+        "name": "Distribution Point",
+        "location": "South",
+        "site name": "KYS0835",
+        "siteName": "KYS0835",
+        "coordinates": {
+          "latitude": 31.357012,
+          "longitude": 34.26976
+        },
+        "Org": ""
+      },
+      {
+        "id": 110,
+        "name": "Distribution Point",
+        "location": "South",
+        "site name": "KYS0835",
+        "siteName": "KYS0835",
+        "coordinates": {
+          "latitude": 31.357905,
+          "longitude": 34.268467
+        },
+        "Org": ""
+      }
+    ]
+  },
+  {
+    "siteCode": "KYS1713",
+    "en": "Al-Fedaa site",
+    "ar": "موقع الفداء",
+    "boundaryFile": "/uploads/boundaries/KYS1713.geojson",
+    "projectCode": "12GNY",
+    "location": "South",
+    "latitude": 31.359209,
+    "longitude": 34.264526,
+    "servicesCount": 12,
+    "services": [
+      {
+        "id": 74,
+        "name": "TLS/School",
+        "location": "South",
+        "site name": "KYS1713",
+        "siteName": "KYS1713",
+        "coordinates": {
+          "latitude": 31.361033,
+          "longitude": 34.266025
+        },
+        "Org": ""
+      },
+      {
+        "id": 73,
+        "name": "TLS/School",
+        "location": "South",
+        "site name": "KYS1713",
+        "siteName": "KYS1713",
+        "coordinates": {
+          "latitude": 31.360455,
+          "longitude": 34.266651
+        },
+        "Org": ""
+      },
+      {
+        "id": 72,
+        "name": "Community Kitchen/Tekeya",
+        "location": "South",
+        "site name": "KYS1713",
+        "siteName": "KYS1713",
+        "coordinates": {
+          "latitude": 31.359975,
+          "longitude": 34.264375
+        },
+        "Org": ""
+      },
+      {
+        "id": 71,
+        "name": "Health Space/Clinic",
+        "location": "South",
+        "site name": "KYS1713",
+        "siteName": "KYS1713",
+        "coordinates": {
+          "latitude": 31.360849,
+          "longitude": 34.267192
+        },
+        "Org": ""
+      },
+      {
+        "id": 70,
+        "name": "Health Space/Clinic",
+        "location": "South",
+        "site name": "KYS1713",
+        "siteName": "KYS1713",
+        "coordinates": {
+          "latitude": 31.361074,
+          "longitude": 34.270628
+        },
+        "Org": ""
+      },
+      {
+        "id": 69,
+        "name": "Social Activity",
+        "location": "South",
+        "site name": "KYS1713",
+        "siteName": "KYS1713",
+        "coordinates": {
+          "latitude": 31.359483,
+          "longitude": 34.264165
+        },
+        "Org": ""
+      },
+      {
+        "id": 68,
+        "name": "Water Trucking - Distribution Point",
+        "location": "South",
+        "site name": "KYS1713",
+        "siteName": "KYS1713",
+        "coordinates": {
+          "latitude": 31.360049,
+          "longitude": 34.26448
+        },
+        "Org": ""
+      },
+      {
+        "id": 67,
+        "name": "Water Trucking - Distribution Point",
+        "location": "South",
+        "site name": "KYS1713",
+        "siteName": "KYS1713",
+        "coordinates": {
+          "latitude": 31.360003,
+          "longitude": 34.263465
+        },
+        "Org": ""
+      },
+      {
+        "id": 66,
+        "name": "Water Trucking - Distribution Point",
+        "location": "South",
+        "site name": "KYS1713",
+        "siteName": "KYS1713",
+        "coordinates": {
+          "latitude": 31.359441,
+          "longitude": 34.264398
+        },
+        "Org": "water well"
+      },
+      {
+        "id": 65,
+        "name": "Community Space",
+        "location": "South",
+        "site name": "KYS1713",
+        "siteName": "KYS1713",
+        "coordinates": {
+          "latitude": 31.359483,
+          "longitude": 34.264165
+        },
+        "Org": ""
+      },
+      {
+        "id": 64,
+        "name": "Distribution Point",
+        "location": "South",
+        "site name": "KYS1713",
+        "siteName": "KYS1713",
+        "coordinates": {
+          "latitude": 31.359501,
+          "longitude": 34.265104
+        },
+        "Org": ""
+      },
+      {
+        "id": 63,
+        "name": "Distribution Point",
+        "location": "South",
+        "site name": "KYS1713",
+        "siteName": "KYS1713",
+        "coordinates": {
+          "latitude": 31.359483,
+          "longitude": 34.264165
+        },
+        "Org": "Egyptian AID"
+      }
+    ]
+  },
+  {
+    "siteCode": "KYS0825",
+    "en": "Al-Jawhari",
+    "ar": "الجوهري",
+    "boundaryFile": "/uploads/boundaries/KYS0825.geojson",
+    "projectCode": "12GNY",
+    "location": "South",
+    "latitude": 31.35825,
+    "longitude": 34.266169,
+    "servicesCount": 11,
+    "services": [
+      {
+        "id": 85,
+        "name": "TLS/School",
+        "location": "South",
+        "site name": "KYS0825",
+        "siteName": "KYS0825",
+        "coordinates": {
+          "latitude": 31.360455,
+          "longitude": 34.266651
+        },
+        "Org": ""
+      },
+      {
+        "id": 84,
+        "name": "TLS/School",
+        "location": "South",
+        "site name": "KYS0825",
+        "siteName": "KYS0825",
+        "coordinates": {
+          "latitude": 31.357573,
+          "longitude": 34.266868
+        },
+        "Org": ""
+      },
+      {
+        "id": 83,
+        "name": "Community Kitchen/Tekeya",
+        "location": "South",
+        "site name": "KYS0825",
+        "siteName": "KYS0825",
+        "coordinates": {
+          "latitude": 31.3572,
+          "longitude": 34.26712
+        },
+        "Org": ""
+      },
+      {
+        "id": 82,
+        "name": "Community Kitchen/Tekeya",
+        "location": "South",
+        "site name": "KYS0825",
+        "siteName": "KYS0825",
+        "coordinates": {
+          "latitude": 31.358381,
+          "longitude": 34.266253
+        },
+        "Org": ""
+      },
+      {
+        "id": 81,
+        "name": "Community Kitchen/Tekeya",
+        "location": "South",
+        "site name": "KYS0825",
+        "siteName": "KYS0825",
+        "coordinates": {
+          "latitude": 31.357967,
+          "longitude": 34.266515
+        },
+        "Org": ""
+      },
+      {
+        "id": 80,
+        "name": "Health Space/Clinic",
+        "location": "South",
+        "site name": "KYS0825",
+        "siteName": "KYS0825",
+        "coordinates": {
+          "latitude": 31.360849,
+          "longitude": 34.267192
+        },
+        "Org": ""
+      },
+      {
+        "id": 79,
+        "name": "Health Space/Clinic",
+        "location": "South",
+        "site name": "KYS0825",
+        "siteName": "KYS0825",
+        "coordinates": {
+          "latitude": 31.357323,
+          "longitude": 34.266663
+        },
+        "Org": ""
+      },
+      {
+        "id": 78,
+        "name": "Social Activity",
+        "location": "South",
+        "site name": "KYS0825",
+        "siteName": "KYS0825",
+        "coordinates": {
+          "latitude": 31.357323,
+          "longitude": 34.267033
+        },
+        "Org": ""
+      },
+      {
+        "id": 77,
+        "name": "Water Trucking - Distribution Point",
+        "location": "South",
+        "site name": "KYS0825",
+        "siteName": "KYS0825",
+        "coordinates": {
+          "latitude": 31.357947,
+          "longitude": 34.266653
+        },
+        "Org": ""
+      },
+      {
+        "id": 76,
+        "name": "Community Space",
+        "location": "South",
+        "site name": "KYS0825",
+        "siteName": "KYS0825",
+        "coordinates": {
+          "latitude": 31.357323,
+          "longitude": 34.267033
+        },
+        "Org": ""
+      },
+      {
+        "id": 75,
+        "name": "Distribution Point",
+        "location": "South",
+        "site name": "KYS0825",
+        "siteName": "KYS0825",
+        "coordinates": {
+          "latitude": 31.357323,
+          "longitude": 34.267033
+        },
+        "Org": ""
+      }
+    ]
+  },
+  {
+    "siteCode": "KYS0947",
+    "en": "Al-rimal Al-Thahabiea",
+    "ar": "الرمال الذهبية",
+    "boundaryFile": "/uploads/boundaries/KYS0947.geojson",
+    "projectCode": "12GNY",
+    "location": "South",
+    "latitude": 31.35672,
+    "longitude": 34.268301,
+    "servicesCount": 12,
+    "services": [
+      {
+        "id": 97,
+        "name": "TLS/School",
+        "location": "South",
+        "site name": "KYS0947",
+        "siteName": "KYS0947",
+        "coordinates": {
+          "latitude": 31.360455,
+          "longitude": 34.266651
+        },
+        "Org": ""
+      },
+      {
+        "id": 96,
+        "name": "Community Kitchen/Tekeya",
+        "location": "South",
+        "site name": "KYS0947",
+        "siteName": "KYS0947",
+        "coordinates": {
+          "latitude": 31.356488,
+          "longitude": 34.267703
+        },
+        "Org": ""
+      },
+      {
+        "id": 95,
+        "name": "Community Kitchen/Tekeya",
+        "location": "South",
+        "site name": "KYS0947",
+        "siteName": "KYS0947",
+        "coordinates": {
+          "latitude": 31.356072,
+          "longitude": 34.268782
+        },
+        "Org": "WCK Hot Meals Distribution"
+      },
+      {
+        "id": 94,
+        "name": "Community Kitchen/Tekeya",
+        "location": "South",
+        "site name": "KYS0947",
+        "siteName": "KYS0947",
+        "coordinates": {
+          "latitude": 31.35705,
+          "longitude": 34.267338
+        },
+        "Org": ""
+      },
+      {
+        "id": 93,
+        "name": "Community Kitchen/Tekeya",
+        "location": "South",
+        "site name": "KYS0947",
+        "siteName": "KYS0947",
+        "coordinates": {
+          "latitude": 31.357177,
+          "longitude": 34.267157
+        },
+        "Org": ""
+      },
+      {
+        "id": 92,
+        "name": "Health Space/Clinic",
+        "location": "South",
+        "site name": "KYS0947",
+        "siteName": "KYS0947",
+        "coordinates": {
+          "latitude": 31.360849,
+          "longitude": 34.267192
+        },
+        "Org": ""
+      },
+      {
+        "id": 91,
+        "name": "Social Activity",
+        "location": "South",
+        "site name": "KYS0947",
+        "siteName": "KYS0947",
+        "coordinates": {
+          "latitude": 31.357323,
+          "longitude": 34.267033
+        },
+        "Org": ""
+      },
+      {
+        "id": 90,
+        "name": "Water Trucking - Distribution Point",
+        "location": "South",
+        "site name": "KYS0947",
+        "siteName": "KYS0947",
+        "coordinates": {
+          "latitude": 31.3572,
+          "longitude": 34.26712
+        },
+        "Org": ""
+      },
+      {
+        "id": 89,
+        "name": "Water Trucking - Distribution Point",
+        "location": "South",
+        "site name": "KYS0947",
+        "siteName": "KYS0947",
+        "coordinates": {
+          "latitude": 31.358483,
+          "longitude": 34.266073
+        },
+        "Org": ""
+      },
+      {
+        "id": 88,
+        "name": "Water Trucking - Distribution Point",
+        "location": "South",
+        "site name": "KYS0947",
+        "siteName": "KYS0947",
+        "coordinates": {
+          "latitude": 31.357947,
+          "longitude": 34.266653
+        },
+        "Org": ""
+      },
+      {
+        "id": 87,
+        "name": "Distribution Point",
+        "location": "South",
+        "site name": "KYS0947",
+        "siteName": "KYS0947",
+        "coordinates": {
+          "latitude": 31.357323,
+          "longitude": 34.267033
+        },
+        "Org": ""
+      },
+      {
+        "id": 86,
+        "name": "Distribution Point",
+        "location": "South",
+        "site name": "KYS0947",
+        "siteName": "KYS0947",
+        "coordinates": {
+          "latitude": 31.357323,
+          "longitude": 34.267033
+        },
+        "Org": ""
+      }
+    ]
+  },
+  {
+    "siteCode": "KYS0805",
+    "en": "Al-Shaheed Jameel",
+    "ar": "الشهيد جميل",
+    "boundaryFile": "/uploads/boundaries/KYS0805.geojson",
+    "projectCode": "12GNY",
+    "location": "South",
+    "latitude": 31.355623,
+    "longitude": 34.269209,
+    "servicesCount": 12,
+    "services": [
+      {
+        "id": 109,
+        "name": "TLS/School",
+        "location": "South",
+        "site name": "KYS0805",
+        "siteName": "KYS0805",
+        "coordinates": {
+          "latitude": 31.360455,
+          "longitude": 34.266651
+        },
+        "Org": ""
+      },
+      {
+        "id": 108,
+        "name": "Community Kitchen/Tekeya",
+        "location": "South",
+        "site name": "KYS0805",
+        "siteName": "KYS0805",
+        "coordinates": {
+          "latitude": 31.35459,
+          "longitude": 34.269647
+        },
+        "Org": ""
+      },
+      {
+        "id": 107,
+        "name": "Community Kitchen/Tekeya",
+        "location": "South",
+        "site name": "KYS0805",
+        "siteName": "KYS0805",
+        "coordinates": {
+          "latitude": 31.355008,
+          "longitude": 34.267845
+        },
+        "Org": ""
+      },
+      {
+        "id": 106,
+        "name": "Community Kitchen/Tekeya",
+        "location": "South",
+        "site name": "KYS0805",
+        "siteName": "KYS0805",
+        "coordinates": {
+          "latitude": 31.355564,
+          "longitude": 34.26782
+        },
+        "Org": ""
+      },
+      {
+        "id": 105,
+        "name": "Nutrition Center",
+        "location": "South",
+        "site name": "KYS0805",
+        "siteName": "KYS0805",
+        "coordinates": {
+          "latitude": 31.357323,
+          "longitude": 34.267033
+        },
+        "Org": ""
+      },
+      {
+        "id": 104,
+        "name": "Health Space/Clinic",
+        "location": "South",
+        "site name": "KYS0805",
+        "siteName": "KYS0805",
+        "coordinates": {
+          "latitude": 31.360849,
+          "longitude": 34.267192
+        },
+        "Org": ""
+      },
+      {
+        "id": 103,
+        "name": "Social Activity",
+        "location": "South",
+        "site name": "KYS0805",
+        "siteName": "KYS0805",
+        "coordinates": {
+          "latitude": 31.357323,
+          "longitude": 34.267033
+        },
+        "Org": ""
+      },
+      {
+        "id": 102,
+        "name": "Water Trucking - Distribution Point",
+        "location": "South",
+        "site name": "KYS0805",
+        "siteName": "KYS0805",
+        "coordinates": {
+          "latitude": 31.35459,
+          "longitude": 34.269647
+        },
+        "Org": ""
+      },
+      {
+        "id": 101,
+        "name": "Water Trucking - Distribution Point",
+        "location": "South",
+        "site name": "KYS0805",
+        "siteName": "KYS0805",
+        "coordinates": {
+          "latitude": 31.356116,
+          "longitude": 34.268654
+        },
+        "Org": ""
+      },
+      {
+        "id": 100,
+        "name": "Water Trucking - Distribution Point",
+        "location": "South",
+        "site name": "KYS0805",
+        "siteName": "KYS0805",
+        "coordinates": {
+          "latitude": 31.355272,
+          "longitude": 34.267468
+        },
+        "Org": ""
+      },
+      {
+        "id": 99,
+        "name": "Community Space",
+        "location": "South",
+        "site name": "KYS0805",
+        "siteName": "KYS0805",
+        "coordinates": {
+          "latitude": 31.357323,
+          "longitude": 34.267033
+        },
+        "Org": ""
+      },
+      {
+        "id": 98,
+        "name": "Distribution Point",
+        "location": "South",
+        "site name": "KYS0805",
+        "siteName": "KYS0805",
+        "coordinates": {
+          "latitude": 31.357323,
+          "longitude": 34.267033
+        },
+        "Org": ""
+      }
+    ]
+  },
+  {
+    "siteCode": "GZA4726",
+    "en": "Esaad Altofola Site",
+    "ar": "موقع إسعاد الطفولة",
+    "boundaryFile": "/uploads/boundaries/GZA4726.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.513925,
+    "longitude": 34.45511,
+    "servicesCount": 4,
+    "services": [
+      {
+        "id": 57,
+        "name": "TLS/School",
+        "location": "North",
+        "site name": "GZA4726",
+        "siteName": "GZA4726",
+        "coordinates": {
+          "latitude": 34.45469,
+          "longitude": 31.513334
+        },
+        "Org": ""
+      },
+      {
+        "id": 56,
+        "name": "Community Kitchen/Tekeya",
+        "location": "North",
+        "site name": "GZA4726",
+        "siteName": "GZA4726",
+        "coordinates": {
+          "latitude": 31.513726,
+          "longitude": 34.454694
+        },
+        "Org": ""
+      },
+      {
+        "id": 55,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA4726",
+        "siteName": "GZA4726",
+        "coordinates": {
+          "latitude": 31.513376,
+          "longitude": 34.454678
+        },
+        "Org": "Daily use water"
+      },
+      {
+        "id": 54,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA4726",
+        "siteName": "GZA4726",
+        "coordinates": {
+          "latitude": 31.514101,
+          "longitude": 34.4455516
+        },
+        "Org": "drinking water point (truck)"
+      }
+    ]
+  },
+  {
+    "siteCode": "GZA5311",
+    "en": "Watan Site",
+    "ar": "موقع وطن",
+    "boundaryFile": "/uploads/boundaries/GZA5311.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.514089,
+    "longitude": 34.4534,
+    "servicesCount": 5,
+    "services": [
+      {
+        "id": 62,
+        "name": "Community Kitchen/Tekeya",
+        "location": "North",
+        "site name": "GZA5311",
+        "siteName": "GZA5311",
+        "coordinates": {
+          "latitude": 31.519656,
+          "longitude": 34.45178
+        },
+        "Org": ""
+      },
+      {
+        "id": 61,
+        "name": "Nutrition Center",
+        "location": "North",
+        "site name": "GZA5311",
+        "siteName": "GZA5311",
+        "coordinates": {
+          "latitude": 31.54064,
+          "longitude": 34.45297
+        },
+        "Org": ""
+      },
+      {
+        "id": 60,
+        "name": "Bakery",
+        "location": "North",
+        "site name": "GZA5311",
+        "siteName": "GZA5311",
+        "coordinates": {
+          "latitude": 31.513425,
+          "longitude": 34.453279
+        },
+        "Org": "ICRC"
+      },
+      {
+        "id": 59,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA5311",
+        "siteName": "GZA5311",
+        "coordinates": {
+          "latitude": 31.514065,
+          "longitude": 34.455538
+        },
+        "Org": "Daily use water"
+      },
+      {
+        "id": 58,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA5311",
+        "siteName": "GZA5311",
+        "coordinates": {
+          "latitude": 31.514206,
+          "longitude": 34.452783
+        },
+        "Org": "drinking water point (truck)"
+      }
+    ]
+  },
+  {
+    "siteCode": "GZA4441",
+    "en": "Ayam Almassrah Site",
+    "ar": "موقع أيام المسرح",
+    "boundaryFile": "/uploads/boundaries/GZA4441.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.517805,
+    "longitude": 34.455652,
+    "servicesCount": 5,
+    "services": [
+      {
+        "id": 45,
+        "name": "Community Kitchen/Tekeya",
+        "location": "North",
+        "site name": "GZA4441",
+        "siteName": "GZA4441",
+        "coordinates": {
+          "latitude": 31.518232,
+          "longitude": 34.456013
+        },
+        "Org": ""
+      },
+      {
+        "id": 44,
+        "name": "Health Space/Clinic",
+        "location": "North",
+        "site name": "GZA4441",
+        "siteName": "GZA4441",
+        "coordinates": {
+          "latitude": 31.518195,
+          "longitude": 34.456043
+        },
+        "Org": "Médecins du Monde – France (MdM-F)"
+      },
+      {
+        "id": 43,
+        "name": "Health Space/Clinic",
+        "location": "North",
+        "site name": "GZA4441",
+        "siteName": "GZA4441",
+        "coordinates": {
+          "latitude": 31.518453,
+          "longitude": 34.455834
+        },
+        "Org": "Al-Awda Hospital (AH)"
+      },
+      {
+        "id": 42,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA4441",
+        "siteName": "GZA4441",
+        "coordinates": {
+          "latitude": 31.517615,
+          "longitude": 34.454832
+        },
+        "Org": "Daily use water"
+      },
+      {
+        "id": 41,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA4441",
+        "siteName": "GZA4441",
+        "coordinates": {
+          "latitude": 31.518043,
+          "longitude": 34.455293
+        },
+        "Org": "drinking water point (truck)"
+      }
+    ]
+  },
+  {
+    "siteCode": "GZA0391",
+    "en": "Palestine Secondary School Site",
+    "ar": "موقع مدرسة فلسطين الثانوية",
+    "boundaryFile": "/uploads/boundaries/GZA0391.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.519826,
+    "longitude": 34.451802,
+    "servicesCount": 4,
+    "services": [
+      {
+        "id": 49,
+        "name": "Community Kitchen/Tekeya",
+        "location": "North",
+        "site name": "GZA0391",
+        "siteName": "GZA0391",
+        "coordinates": {
+          "latitude": 31.519656,
+          "longitude": 34.45178
+        },
+        "Org": ""
+      },
+      {
+        "id": 48,
+        "name": "Social Activity",
+        "location": "North",
+        "site name": "GZA0391",
+        "siteName": "GZA0391",
+        "coordinates": {
+          "latitude": 31.520192,
+          "longitude": 34.451846
+        },
+        "Org": ""
+      },
+      {
+        "id": 47,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA0391",
+        "siteName": "GZA0391",
+        "coordinates": {
+          "latitude": 31.519656,
+          "longitude": 34.45178
+        },
+        "Org": "drinking water point (truck)"
+      },
+      {
+        "id": 46,
+        "name": "Safe space",
+        "location": "North",
+        "site name": "GZA0391",
+        "siteName": "GZA0391",
+        "coordinates": {
+          "latitude": 31.519771,
+          "longitude": 34.452097
+        },
+        "Org": ""
+      }
+    ]
+  },
+  {
+    "siteCode": "GZA0393",
+    "en": "Amir Al-Mansi School Site",
+    "ar": "موقع مدرسة أمير المنسي",
+    "boundaryFile": "/uploads/boundaries/GZA0393.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.52027,
+    "longitude": 34.451309,
+    "servicesCount": 4,
+    "services": [
+      {
+        "id": 53,
+        "name": "Community Kitchen/Tekeya",
+        "location": "North",
+        "site name": "GZA0393",
+        "siteName": "GZA0393",
+        "coordinates": {
+          "latitude": 31.519656,
+          "longitude": 34.45178
+        },
+        "Org": ""
+      },
+      {
+        "id": 52,
+        "name": "Social Activity",
+        "location": "North",
+        "site name": "GZA0393",
+        "siteName": "GZA0393",
+        "coordinates": {
+          "latitude": 31.520223,
+          "longitude": 34.451785
+        },
+        "Org": ""
+      },
+      {
+        "id": 51,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA0393",
+        "siteName": "GZA0393",
+        "coordinates": {
+          "latitude": 31.520982,
+          "longitude": 34.431086
+        },
+        "Org": "Daily use water"
+      },
+      {
+        "id": 50,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA0393",
+        "siteName": "GZA0393",
+        "coordinates": {
+          "latitude": 31.520058,
+          "longitude": 34.451335
+        },
+        "Org": "drinking water point (truck)"
+      }
+    ]
+  },
+  {
+    "siteCode": "GZA3314",
+    "en": "Al Amal college Site",
+    "ar": "موقع كلية الأمل",
+    "boundaryFile": "/uploads/boundaries/GZA3314.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.520112,
+    "longitude": 34.449954,
+    "servicesCount": 7,
+    "services": [
+      {
+        "id": 32,
+        "name": "TLS/School",
+        "location": "North",
+        "site name": "GZA3314",
+        "siteName": "GZA3314",
+        "coordinates": {
+          "latitude": 31.520367,
+          "longitude": 34.449695
+        },
+        "Org": ""
+      },
+      {
+        "id": 31,
+        "name": "Community Kitchen/Tekeya",
+        "location": "North",
+        "site name": "GZA3314",
+        "siteName": "GZA3314",
+        "coordinates": {
+          "latitude": 31.519928,
+          "longitude": 34.44965
+        },
+        "Org": ""
+      },
+      {
+        "id": 30,
+        "name": "Health Space/Clinic",
+        "location": "North",
+        "site name": "GZA3314",
+        "siteName": "GZA3314",
+        "coordinates": {
+          "latitude": 31.51952,
+          "longitude": 34.449512
+        },
+        "Org": "Juzoor"
+      },
+      {
+        "id": 29,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA3314",
+        "siteName": "GZA3314",
+        "coordinates": {
+          "latitude": 31.520022,
+          "longitude": 34.449608
+        },
+        "Org": "daily use water"
+      },
+      {
+        "id": 28,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA3314",
+        "siteName": "GZA3314",
+        "coordinates": {
+          "latitude": 31.520094,
+          "longitude": 34.449543
+        },
+        "Org": "water point (truck)"
+      },
+      {
+        "id": 27,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA3314",
+        "siteName": "GZA3314",
+        "coordinates": {
+          "latitude": 31.520047,
+          "longitude": 34.449753
+        },
+        "Org": "water point (truck)"
+      },
+      {
+        "id": 26,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA3314",
+        "siteName": "GZA3314",
+        "coordinates": {
+          "latitude": 31.519358,
+          "longitude": 34.449595
+        },
+        "Org": "water point (truck)"
+      }
+    ]
+  },
+  {
+    "siteCode": "GZA4124",
+    "en": "Insurance and Pensions Site",
+    "ar": "موقع التأمين والمعاشات",
+    "boundaryFile": "/uploads/boundaries/GZA4124.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.521193,
+    "longitude": 34.450459,
+    "servicesCount": 2,
+    "services": [
+      {
+        "id": 34,
+        "name": "Community Kitchen/Tekeya",
+        "location": "North",
+        "site name": "GZA4124",
+        "siteName": "GZA4124",
+        "coordinates": {
+          "latitude": 31.522342,
+          "longitude": 34.45521
+        },
+        "Org": ""
+      },
+      {
+        "id": 33,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA4124",
+        "siteName": "GZA4124",
+        "coordinates": {
+          "latitude": 31.522412,
+          "longitude": 34.45518
+        },
+        "Org": "Daly Use Water"
+      }
+    ]
+  },
+  {
+    "siteCode": "GZA5001",
+    "en": "Al Waad Site",
+    "ar": "موقع الوعد",
+    "boundaryFile": "/uploads/boundaries/GZA5001.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.522291,
+    "longitude": 34.455314,
+    "servicesCount": 2,
+    "services": [
+      {
+        "id": 36,
+        "name": "Community Kitchen/Tekeya",
+        "location": "North",
+        "site name": "GZA5001",
+        "siteName": "GZA5001",
+        "coordinates": {
+          "latitude": 31.521527,
+          "longitude": 34.449872
+        },
+        "Org": ""
+      },
+      {
+        "id": 35,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA5001",
+        "siteName": "GZA5001",
+        "coordinates": {
+          "latitude": 31.521504,
+          "longitude": 34.44982
+        },
+        "Org": "drinking water point (truck)"
+      }
+    ]
+  },
+  {
+    "siteCode": "GZA4962",
+    "en": "Al Haya 2 Site",
+    "ar": "موقع الحياة 2",
+    "boundaryFile": "/uploads/boundaries/GZA4962.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.523449,
+    "longitude": 34.454602,
+    "servicesCount": 4,
+    "services": [
+      {
+        "id": 25,
+        "name": "TLS/School",
+        "location": "North",
+        "site name": "GZA4962",
+        "siteName": "GZA4962",
+        "coordinates": {
+          "latitude": 31.523423,
+          "longitude": 34.45471
+        },
+        "Org": ""
+      },
+      {
+        "id": 24,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA4962",
+        "siteName": "GZA4962",
+        "coordinates": {
+          "latitude": 31.523399,
+          "longitude": 34.454373
+        },
+        "Org": "Daliy Use Water"
+      },
+      {
+        "id": 23,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA4962",
+        "siteName": "GZA4962",
+        "coordinates": {
+          "latitude": 31.523747,
+          "longitude": 34.454001
+        },
+        "Org": "drinking water point (truck)"
+      },
+      {
+        "id": 22,
+        "name": "Safe space",
+        "location": "North",
+        "site name": "GZA4962",
+        "siteName": "GZA4962",
+        "coordinates": {
+          "latitude": 31.52354,
+          "longitude": 34.454418
+        },
+        "Org": ""
+      }
+    ]
+  },
+  {
+    "siteCode": "GZA4122",
+    "en": "Al Buraq School Site",
+    "ar": "موقع مدرسة البراق",
+    "boundaryFile": "/uploads/boundaries/GZA4122.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.52461,
+    "longitude": 34.455881,
+    "servicesCount": 4,
+    "services": [
+      {
+        "id": 40,
+        "name": "TLS/School",
+        "location": "North",
+        "site name": "GZA4122",
+        "siteName": "GZA4122",
+        "coordinates": {
+          "latitude": 31.524621,
+          "longitude": 34.455418
+        },
+        "Org": ""
+      },
+      {
+        "id": 39,
+        "name": "Social Activity",
+        "location": "North",
+        "site name": "GZA4122",
+        "siteName": "GZA4122",
+        "coordinates": {
+          "latitude": 31.526292,
+          "longitude": 34.455305
+        },
+        "Org": ""
+      },
+      {
+        "id": 38,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA4122",
+        "siteName": "GZA4122",
+        "coordinates": {
+          "latitude": 31.524559,
+          "longitude": 34.455463
+        },
+        "Org": "Daily use water"
+      },
+      {
+        "id": 37,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA4122",
+        "siteName": "GZA4122",
+        "coordinates": {
+          "latitude": 31.524507,
+          "longitude": 34.455544
+        },
+        "Org": "drinking water point (truck)"
+      }
+    ]
+  },
+  {
+    "siteCode": "KYS5287",
+    "en": "Mukhayam Alshabab Walriyda",
+    "ar": "مخيم الشباب والرياضة",
+    "boundaryFile": "/uploads/boundaries/KYS5287.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.536021,
+    "longitude": 34.459117,
+    "servicesCount": 0,
+    "services": []
+  },
+  {
+    "siteCode": "ACT7444",
+    "en": "An Naser School Site",
+    "ar": "موقع مدرسة النصر",
+    "boundaryFile": "/uploads/boundaries/ACT7444.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.532243,
+    "longitude": 34.457737,
+    "servicesCount": 0,
+    "services": []
+  },
+  {
+    "siteCode": "GZA5270",
+    "en": "Hsan Selema School",
+    "ar": "مدرسة حسان سلمة",
+    "boundaryFile": "/uploads/boundaries/GZA5270.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.531414,
+    "longitude": 34.460962,
+    "servicesCount": 0,
+    "services": []
+  },
+  {
+    "siteCode": "GZA5343",
+    "en": "Al Qastal camp",
+    "ar": "مخيم القسطل",
+    "boundaryFile": "/uploads/boundaries/GZA5343.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.530759,
+    "longitude": 34.460069,
+    "servicesCount": 0,
+    "services": []
+  },
+  {
+    "siteCode": "GZA5443",
+    "en": "Nisr Al-Shamali",
+    "ar": "نصر الشمالي",
+    "boundaryFile": "/uploads/boundaries/GZA5443.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.530795,
+    "longitude": 34.463511,
+    "servicesCount": 0,
+    "services": []
+  },
+  {
+    "siteCode": "GZA5444",
+    "en": "Ahel Al khair",
+    "ar": "أهل الخير",
+    "boundaryFile": "/uploads/boundaries/GZA5444.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.529874,
+    "longitude": 34.463693,
+    "servicesCount": 0,
+    "services": []
+  },
+  {
+    "siteCode": "GZA5031",
+    "en": "Jesser Alhayat Site",
+    "ar": "موقع جسر الحياة",
+    "boundaryFile": "/uploads/boundaries/GZA5031.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.529955,
+    "longitude": 34.465658,
+    "servicesCount": 0,
+    "services": []
+  },
+  {
+    "siteCode": "GZA5007",
+    "en": "Aman 3",
+    "ar": "أمان 3",
+    "boundaryFile": "/uploads/boundaries/GZA5007.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.529043,
+    "longitude": 34.466852,
+    "servicesCount": 0,
+    "services": []
+  },
+  {
+    "siteCode": "ACT8999",
+    "en": "Al Jalaa Site",
+    "ar": "موقع الجلاء",
+    "boundaryFile": "/uploads/boundaries/ACT8999.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.527669,
+    "longitude": 34.464991,
+    "servicesCount": 0,
+    "services": []
+  },
+  {
+    "siteCode": "GZA4838",
+    "en": "Haratuna Site",
+    "ar": "موقع حارتنا",
+    "boundaryFile": "/uploads/boundaries/GZA4838.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.522514,
+    "longitude": 34.46169,
+    "servicesCount": 0,
+    "services": []
+  },
+  {
+    "siteCode": "GZA4817",
+    "en": "Al-Rahma Site",
+    "ar": "موقع الرحمة",
+    "boundaryFile": "/uploads/boundaries/GZA4817.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.522803,
+    "longitude": 34.450184,
+    "servicesCount": 1,
+    "services": [
+      {
+        "id": 1,
+        "name": "Health Space/Clinic",
+        "location": "North",
+        "site name": "GZA4817",
+        "siteName": "GZA4817",
+        "coordinates": {
+          "latitude": 31.522319,
+          "longitude": 34.450359
+        },
+        "Org": "Delta"
+      }
+    ]
+  },
+  {
+    "siteCode": "GZA5220",
+    "en": "Al-Rageen",
+    "ar": "الراجين",
+    "boundaryFile": "/uploads/boundaries/GZA5220.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.525231,
+    "longitude": 34.455402,
+    "servicesCount": 2,
+    "services": [
+      {
+        "id": 3,
+        "name": "Health Space/Clinic",
+        "location": "North",
+        "site name": "GZA5220",
+        "siteName": "GZA5220",
+        "coordinates": {
+          "latitude": 31.521217867875542,
+          "longitude": 34.45563890708494
+        },
+        "Org": "UNRWA Salah al-Din Coeducational Primary School"
+      },
+      {
+        "id": 2,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA5220",
+        "siteName": "GZA5220",
+        "coordinates": {
+          "latitude": 31.524431,
+          "longitude": 34.454912
+        },
+        "Org": "Al-Baraka Association (Algeria)"
+      }
+    ]
+  },
+  {
+    "siteCode": "GZA6009",
+    "en": "Atfalouna",
+    "ar": "أطفالنا",
+    "boundaryFile": "/uploads/boundaries/GZA6009.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.522903,
+    "longitude": 34.456559,
+    "servicesCount": 2,
+    "services": [
+      {
+        "id": 5,
+        "name": "Health Space/Clinic",
+        "location": "North",
+        "site name": "GZA6009",
+        "siteName": "GZA6009",
+        "coordinates": {
+          "latitude": 31.521217867875542,
+          "longitude": 34.45563890708494
+        },
+        "Org": "UNRWA Salah al-Din Coeducational Primary School"
+      },
+      {
+        "id": 4,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA6009",
+        "siteName": "GZA6009",
+        "coordinates": {
+          "latitude": 31.52277159358243,
+          "longitude": 34.45631064125774
+        },
+        "Org": "MSF drinking water point (truck)"
+      }
+    ]
+  },
+  {
+    "siteCode": "GZA4353",
+    "en": "Al-Majida School Wasila Bani Ammar",
+    "ar": "مدرسة الماجدة",
+    "boundaryFile": "/uploads/boundaries/GZA4353.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.522996,
+    "longitude": 34.457966,
+    "servicesCount": 2,
+    "services": [
+      {
+        "id": 7,
+        "name": "TLS/School",
+        "location": "North",
+        "site name": "GZA4353",
+        "siteName": "GZA4353",
+        "coordinates": {
+          "latitude": 31.52302,
+          "longitude": 34.45769
+        },
+        "Org": "Al Haya Education inatiative"
+      },
+      {
+        "id": 6,
+        "name": "Bakery",
+        "location": "North",
+        "site name": "GZA4353",
+        "siteName": "GZA4353",
+        "coordinates": {
+          "latitude": 31.52302,
+          "longitude": 34.45769
+        },
+        "Org": "ICRC"
+      }
+    ]
+  },
+  {
+    "siteCode": "GZA4437",
+    "en": "Al-Zaharna site",
+    "ar": "موقع الزهارنة",
+    "boundaryFile": "/uploads/boundaries/GZA4437.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.520275,
+    "longitude": 34.457356,
+    "servicesCount": 0,
+    "services": []
+  },
+  {
+    "siteCode": "GZA6027",
+    "en": "Al-Salam Site",
+    "ar": "موقع السلام",
+    "boundaryFile": "/uploads/boundaries/GZA6027.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.52168,
+    "longitude": 34.451379,
+    "servicesCount": 2,
+    "services": [
+      {
+        "id": 9,
+        "name": "Community Kitchen/Tekeya",
+        "location": "North",
+        "site name": "GZA6027",
+        "siteName": "GZA6027",
+        "coordinates": {
+          "latitude": 34.4517722,
+          "longitude": 31.5216401
+        },
+        "Org": "Palestinian Food Bank"
+      },
+      {
+        "id": 8,
+        "name": "Health Space/Clinic",
+        "location": "North",
+        "site name": "GZA6027",
+        "siteName": "GZA6027",
+        "coordinates": {
+          "latitude": 31.521217867875542,
+          "longitude": 34.45563890708494
+        },
+        "Org": "UNRWA Salah al-Din Coeducational Primary School"
+      }
+    ]
+  },
+  {
+    "siteCode": "GZA4388",
+    "en": "Ministry of Labor",
+    "ar": "وزارة العمل",
+    "boundaryFile": "/uploads/boundaries/GZA4388.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.52085,
+    "longitude": 34.449766,
+    "servicesCount": 2,
+    "services": [
+      {
+        "id": 11,
+        "name": "Health Space/Clinic",
+        "location": "North",
+        "site name": "GZA4388",
+        "siteName": "GZA4388",
+        "coordinates": {
+          "latitude": 31.523153179240236,
+          "longitude": 34.443480827191145
+        },
+        "Org": "Al shifa Hospital"
+      },
+      {
+        "id": 10,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA4388",
+        "siteName": "GZA4388",
+        "coordinates": {
+          "latitude": 31.520863004519214,
+          "longitude": 34.4498003662796
+        },
+        "Org": ""
+      }
+    ]
+  },
+  {
+    "siteCode": "GZA4123",
+    "en": "Al-Aila Al-Muqaddasa School Shelter",
+    "ar": "مأوى مدرسة العائلة المقدسة",
+    "boundaryFile": "/uploads/boundaries/GZA4123.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.523964,
+    "longitude": 34.452631,
+    "servicesCount": 4,
+    "services": [
+      {
+        "id": 15,
+        "name": "TLS/School",
+        "location": "North",
+        "site name": "GZA4123",
+        "siteName": "GZA4123",
+        "coordinates": {
+          "latitude": 31.5240097,
+          "longitude": 34.4522342
+        },
+        "Org": "Yeryüzü Eğitim Derneği"
+      },
+      {
+        "id": 14,
+        "name": "Health Space/Clinic",
+        "location": "North",
+        "site name": "GZA4123",
+        "siteName": "GZA4123",
+        "coordinates": {
+          "latitude": 31.521217867875542,
+          "longitude": 34.45563890708494
+        },
+        "Org": "UNRWA Salah al-Din Coeducational Primary School"
+      },
+      {
+        "id": 13,
+        "name": "Bakery",
+        "location": "North",
+        "site name": "GZA4123",
+        "siteName": "GZA4123",
+        "coordinates": {
+          "latitude": 31.5238751,
+          "longitude": 34.4525279
+        },
+        "Org": "ICRC"
+      },
+      {
+        "id": 12,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA4123",
+        "siteName": "GZA4123",
+        "coordinates": {
+          "latitude": 31.5238751,
+          "longitude": 34.4525279
+        },
+        "Org": ""
+      }
+    ]
+  },
+  {
+    "siteCode": "GZA6018",
+    "en": "Al-Jawad Site",
+    "ar": "موقع الجواد",
+    "boundaryFile": "/uploads/boundaries/GZA6018.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.517242,
+    "longitude": 34.453854,
+    "servicesCount": 2,
+    "services": [
+      {
+        "id": 17,
+        "name": "Health Space/Clinic",
+        "location": "North",
+        "site name": "GZA6018",
+        "siteName": "GZA6018",
+        "coordinates": {
+          "latitude": 31.521217867875542,
+          "longitude": 34.45563890708494
+        },
+        "Org": "UNRWA Salah al-Din Coeducational Primary School"
+      },
+      {
+        "id": 16,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA6018",
+        "siteName": "GZA6018",
+        "coordinates": {
+          "latitude": 31.517156,
+          "longitude": 34.454312
+        },
+        "Org": "Gaza Municipality"
+      }
+    ]
+  },
+  {
+    "siteCode": "GZA2136",
+    "en": "Al-Mu'tasim Billah Shelter Center",
+    "ar": "مركز مأوى المعتصم بلال",
+    "boundaryFile": "/uploads/boundaries/GZA2136.geojson",
+    "projectCode": "12GNY",
+    "location": "North",
+    "latitude": 31.516009,
+    "longitude": 34.45555,
+    "servicesCount": 4,
+    "services": [
+      {
+        "id": 21,
+        "name": "Health Space/Clinic",
+        "location": "North",
+        "site name": "GZA2136",
+        "siteName": "GZA2136",
+        "coordinates": {
+          "latitude": 31.521217867875542,
+          "longitude": 34.45563890708494
+        },
+        "Org": "UNRWA Salah al-Din Coeducational Primary School"
+      },
+      {
+        "id": 20,
+        "name": "Bakery",
+        "location": "North",
+        "site name": "GZA2136",
+        "siteName": "GZA2136",
+        "coordinates": {
+          "latitude": 31.516297735480894,
+          "longitude": 34.45577931817078
+        },
+        "Org": "ICRC"
+      },
+      {
+        "id": 19,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA2136",
+        "siteName": "GZA2136",
+        "coordinates": {
+          "latitude": 31.5162094,
+          "longitude": 34.4557754
+        },
+        "Org": ""
+      },
+      {
+        "id": 18,
+        "name": "Water Trucking - Distribution Point",
+        "location": "North",
+        "site name": "GZA2136",
+        "siteName": "GZA2136",
+        "coordinates": {
+          "latitude": 31.5160713,
+          "longitude": 34.4559148
+        },
+        "Org": "Gaza Municipality"
+      }
+    ]
+  }
+]

@@ -61,12 +61,26 @@ const getColorFromService = (serviceName) => {
   const lowerName = serviceName.toLowerCase();
   let color;
   if (lowerName.includes('water trucking') && lowerName.includes('distribution point')) color = '#1e90ff';
+  else if (lowerName.startsWith('water trucking')) color = '#1e90ff';
   else if (lowerName.includes('health space') && lowerName.includes('clinic')) color = '#ff4444';
+  else if (lowerName.startsWith('health space/clinic')) color = '#ff4444';
   else if (lowerName.includes('community kitchen')) color = '#ff8800';
+  else if (lowerName.startsWith('community kitchen')) color = '#ff8800';
   else if (lowerName.includes('bakery')) color = '#b45309';
   else if (lowerName.includes('tls') || lowerName.includes('school')) color = '#9933ff';
   else if (lowerName.includes('community space')) color = '#4BB272';
-  else if (lowerName.includes('safe space')) color = '#ec4899';
+  else if (
+    lowerName.includes('wgss') || 
+    lowerName.includes('women and girls') || 
+    lowerName.startsWith('safe spaces for women and girls') ||
+    lowerName.includes('للنساء والفتيات') ||
+    lowerName.includes('النساء والفتيات') ||
+    lowerName.includes('مساحات آمنة للنساء') ||
+    lowerName.includes('مساحة آمنة للنساء')
+  ) {
+    color = '#ec4899'; // Pink
+  }
+  else if (lowerName.includes('safe space') || lowerName.includes('مساحة آمنة')) color = '#ec4899'; // Pink
   else if (lowerName.includes('nutrition center') || lowerName.includes('nutrition centre')) color = '#fbbf24';
   else if (lowerName.includes('distribution point')) color = '#545454';
   else if (lowerName.includes('social activity')) color = '#93c01f';
@@ -175,11 +189,22 @@ const getServiceType = (serviceName = '') => {
   const normalized = serviceName.toLowerCase();
   if (normalized.startsWith('water trucking')) return 'Water Trucking - Distribution Point';
   if (normalized.startsWith('health space/clinic')) return 'Health Space/Clinic';
-  if (normalized.startsWith('community kitchen')) return 'Community Kitchen';
+  if (normalized.startsWith('community kitchen')) return 'Community Kitchen/Tekeya';
   if (normalized.startsWith('bakery')) return 'Bakery';
   if (normalized.startsWith('tls/school')) return 'TLS/School';
   if (normalized.startsWith('community space')) return 'Community Space';
-  if (normalized.startsWith('safe space')) return 'Safe space';
+  if (
+    normalized.includes('wgss') || 
+    normalized.includes('women and girls') || 
+    normalized.startsWith('safe spaces for women and girls') ||
+    normalized.includes('للنساء والفتيات') ||
+    normalized.includes('النساء والفتيات') ||
+    normalized.includes('مساحات آمنة للنساء') ||
+    normalized.includes('مساحة آمنة للنساء')
+  ) {
+    return 'Safe Spaces for Women and Girls (WGSS)';
+  }
+  if (normalized.startsWith('safe space') || normalized.includes('مساحة آمنة') || normalized.includes('مساحات آمنة')) return 'Safe space';
   if (normalized.startsWith('nutrition center') || normalized.startsWith('nutrition centre')) return 'Nutrition Center';
   if (normalized.startsWith('distribution point')) return 'Distribution Point';
   if (normalized.startsWith('social activity')) return 'Social Activity';
@@ -237,6 +262,12 @@ const rawServiceTranslations = [
     key: 'Safe space',
     en: 'Safe space',
     ar: 'مساحة آمنة',
+  },
+  {
+    key: 'Safe Spaces for Women and Girls (WGSS)',
+    en: 'Safe Spaces for Women and Girls (WGSS)',
+    ar: 'مساحات آمنة للنساء والفتيات (WGSS)',
+    aliases: ['Safe Spaces for Women and Girls', 'مساحات آمنة للنساء والفتيات', 'مساحة آمنة للنساء والفتيات', 'Safe Spaces for women and girls (WGSS)', 'مساحات آمنة للنساء والفتيات (WGSS)']
   },
   {
     key: 'Community Kitchen/Tekeya',
@@ -852,6 +883,7 @@ const serviceTypeTranslations = {
     Bakery: 'Bakery',
     'TLS/School': 'TLS/School',
     'Community Space': 'Community Space',
+    'Safe Spaces for Women and Girls (WGSS)': 'Safe Spaces for Women and Girls (WGSS)',
     'Safe space': 'Safe space',
     'Nutrition Center': 'Nutrition Center',
     'Distribution Point': 'Distribution Point',
@@ -865,6 +897,7 @@ const serviceTypeTranslations = {
     Bakery: 'مخبز',
     'TLS/School': 'مساحة تعليمية مؤقتة / مدرسة',
     'Community Space': 'مساحة مجتمعية',
+    'Safe Spaces for Women and Girls (WGSS)': 'مساحات آمنة للنساء والفتيات (WGSS)',
     'Safe space': 'مساحة آمنة',
     'Nutrition Center': 'مركز تغذية',
     'Distribution Point': 'نقطة توزيع',
@@ -1075,6 +1108,8 @@ export default function Home() {
   const [showMobilePanel, setShowMobilePanel] = useState(false);
   const [services, setServices] = useState([]);
   const [selectedService, setSelectedService] = useState(null);
+  const [hoveredCardId, setHoveredCardId] = useState(null);
+  const [visibleServiceTypesInViewport, setVisibleServiceTypesInViewport] = useState(new Set());
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedSiteName, setSelectedSiteName] = useState(null);
   const [selectedServiceName, setSelectedServiceName] = useState(null);
@@ -1794,7 +1829,6 @@ export default function Home() {
   useEffect(() => {
     const L = leafletRef.current;
     if (!leafletReady || loading || !L || mapRef.current || !mapContainerRef.current) return;
-    if (!services.length) return; // wait for data before drawing markers
 
     const initialCenter = userLocation || DEFAULT_MAP_CENTER;
     const initialZoom = userLocation ? USER_LOCATION_ZOOM : DEFAULT_MAP_ZOOM;
@@ -1979,7 +2013,7 @@ export default function Home() {
     (!selectedSiteName || service.siteName === selectedSiteName) &&
     (!selectedServiceName || service.name === selectedServiceName)
   )), [services, selectedLocation, selectedSiteName, selectedServiceName]);
-  const mapServices = services;
+  const mapServices = filteredServices;
 
   // Auto-center map on selected site
   useEffect(() => {
@@ -2010,14 +2044,76 @@ export default function Home() {
     };
   }), [filteredServices, lang]);
 
-  const locationOptions = useMemo(() => [...new Set(services.map((service) => service.location).filter(Boolean))], [services]);
+  const updateLegendFromViewport = useCallback(() => {
+    const mapInstance = mapRef.current;
+    if (!mapInstance) return;
+    try {
+      const bounds = mapInstance.getBounds();
+      const visibleTypes = new Set();
+      filteredServices.forEach((service) => {
+        const lat = service?.coordinates?.latitude;
+        const lng = service?.coordinates?.longitude;
+        if (lat !== undefined && lng !== undefined && bounds.contains([lat, lng])) {
+          const type = getServiceType(service.name);
+          if (type) {
+            visibleTypes.add(type);
+          }
+        }
+      });
+      setVisibleServiceTypesInViewport(visibleTypes);
+    } catch (e) {
+      console.warn('Error updating legend from viewport:', e);
+    }
+  }, [filteredServices]);
+
+  useEffect(() => {
+    const mapInstance = mapRef.current;
+    if (!mapReady || !mapInstance) return;
+
+    mapInstance.on('moveend', updateLegendFromViewport);
+    updateLegendFromViewport();
+
+    return () => {
+      mapInstance.off('moveend', updateLegendFromViewport);
+    };
+  }, [mapReady, updateLegendFromViewport]);
+
+  const visibleLegendItems = useMemo(() => {
+    const allLegendItems = [
+      { type: 'Water Trucking - Distribution Point', color: '#1e90ff' },
+      { type: 'Health Space/Clinic', color: '#ff4444' },
+      { type: 'Community Kitchen/Tekeya', color: '#ff8800' },
+      { type: 'Bakery', color: '#b45309' },
+      { type: 'TLS/School', color: '#9933ff' },
+      { type: 'Community Space', color: '#4BB272' },
+      { type: 'Safe Spaces for Women and Girls (WGSS)', color: '#ec4899' },
+      { type: 'Safe space', color: '#ec4899' },
+      { type: 'Nutrition Center', color: '#fbbf24' },
+      { type: 'Distribution Point', color: '#545454' },
+      { type: 'Social Activity', color: '#93c01f' },
+      { type: 'Other', color: '#808080' },
+    ];
+    return allLegendItems.filter(item => visibleServiceTypesInViewport.has(item.type));
+  }, [visibleServiceTypesInViewport]);
+
+  const locationOptions = useMemo(() => {
+    const serviceLocs = services.map((s) => s.location).filter(Boolean);
+    const dynamicLocs = Object.values(dynamicSiteTranslations || {}).map((s) => s.location).filter(Boolean);
+    return [...new Set([...serviceLocs, ...dynamicLocs])];
+  }, [services, dynamicSiteTranslations]);
 
   const siteNameOptions = useMemo(() => {
-    const scopedServices = selectedLocation
-      ? services.filter((service) => service.location === selectedLocation)
-      : services;
-    return [...new Set(scopedServices.map((service) => service.siteName).filter(Boolean))];
-  }, [services, selectedLocation]);
+    const serviceSites = selectedLocation
+      ? services.filter((s) => s.location === selectedLocation).map((s) => s.siteName).filter(Boolean)
+      : services.map((s) => s.siteName).filter(Boolean);
+      
+    const dynamicSites = Object.entries(dynamicSiteTranslations || {}).map(([siteCode, site]) => {
+      if (selectedLocation && site.location !== selectedLocation) return null;
+      return siteCode;
+    }).filter(Boolean);
+
+    return [...new Set([...serviceSites, ...dynamicSites])];
+  }, [services, dynamicSiteTranslations, selectedLocation]);
 
   const serviceNameOptions = useMemo(() => {
     const scopedServices = services.filter((service) => (
@@ -2628,51 +2724,19 @@ export default function Home() {
               <img src="/assets/filtersvg.svg" alt="Filter" className="w-7 h-7 filter brightness-0 invert" />
             </button>
           )}
-          <div className="absolute bottom-2 right-2 lg:bottom-4 lg:right-4 bg-white dark:bg-zinc-900 p-2 lg:p-3 rounded-lg shadow-lg border border-gray-200 dark:border-zinc-800 z-[1000] max-w-xs lg:max-w-none">
-            <p className="font-bold text-xs lg:text-sm mb-1 lg:mb-2 text-gray-900 dark:text-white">{t[lang].legend}</p>
-            <div className="space-y-0.5 lg:space-y-1 text-xs grid grid-cols-2 lg:grid-cols-1 gap-1 lg:gap-0">
-              <div className="flex items-center gap-1 lg:gap-2">
-                <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full flex-shrink-0" style={{ backgroundColor: '#1e90ff' }}></div>
-                <span className="text-gray-700 dark:text-gray-300 truncate text-xs">{t[lang].legend_services["Water Trucking - Distribution Point"]}</span>
-              </div>
-              <div className="flex items-center gap-1 lg:gap-2">
-                <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full flex-shrink-0" style={{ backgroundColor: '#ff4444' }}></div>
-                <span className="text-gray-700 dark:text-gray-300 truncate text-xs">{t[lang].legend_services["Health Space/Clinic"]}</span>
-              </div>
-              <div className="flex items-center gap-1 lg:gap-2">
-                <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full flex-shrink-0" style={{ backgroundColor: '#ff8800' }}></div>
-                <span className="text-gray-700 dark:text-gray-300 truncate text-xs">{t[lang].legend_services["Community Kitchen/Tekeya"]}</span>
-              </div>
-              <div className="flex items-center gap-1 lg:gap-2">
-                <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full flex-shrink-0" style={{ backgroundColor: '#b45309' }}></div>
-                <span className="text-gray-700 dark:text-gray-300 truncate text-xs">{t[lang].legend_services["Bakery"]}</span>
-              </div>
-              <div className="flex items-center gap-1 lg:gap-2">
-                <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full flex-shrink-0" style={{ backgroundColor: '#9933ff' }}></div>
-                <span className="text-gray-700 dark:text-gray-300 truncate text-xs">{t[lang].legend_services["TLS/School"]}</span>
-              </div>
-              <div className="flex items-center gap-1 lg:gap-2">
-                <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full flex-shrink-0" style={{ backgroundColor: '#4BB272' }}></div>
-                <span className="text-gray-700 dark:text-gray-300 truncate text-xs">{t[lang].legend_services["Community Space"]}</span>
-              </div>
-              <div className="flex items-center gap-1 lg:gap-2">
-                <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full flex-shrink-0" style={{ backgroundColor: '#ec4899' }}></div>
-                <span className="text-gray-700 dark:text-gray-300 truncate text-xs">{t[lang].legend_services["Safe space"]}</span>
-              </div>
-              <div className="flex items-center gap-1 lg:gap-2">
-                <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full flex-shrink-0" style={{ backgroundColor: '#fbbf24' }}></div>
-                <span className="text-gray-700 dark:text-gray-300 truncate text-xs">{t[lang].legend_services["Nutrition Center"]}</span>
-              </div>
-              <div className="flex items-center gap-1 lg:gap-2">
-                <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full flex-shrink-0" style={{ backgroundColor: '#545454' }}></div>
-                <span className="text-gray-700 dark:text-gray-300 truncate text-xs">{t[lang].legend_services["Distribution Point"]}</span>
-              </div>
-              <div className="flex items-center gap-1 lg:gap-2">
-                <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full flex-shrink-0" style={{ backgroundColor: '#93c01f' }}></div>
-                <span className="text-gray-700 dark:text-gray-300 truncate text-xs">{t[lang].legend_services["Social Activity"]}</span>
+          {visibleLegendItems.length > 0 && (
+            <div className="absolute bottom-2 right-2 lg:bottom-4 lg:right-4 bg-white dark:bg-zinc-900 p-2 lg:p-3 rounded-lg shadow-lg border border-gray-200 dark:border-zinc-800 z-[1000] max-w-xs lg:max-w-none">
+              <p className="font-bold text-xs lg:text-sm mb-1 lg:mb-2 text-gray-900 dark:text-white">{t[lang].legend}</p>
+              <div className="space-y-0.5 lg:space-y-1 text-xs grid grid-cols-2 lg:grid-cols-1 gap-1 lg:gap-0">
+                {visibleLegendItems.map((item) => (
+                  <div key={item.type} className="flex items-center gap-1 lg:gap-2">
+                    <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full flex-shrink-0" style={{ backgroundColor: item.color }}></div>
+                    <span className="text-gray-700 dark:text-gray-300 truncate text-xs">{t[lang].legend_services[item.type] || item.type}</span>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
+          )}
         </div>
         {/* Details/Panel Section */}
         <div className="relative w-full lg:w-80 flex-shrink-0 min-h-0 flex flex-col lg:h-full">
@@ -2825,42 +2889,38 @@ export default function Home() {
               ) : (
                 <div className="space-y-2">
                   {currentServices.map((service) => {
-                  const serviceType = service.serviceTypeKey || getServiceType(service.name);
-                  const serviceTypeLabel = service.serviceTypeLabel || serviceType;
-                  const translatedServiceName = service.translatedServiceName || translateServiceNameValue(service, lang);
                   const translatedOrg = translateOrganization(service.Org || service.org);
-                  let badgeColor = 'bg-gray-200 dark:bg-zinc-700';
-                  if (serviceType === 'Water Trucking - Distribution Point') badgeColor = 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
-                  if (serviceType === 'Health Space/Clinic') badgeColor = 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200';
-                  if (serviceType === 'Community Kitchen') badgeColor = 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200';
-                  if (serviceType === 'Bakery') badgeColor = 'bg-amber-700/15 text-amber-900 dark:bg-amber-800/30 dark:text-amber-200';
-                  if (serviceType === 'TLS/School') badgeColor = 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200';
-                  if (serviceType === 'Community Space') badgeColor = 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
-                  if (serviceType === 'Safe space') badgeColor = 'bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200';
-                  if (serviceType === 'Nutrition Center') badgeColor = 'bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200';
-                  if (serviceType === 'Social Activity') badgeColor = 'bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-200';
+                  const serviceColor = getColorFromService(service.name);
+                  const isSelected = selectedService?.id === service.id;
+                  const isHovered = hoveredCardId === service.id;
+                  const contrastColor = isSelected ? (serviceColor.toLowerCase() === '#fbbf24' ? '#000000' : '#ffffff') : undefined;
 
                     return (
                     <button
                       key={service.id}
                       onClick={() => handleServiceClick(service)}
-                      className={`w-full p-3 rounded-lg transition-colors ${isArabic ? 'text-right' : 'text-left'} ${selectedService?.id === service.id
-                          ? 'bg-green-500 text-white dark:bg-green-600'
-                          : 'bg-gray-100 text-gray-900 hover:bg-gray-200 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700'
-                        }`}
+                      onMouseEnter={() => setHoveredCardId(service.id)}
+                      onMouseLeave={() => setHoveredCardId(null)}
+                      className={`w-full p-3 rounded-lg transition-all border border-gray-200/50 dark:border-zinc-800/50 text-gray-900 dark:text-white ${isArabic ? 'text-right' : 'text-left'} ${
+                        isSelected
+                          ? 'scale-[1.02] shadow-md ring-2 ring-emerald-500 dark:ring-emerald-400 font-bold'
+                          : ''
+                      }`}
+                      style={{
+                        borderInlineStart: `5px solid ${serviceColor}`,
+                        backgroundColor: isSelected ? serviceColor : (isHovered ? `${serviceColor}2e` : `${serviceColor}15`),
+                        color: contrastColor,
+                      }}
                     >
                       <p className="font-semibold text-sm">{service.translatedName}</p>
-                      <p className={`text-xs ${selectedService?.id === service.id ? 'text-white/90' : 'text-gray-600 dark:text-gray-300'}`}>
+                      <p className={`text-xs ${isSelected ? 'text-white/90' : 'text-gray-600 dark:text-gray-300'}`}>
                         {translateSiteName(service.siteName)}
                       </p>
                       {translatedOrg && (
-                        <p className={`text-xs ${selectedService?.id === service.id ? 'text-white/85' : 'text-gray-500 dark:text-gray-400'}`}>
+                        <p className={`text-xs ${isSelected ? 'text-white/85' : 'text-gray-500 dark:text-gray-400'}`}>
                           {translatedOrg}
                         </p>
                       )}
-                      <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${selectedService?.id === service.id ? 'bg-white/20' : badgeColor}`}>
-                        {serviceTypeLabel}
-                      </span>
                     </button>
                   );
                   })}

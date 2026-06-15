@@ -1,0 +1,52 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              34.258455,
+              31.350201
+            ],
+            [
+              34.257478,
+              31.350665
+            ],
+            [
+              34.257302,
+              31.350921
+            ],
+            [
+              34.256432,
+              31.350519
+            ],
+            [
+              34.256744,
+              31.350081
+            ],
+            [
+              34.256992,
+              31.3495
+            ],
+            [
+              34.257646,
+              31.349778
+            ],
+            [
+              34.258455,
+              31.350201
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "site_code": "KYS1901",
+        "name": "KYS1901",
+        "description": "Al-Zaytoon    <br>       <br>   OID   25    <br>   Name   Al-Zaytoon    <br>   FolderPath   Sites_for_GFM    <br>   SymbolID   0    <br>   AltMode   0    <br>   Base   0    <br>   Clamped   -1    <br>   Extruded   0    <br>   Snippet       <br>   PopupInfo   Al-Zaytoon <br> <br> SHAPE Polygon <br> Name Al-Zaytoon <br> Area  <br> Site Code KYS1901 <br> SHAPE_Length 0.005146 <br> SHAPE_Area 0.000001"
+      }
+    }
+  ]
+}

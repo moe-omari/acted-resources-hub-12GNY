@@ -448,6 +448,7 @@ export default function AdminControlPanel() {
     boundaryFile: '',
   });
   const [siteFormError, setSiteFormError] = useState('');
+  const [plainCoordinates, setPlainCoordinates] = useState('');
 
   // Map Preview Modal state
   const [previewMapUrl, setPreviewMapUrl] = useState(null);
@@ -695,11 +696,22 @@ export default function AdminControlPanel() {
   const handleSaveCoordinate = async (e) => {
     e.preventDefault();
 
-    const lat = parseFloat(coordForm.latitude);
-    const lng = parseFloat(coordForm.longitude);
+    let lat = parseFloat(coordForm.latitude);
+    let lng = parseFloat(coordForm.longitude);
     if (isNaN(lat) || isNaN(lng)) {
       showToast('Latitude and Longitude must be valid numbers', 'error');
       return;
+    }
+
+    if (lat >= 33.5 && lat <= 36.5 && lng >= 30.5 && lng <= 32.5) {
+      const temp = lat;
+      lat = lng;
+      lng = temp;
+      setCoordForm(prev => ({
+        ...prev,
+        latitude: lat,
+        longitude: lng
+      }));
     }
 
     const selectedSite = coordForm['site name'];
@@ -905,8 +917,184 @@ export default function AdminControlPanel() {
     }
   };
 
+  const handleParsePlainCoordinates = async () => {
+    if (!siteForm.code) {
+      showToast(isArabic ? 'يرجى إدخال رمز الموقع أولاً' : 'Please enter Site Code first', 'error');
+      return;
+    }
+
+    const text = plainCoordinates.trim();
+    if (!text) {
+      showToast(isArabic ? 'يرجى إدخال إحداثيات صالحة' : 'Please enter valid coordinates', 'error');
+      return;
+    }
+
+    setUploadingBoundary(true);
+
+    try {
+      let coords = [];
+
+      const extractCoordinates = (arr) => {
+        let extracted = [];
+        const walk = (item) => {
+          if (!Array.isArray(item)) return;
+          if (item.length >= 2 && typeof item[0] === 'number' && typeof item[1] === 'number') {
+            extracted.push([item[0], item[1], typeof item[2] === 'number' ? item[2] : 0]);
+          } else {
+            item.forEach(walk);
+          }
+        };
+        walk(arr);
+        return extracted;
+      };
+
+      if (text.toLowerCase().includes('polygon')) {
+        const matches = text.match(/\(([^()]+)\)/g);
+        if (matches) {
+          let bestCoords = [];
+          for (const match of matches) {
+            const ringStr = match.slice(1, -1).trim();
+            const pairs = ringStr.split(',').map(p => p.trim()).filter(p => p.length > 0);
+            const currentCoords = [];
+            for (const pair of pairs) {
+              const parts = pair.split(/\s+/).map(p => p.trim()).filter(p => p.length > 0);
+              if (parts.length >= 2) {
+                const lng = parseFloat(parts[0]);
+                const lat = parseFloat(parts[1]);
+                const ele = parts[2] ? parseFloat(parts[2]) : 0;
+                if (!isNaN(lng) && !isNaN(lat)) {
+                  currentCoords.push([lng, lat, ele]);
+                }
+              }
+            }
+            if (currentCoords.length > bestCoords.length) {
+              bestCoords = currentCoords;
+            }
+          }
+          if (bestCoords.length > 0) {
+            coords = bestCoords;
+          }
+        }
+      }
+
+      if (coords.length === 0 && text.includes('[')) {
+        let parsed = null;
+        let cleanedText = text.trim().replace(/,\s*$/, '').replace(/,\s*(?=\]|\})/g, '');
+        try {
+          parsed = JSON.parse(cleanedText);
+        } catch (e1) {
+          try {
+            parsed = JSON.parse("[" + cleanedText + "]");
+          } catch (e2) {
+            // ignore JSON error, will fall back to plain parser
+          }
+        }
+        if (parsed) {
+          coords = extractCoordinates(parsed);
+        }
+      }
+
+      if (coords.length === 0) {
+        const lines = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+        for (const line of lines) {
+          const parts = line.split(/[,\s;]+/).map(p => p.trim()).filter(p => p.length > 0);
+          if (parts.length < 2) continue;
+
+          const lng = parseFloat(parts[0]);
+          const lat = parseFloat(parts[1]);
+          const ele = parts[2] ? parseFloat(parts[2]) : 0;
+
+          if (isNaN(lng) || isNaN(lat)) {
+            throw new Error(isArabic ? `إحداثي غير صالح: ${line}` : `Invalid coordinate: ${line}`);
+          }
+          coords.push([lng, lat, ele]);
+        }
+      }
+
+      coords = coords.map(([lng, lat, ele]) => {
+        if (lat >= 33.5 && lat <= 36.5 && lng >= 30.5 && lng <= 32.5) {
+          return [lat, lng, ele];
+        }
+        return [lng, lat, ele];
+      });
+
+      if (coords.length < 3) {
+        throw new Error(isArabic ? 'تحتاج إلى 3 نقاط على الأقل لتشكيل مضلع' : 'You need at least 3 coordinates to form a polygon.');
+      }
+
+      const first = coords[0];
+      const last = coords[coords.length - 1];
+      if (first[0] !== last[0] || first[1] !== last[1]) {
+        coords.push([first[0], first[1], first[2]]);
+      }
+
+      const geojson = {
+        type: 'FeatureCollection',
+        features: [
+          {
+            type: 'Feature',
+            geometry: {
+              type: 'Polygon',
+              coordinates: [coords]
+            },
+            properties: {
+              site_code: siteForm.code,
+              name: siteForm.code
+            }
+          }
+        ]
+      };
+
+      const geojsonString = JSON.stringify(geojson, null, 2);
+      const blob = new Blob([geojsonString], { type: 'application/json' });
+      const virtualFile = new File([blob], `${siteForm.code}.geojson`, { type: 'application/json' });
+
+      const formData = new FormData();
+      formData.append('file', virtualFile);
+      formData.append('type', 'boundary');
+      formData.append('customName', siteForm.code);
+
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setSiteForm((prev) => ({
+          ...prev,
+          boundaryFile: data.fileUrl,
+        }));
+        showToast(isArabic ? 'تم إنشاء وحفظ الحدود بنجاح!' : 'Boundary generated and saved successfully!');
+
+        let latSum = 0;
+        let lngSum = 0;
+        coords.forEach(c => {
+          lngSum += Number(c[0]);
+          latSum += Number(c[1]);
+        });
+        const centerLat = (latSum / coords.length).toFixed(6);
+        const centerLng = (lngSum / coords.length).toFixed(6);
+        setSiteForm(prev => ({
+          ...prev,
+          latitude: centerLat,
+          longitude: centerLng
+        }));
+      } else {
+        const errData = await res.json();
+        throw new Error(errData.error || (isArabic ? 'فشل في حفظ الحدود' : 'Failed to save boundary'));
+      }
+    } catch (err) {
+      console.error(err);
+      showToast(err.message || (isArabic ? 'حدث خطأ أثناء معالجة الإحداثيات' : 'Error processing coordinates'), 'error');
+    } finally {
+      setUploadingBoundary(false);
+    }
+  };
+
   const openSiteModal = (site = null) => {
     setSiteFormError('');
+    setPlainCoordinates('');
     if (site) {
       const siteTrans = siteTranslations[site.name] || { en: site.name, ar: site.name };
       setEditingSite({ oldName: site.name, name: site.name, location: site.location });
@@ -921,6 +1109,39 @@ export default function AdminControlPanel() {
         longitude: site.longitude || '',
         boundaryFile: siteTrans.boundaryFile || '',
       });
+
+      if (siteTrans.boundaryFile) {
+        fetch(siteTrans.boundaryFile)
+          .then((res) => {
+            if (res.ok) return res.json();
+            throw new Error();
+          })
+          .then((geojson) => {
+            let coords = [];
+            if (geojson.type === 'FeatureCollection' && Array.isArray(geojson.features)) {
+              geojson.features.forEach(f => {
+                if (f.geometry && f.geometry.type === 'Polygon') {
+                  coords.push(...f.geometry.coordinates[0]);
+                } else if (f.geometry && f.geometry.type === 'MultiPolygon') {
+                  f.geometry.coordinates.forEach(poly => coords.push(...poly[0]));
+                }
+              });
+            } else if (geojson.type === 'Feature' && geojson.geometry) {
+              if (geojson.geometry.type === 'Polygon') {
+                coords.push(...geojson.geometry.coordinates[0]);
+              }
+            } else if (geojson.type === 'Polygon') {
+              coords.push(...geojson.coordinates[0]);
+            }
+            if (coords.length > 0) {
+              const coordLines = coords.map(c => `${c[0]},${c[1]},${c[2] !== undefined ? c[2] : 0}`).join('\n');
+              setPlainCoordinates(coordLines);
+            }
+          })
+          .catch((err) => {
+            console.warn('Could not load existing boundary coordinates into text area', err);
+          });
+      }
     } else {
       setEditingSite(null);
       setSiteForm({
@@ -955,11 +1176,25 @@ export default function AdminControlPanel() {
         return;
       }
 
+      let formLat = siteForm.latitude === '' ? '' : parseFloat(siteForm.latitude);
+      let formLng = siteForm.longitude === '' ? '' : parseFloat(siteForm.longitude);
+      if (formLat !== '' && formLng !== '' && !isNaN(formLat) && !isNaN(formLng)) {
+        if (formLat >= 33.5 && formLat <= 36.5 && formLng >= 30.5 && formLng <= 32.5) {
+          const temp = formLat;
+          formLat = formLng;
+          formLng = temp;
+          setSiteForm(prev => ({
+            ...prev,
+            latitude: formLat,
+            longitude: formLng
+          }));
+        }
+      }
+
       let updatedCoords = [...coordinates];
       let updatedTranslations = { ...siteTranslations };
 
       if (editingSite) {
-        // 1. Rename existing site name in coordinates database
         const oldName = editingSite.oldName;
         updatedCoords = coordinates.map((c) => {
           const cSiteName = c['site name'] || c.siteName || '';
@@ -974,7 +1209,6 @@ export default function AdminControlPanel() {
           return c;
         });
 
-        // 2. Update translations key
         if (oldName !== code) {
           delete updatedTranslations[oldName];
         }
@@ -984,17 +1218,11 @@ export default function AdminControlPanel() {
           boundaryFile: siteForm.boundaryFile || '',
           projectCode: (siteForm.projectCode || '').trim(),
           location: siteForm.location,
-          latitude: siteForm.latitude === '' ? '' : parseFloat(siteForm.latitude) || '',
-          longitude: siteForm.longitude === '' ? '' : parseFloat(siteForm.longitude) || ''
+          latitude: formLat,
+          longitude: formLng
         };
       } else {
-        // 1. Add new site with center placeholder
-        let latStr = (siteForm.latitude || '').toString().trim();
-        let lngStr = (siteForm.longitude || '').toString().trim();
-        let lat = latStr === '' ? '' : parseFloat(latStr);
-        let lng = lngStr === '' ? '' : parseFloat(lngStr);
-        
-        if ((latStr !== '' || lngStr !== '') && (lat === '' || lng === '' || isNaN(lat) || isNaN(lng))) {
+        if ((siteForm.latitude !== '' || siteForm.longitude !== '') && (formLat === '' || formLng === '' || isNaN(formLat) || isNaN(formLng))) {
           setSiteFormError(isArabic ? 'خطوط الطول والعرض يجب أن تكون أرقاماً صالحة' : 'Latitude and Longitude must be valid numbers');
           return;
         }
@@ -1010,8 +1238,8 @@ export default function AdminControlPanel() {
           boundaryFile: siteForm.boundaryFile || '',
           projectCode: (siteForm.projectCode || '').trim(),
           location: siteForm.location,
-          latitude: isNaN(lat) ? '' : lat,
-          longitude: isNaN(lng) ? '' : lng
+          latitude: isNaN(formLat) ? '' : formLat,
+          longitude: isNaN(formLng) ? '' : formLng
         };
       }
 
@@ -1704,6 +1932,7 @@ export default function AdminControlPanel() {
       'Bakery',
       'TLS/School',
       'Community Space',
+      'Safe Spaces for Women and Girls (WGSS)',
       'Safe space',
       'Nutrition Center',
       'Distribution Point',
@@ -1719,6 +1948,7 @@ export default function AdminControlPanel() {
         Bakery: 'Bakery',
         'TLS/School': 'TLS/School',
         'Community Space': 'Community Space',
+        'Safe Spaces for Women and Girls (WGSS)': 'Safe Spaces for Women and Girls (WGSS)',
         'Safe space': 'Safe space',
         'Nutrition Center': 'Nutrition Center',
         'Distribution Point': 'Distribution Point',
@@ -1732,6 +1962,7 @@ export default function AdminControlPanel() {
         Bakery: 'مخبز (Bakery)',
         'TLS/School': 'مدرسة / مساحة تعليمية (TLS/School)',
         'Community Space': 'مساحة مجتمعية (Community Space)',
+        'Safe Spaces for Women and Girls (WGSS)': 'مساحات آمنة للنساء والفتيات (WGSS)',
         'Safe space': 'مساحة آمنة (Safe space)',
         'Nutrition Center': 'مركز تغذية (Nutrition Center)',
         'Distribution Point': 'نقطة توزيع (Distribution Point)',
@@ -2346,7 +2577,19 @@ export default function AdminControlPanel() {
                         const siteTrans = siteTranslations[site.name] || {};
                         return (
                           <tr key={site.name} className="hover:bg-zinc-900/30 transition-colors">
-                            <td className="py-3 px-4 font-bold text-white font-mono">{site.name}</td>
+                            <td className="py-3 px-4 font-bold text-white font-mono">
+                              <div className="flex items-center gap-2">
+                                <span>{site.name}</span>
+                                {siteTrans.boundaryFile && (
+                                  <span 
+                                    title={isArabic ? "تم تحديد الحدود للموقع" : "Boundaries set for this site"} 
+                                    className="px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[9px] font-extrabold uppercase tracking-wide cursor-help"
+                                  >
+                                    {isArabic ? "حدود" : "Bound"}
+                                  </span>
+                                )}
+                              </div>
+                            </td>
                             <td className="py-3 px-4 text-amber-400 font-bold font-mono">{siteTrans.projectCode || '—'}</td>
                             <td className="py-3 px-4 text-zinc-300 font-mono">{siteTrans.en || site.name}</td>
                             <td className="py-3 px-4 text-zinc-300 font-medium">{siteTrans.ar || '—'}</td>
@@ -2820,7 +3063,7 @@ export default function AdminControlPanel() {
       {/* SITES MODAL FORM */}
       {isSiteModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="w-full max-w-lg bg-zinc-950 border border-zinc-800 p-6 rounded-3xl shadow-2xl relative">
+          <div className="w-full max-w-4xl bg-zinc-950 border border-zinc-800 p-6 rounded-3xl shadow-2xl relative max-h-[90vh] overflow-y-auto">
             <h3 className="text-base font-black text-white mb-4">
               {editingSite ? t.modalEditSite.replace('{name}', editingSite.name) : t.modalAddSite}
             </h3>
@@ -2834,137 +3077,170 @@ export default function AdminControlPanel() {
               </div>
             )}
 
-            <form onSubmit={handleSaveSite} className="space-y-4 text-xs">
-              <div>
-                <label className="block text-zinc-400 font-bold uppercase tracking-wider text-[10px] mb-1.5">
-                  {isArabic ? 'رمز الموقع (المفتاح الأساسي ومفتاح الربط الداخلي)' : 'Site Code (Primary & Internal Key)'}
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={siteForm.code}
-                  onChange={(e) => setSiteForm({ ...siteForm, code: e.target.value })}
-                  placeholder={isArabic ? 'مثال: KH5452' : 'e.g. KH5452'}
-                  className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white outline-none focus:border-blue-500 text-left font-mono"
-                  dir="ltr"
-                />
-              </div>
+            <form onSubmit={handleSaveSite} className="space-y-6 text-xs">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                {/* Left Column: Metadata */}
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-zinc-400 font-bold uppercase tracking-wider text-[10px] mb-1.5">
+                      {isArabic ? 'رمز الموقع (المفتاح الأساسي ومفتاح الربط الداخلي)' : 'Site Code (Primary & Internal Key)'}
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={siteForm.code}
+                      onChange={(e) => setSiteForm({ ...siteForm, code: e.target.value })}
+                      placeholder={isArabic ? 'مثال: KH5452' : 'e.g. KH5452'}
+                      className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white outline-none focus:border-blue-500 text-left font-mono"
+                      dir="ltr"
+                    />
+                  </div>
 
-              <div>
-                <label className="block text-zinc-400 font-bold uppercase tracking-wider text-[10px] mb-1.5">
-                  {isArabic ? 'رمز المشروع (Project Code)' : 'Project Code'}
-                </label>
-                <CreatableSelect
-                  isClearable
-                  options={projectCodeOptions}
-                  onChange={(option) => setSiteForm({ ...siteForm, projectCode: option ? option.value : '' })}
-                  value={siteForm.projectCode ? { value: siteForm.projectCode, label: siteForm.projectCode } : null}
-                  placeholder={isArabic ? 'مثال: GNY' : 'e.g. GNY'}
-                  styles={reactSelectStyles}
-                  className="w-full text-xs text-white text-left"
-                  classNamePrefix="react-select"
-                  dir="ltr"
-                />
-              </div>
+                  <div>
+                    <label className="block text-zinc-400 font-bold uppercase tracking-wider text-[10px] mb-1.5">
+                      {isArabic ? 'رمز المشروع (Project Code)' : 'Project Code'}
+                    </label>
+                    <CreatableSelect
+                      isClearable
+                      options={projectCodeOptions}
+                      onChange={(option) => setSiteForm({ ...siteForm, projectCode: option ? option.value : '' })}
+                      value={siteForm.projectCode ? { value: siteForm.projectCode, label: siteForm.projectCode } : null}
+                      placeholder={isArabic ? 'مثال: GNY' : 'e.g. GNY'}
+                      styles={reactSelectStyles}
+                      className="w-full text-xs text-white text-left"
+                      classNamePrefix="react-select"
+                      dir="ltr"
+                    />
+                  </div>
 
-              <div>
-                <label className="block text-zinc-400 font-bold uppercase tracking-wider text-[10px] mb-1.5">{t.lblSiteNameEng}</label>
-                <input
-                  type="text"
-                  required
-                  value={siteForm.nameEn}
-                  onChange={(e) => setSiteForm({ ...siteForm, nameEn: e.target.value })}
-                  placeholder="e.g. AL Amal college"
-                  className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white outline-none focus:border-blue-500 text-left font-mono"
-                  dir="ltr"
-                />
-              </div>
+                  <div>
+                    <label className="block text-zinc-400 font-bold uppercase tracking-wider text-[10px] mb-1.5">{t.lblSiteNameEng}</label>
+                    <input
+                      type="text"
+                      required
+                      value={siteForm.nameEn}
+                      onChange={(e) => setSiteForm({ ...siteForm, nameEn: e.target.value })}
+                      placeholder="e.g. AL Amal college"
+                      className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white outline-none focus:border-blue-500 text-left font-mono"
+                      dir="ltr"
+                    />
+                  </div>
 
-              <div>
-                <label className="block text-zinc-400 font-bold uppercase tracking-wider text-[10px] mb-1.5">{t.lblSiteNameAra}</label>
-                <input
-                  type="text"
-                  required
-                  value={siteForm.nameAr}
-                  onChange={(e) => setSiteForm({ ...siteForm, nameAr: e.target.value })}
-                  placeholder="مثال: كلية الأمل"
-                  className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white outline-none focus:border-blue-500 text-right font-medium"
-                  dir="rtl"
-                />
-              </div>
-              <div>
-                <label className="block text-zinc-400 font-bold uppercase tracking-wider text-[10px] mb-1.5">{t.lblRegion}</label>
-                <select
-                  value={siteForm.location}
-                  onChange={(e) => setSiteForm({ ...siteForm, location: e.target.value })}
-                  className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-blue-500"
-                >
-                  <option value="North">North</option>
-                  <option value="South">South</option>
-                </select>
-              </div>
+                  <div>
+                    <label className="block text-zinc-400 font-bold uppercase tracking-wider text-[10px] mb-1.5">{t.lblSiteNameAra}</label>
+                    <input
+                      type="text"
+                      required
+                      value={siteForm.nameAr}
+                      onChange={(e) => setSiteForm({ ...siteForm, nameAr: e.target.value })}
+                      placeholder="مثال: كلية الأمل"
+                      className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white outline-none focus:border-blue-500 text-right font-medium"
+                      dir="rtl"
+                    />
+                  </div>
 
-              <div>
-                <label className="block text-zinc-400 font-bold uppercase tracking-wider text-[10px] mb-1.5">
-                  {isArabic ? 'ملف حدود الموقع (GeoJSON/JSON)' : 'Site Boundary File (GeoJSON/JSON)'}
-                </label>
-                <div className="flex gap-3 items-center">
-                  <input
-                    type="file"
-                    accept=".json,.geojson"
-                    onChange={handleBoundaryUpload}
-                    className="hidden"
-                    id="site-boundary-upload"
-                  />
-                  <label
-                    htmlFor="site-boundary-upload"
-                    className="px-4 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 hover:text-white font-bold text-xs rounded-xl cursor-pointer border border-zinc-700 flex items-center gap-2 transition-all"
-                  >
-                    <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
-                    </svg>
-                    {uploadingBoundary ? (isArabic ? 'جاري الرفع...' : 'Uploading...') : (isArabic ? 'اختر ملف الحدود' : 'Choose Boundary File')}
-                  </label>
+                  <div>
+                    <label className="block text-zinc-400 font-bold uppercase tracking-wider text-[10px] mb-1.5">{t.lblRegion}</label>
+                    <select
+                      value={siteForm.location}
+                      onChange={(e) => setSiteForm({ ...siteForm, location: e.target.value })}
+                      className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-blue-500"
+                    >
+                      <option value="North">North</option>
+                      <option value="South">South</option>
+                    </select>
+                  </div>
+                </div>
 
-                  {siteForm.boundaryFile && (
-                    <span className="text-emerald-400 font-mono text-[10px] truncate max-w-xs flex items-center gap-1.5 bg-emerald-950/20 border border-emerald-900/30 px-2.5 py-1.5 rounded-lg" dir="ltr">
-                      <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping"></span>
-                      Uploaded: {siteForm.boundaryFile.split('/').pop()}
-                    </span>
+                {/* Right Column: Boundaries */}
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-zinc-400 font-bold uppercase tracking-wider text-[10px] mb-1.5">
+                      {isArabic ? 'ملف حدود الموقع (GeoJSON/JSON)' : 'Site Boundary File (GeoJSON/JSON)'}
+                    </label>
+                    <div className="flex gap-3 items-center">
+                      <input
+                        type="file"
+                        accept=".json,.geojson"
+                        onChange={handleBoundaryUpload}
+                        className="hidden"
+                        id="site-boundary-upload"
+                      />
+                      <label
+                        htmlFor="site-boundary-upload"
+                        className="px-4 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 hover:text-white font-bold text-xs rounded-xl cursor-pointer border border-zinc-700 flex items-center gap-2 transition-all"
+                      >
+                        <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                        </svg>
+                        {uploadingBoundary ? (isArabic ? 'جاري الرفع...' : 'Uploading...') : (isArabic ? 'اختر ملف الحدود' : 'Choose Boundary File')}
+                      </label>
+
+                      {siteForm.boundaryFile && (
+                        <span className="text-emerald-400 font-mono text-[10px] truncate max-w-xs flex items-center gap-1.5 bg-emerald-950/20 border border-emerald-900/30 px-2.5 py-1.5 rounded-lg" dir="ltr">
+                          <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping"></span>
+                          Uploaded: {siteForm.boundaryFile.split('/').pop()}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="bg-zinc-900/40 p-4 border border-zinc-800/60 rounded-2xl space-y-3">
+                    <div className="flex justify-between items-center">
+                      <label className="block text-zinc-400 font-bold uppercase tracking-wider text-[10px]">
+                        {isArabic ? 'أو أدخل الإحداثيات يدوياً (خطوط الطول, العرض, الارتفاع)' : 'Or Enter Coordinates Manually (Lng, Lat, Ele)'}
+                      </label>
+                      <span className="text-[9px] text-zinc-500 font-mono">one pair per line</span>
+                    </div>
+                    <textarea
+                      rows={4}
+                      value={plainCoordinates}
+                      onChange={(e) => setPlainCoordinates(e.target.value)}
+                      placeholder={`e.g.\n34.26742,31.360003,0\n34.266474,31.359212,0\n34.267411,31.358588,0`}
+                      className="w-full bg-zinc-950 border border-zinc-850 rounded-xl px-3.5 py-2.5 text-xs text-white outline-none focus:border-blue-500 font-mono placeholder-zinc-700"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleParsePlainCoordinates}
+                      disabled={uploadingBoundary || !plainCoordinates.trim()}
+                      className="w-full py-2 bg-blue-600/10 hover:bg-blue-600/20 text-blue-400 font-extrabold text-[10px] uppercase tracking-wider rounded-xl border border-blue-500/20 transition-all disabled:opacity-50 disabled:pointer-events-none cursor-pointer"
+                    >
+                      {isArabic ? 'إنشاء وتطبيق الحدود' : 'Generate & Apply Boundary'}
+                    </button>
+                  </div>
+
+                  {!editingSite && (
+                    <div className="grid grid-cols-2 gap-4 bg-zinc-900/30 p-4 border border-zinc-900 rounded-2xl">
+                      <div className="col-span-2 text-[10px] text-zinc-400 leading-normal">
+                        {t.sitePlaceholderAlert}
+                      </div>
+                      <div>
+                        <label className="block text-zinc-400 font-bold uppercase tracking-wider text-[9px] mb-1">{t.lblCenterLat}</label>
+                        <input
+                          type="number"
+                          step="any"
+                          value={siteForm.latitude}
+                          onChange={(e) => setSiteForm({ ...siteForm, latitude: e.target.value })}
+                          placeholder="e.g. 31.519358"
+                          className="w-full bg-zinc-900 border border-zinc-850 rounded-xl px-3.5 py-2 text-xs text-white outline-none focus:border-blue-500 font-mono"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-zinc-400 font-bold uppercase tracking-wider text-[9px] mb-1">{t.lblCenterLng}</label>
+                        <input
+                          type="number"
+                          step="any"
+                          value={siteForm.longitude}
+                          onChange={(e) => setSiteForm({ ...siteForm, longitude: e.target.value })}
+                          placeholder="e.g. 34.449595"
+                          className="w-full bg-zinc-900 border border-zinc-850 rounded-xl px-3.5 py-2 text-xs text-white outline-none focus:border-blue-500 font-mono"
+                        />
+                      </div>
+                    </div>
                   )}
                 </div>
               </div>
-
-              {!editingSite && (
-                <div className="grid grid-cols-2 gap-4 bg-zinc-900/30 p-4 border border-zinc-900 rounded-2xl">
-                  <div className="col-span-2 text-[10px] text-zinc-400 leading-normal">
-                    {t.sitePlaceholderAlert}
-                  </div>
-                  <div>
-                    <label className="block text-zinc-400 font-bold uppercase tracking-wider text-[9px] mb-1">{t.lblCenterLat}</label>
-                    <input
-                      type="number"
-                      step="any"
-                      value={siteForm.latitude}
-                      onChange={(e) => setSiteForm({ ...siteForm, latitude: e.target.value })}
-                      placeholder="e.g. 31.519358"
-                      className="w-full bg-zinc-900 border border-zinc-850 rounded-xl px-3.5 py-2 text-xs text-white outline-none focus:border-blue-500 font-mono"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-zinc-400 font-bold uppercase tracking-wider text-[9px] mb-1">{t.lblCenterLng}</label>
-                    <input
-                      type="number"
-                      step="any"
-                      value={siteForm.longitude}
-                      onChange={(e) => setSiteForm({ ...siteForm, longitude: e.target.value })}
-                      placeholder="e.g. 34.449595"
-                      className="w-full bg-zinc-900 border border-zinc-850 rounded-xl px-3.5 py-2 text-xs text-white outline-none focus:border-blue-500 font-mono"
-                    />
-                  </div>
-                </div>
-              )}
 
               <div className="flex gap-3 pt-4 border-t border-zinc-900">
                 <button

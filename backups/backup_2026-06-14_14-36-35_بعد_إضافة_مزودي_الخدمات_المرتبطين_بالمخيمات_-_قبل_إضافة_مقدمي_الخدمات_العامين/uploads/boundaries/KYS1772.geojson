@@ -1,0 +1,84 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              34.26185,
+              31.352162
+            ],
+            [
+              34.261546,
+              31.3524
+            ],
+            [
+              34.261133,
+              31.352803
+            ],
+            [
+              34.260889,
+              31.353101
+            ],
+            [
+              34.2605,
+              31.352782
+            ],
+            [
+              34.260691,
+              31.352283
+            ],
+            [
+              34.260986,
+              31.351911
+            ],
+            [
+              34.262207,
+              31.350965
+            ],
+            [
+              34.262221,
+              31.350953
+            ],
+            [
+              34.262421,
+              31.351223
+            ],
+            [
+              34.262326,
+              31.351312
+            ],
+            [
+              34.262288,
+              31.351404
+            ],
+            [
+              34.26205,
+              31.351617
+            ],
+            [
+              34.262358,
+              31.352058
+            ],
+            [
+              34.262108,
+              31.352363
+            ],
+            [
+              34.26185,
+              31.352162
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "site_code": "KYS1772",
+        "name": "KYS1772",
+        "description": "Al-Wehda    <br>       <br>   OID   16    <br>   Name   Al-Wehda    <br>   FolderPath   Sites_for_GFM    <br>   SymbolID   0    <br>   AltMode   0    <br>   Base   0    <br>   Clamped   -1    <br>   Extruded   0    <br>   Snippet       <br>   PopupInfo   Al-Wehda     <br>       <br>   SHAPE   Polygon    <br>   Name   Al-Wehda    <br>   Area       <br>   Site Code   KYS1772    <br>   SHAPE_Length   0.004568    <br>   SHAPE_Area   0.000001"
+      }
+    }
+  ]
+}

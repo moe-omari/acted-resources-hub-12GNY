@@ -1,0 +1,96 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              34.25626,
+              31.35414
+            ],
+            [
+              34.256737,
+              31.353491
+            ],
+            [
+              34.256796,
+              31.353578
+            ],
+            [
+              34.25733,
+              31.353381
+            ],
+            [
+              34.258281,
+              31.352705
+            ],
+            [
+              34.259024,
+              31.353025
+            ],
+            [
+              34.259873,
+              31.353368
+            ],
+            [
+              34.260236,
+              31.353724
+            ],
+            [
+              34.259856,
+              31.353982
+            ],
+            [
+              34.259257,
+              31.354148
+            ],
+            [
+              34.259002,
+              31.353854
+            ],
+            [
+              34.258274,
+              31.354351
+            ],
+            [
+              34.257868,
+              31.354759
+            ],
+            [
+              34.258385,
+              31.355237
+            ],
+            [
+              34.257891,
+              31.355741
+            ],
+            [
+              34.257502,
+              31.355406
+            ],
+            [
+              34.256624,
+              31.354561
+            ],
+            [
+              34.256659,
+              31.354525
+            ],
+            [
+              34.25626,
+              31.35414
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "site_code": "KYS2030",
+        "name": "KYS2030",
+        "description": "Al-Rayyan    <br>       <br>   OID   24    <br>   Name   Al-Rayyan    <br>   FolderPath   Sites_for_GFM    <br>   SymbolID   0    <br>   AltMode   0    <br>   Base   0    <br>   Clamped   -1    <br>   Extruded   0    <br>   Snippet       <br>   PopupInfo   Al-Rayyan    <br>       <br>   SHAPE   Polygon    <br>   Name   Al-Rayyan    <br>   Area       <br>   Site Code   KYS2030    <br>   SHAPE_Length   0.00907    <br>   SHAPE_Area   0.000004"
+      }
+    }
+  ]
+}

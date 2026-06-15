@@ -1,0 +1,76 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              34.25871,
+              31.350118
+            ],
+            [
+              34.258676,
+              31.35069
+            ],
+            [
+              34.258622,
+              31.350778
+            ],
+            [
+              34.258451,
+              31.351179
+            ],
+            [
+              34.258436,
+              31.351467
+            ],
+            [
+              34.258761,
+              31.351673
+            ],
+            [
+              34.258555,
+              31.352081
+            ],
+            [
+              34.258138,
+              31.352624
+            ],
+            [
+              34.257702,
+              31.352319
+            ],
+            [
+              34.257302,
+              31.351989
+            ],
+            [
+              34.256815,
+              31.35165
+            ],
+            [
+              34.257299,
+              31.350932
+            ],
+            [
+              34.25749,
+              31.350654
+            ],
+            [
+              34.25871,
+              31.350118
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "site_code": "KYS1732",
+        "name": "KYS1732",
+        "description": "Al-Nour    <br>       <br>   OID   23    <br>   Name   Al-Nour    <br>   FolderPath   Sites_for_GFM    <br>   SymbolID   0    <br>   AltMode   0    <br>   Base   0    <br>   Clamped   -1    <br>   Extruded   0    <br>   Snippet       <br>   PopupInfo   Al-Nour    <br>       <br>   SHAPE   Polygon    <br>   Name   Al-Nour    <br>   Area       <br>   Site Code   KYS1732    <br>   SHAPE_Length   0.007109    <br>   SHAPE_Area   0.000003"
+      }
+    }
+  ]
+}

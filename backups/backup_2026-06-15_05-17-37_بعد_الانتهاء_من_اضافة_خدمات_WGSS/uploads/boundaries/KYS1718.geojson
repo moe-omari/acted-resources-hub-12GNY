@@ -1,0 +1,76 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              34.268357,
+              31.353416
+            ],
+            [
+              34.267653,
+              31.353985
+            ],
+            [
+              34.266876,
+              31.35421
+            ],
+            [
+              34.265658,
+              31.35448
+            ],
+            [
+              34.265648,
+              31.354425
+            ],
+            [
+              34.266224,
+              31.35394
+            ],
+            [
+              34.265734,
+              31.353591
+            ],
+            [
+              34.265519,
+              31.353271
+            ],
+            [
+              34.265387,
+              31.352973
+            ],
+            [
+              34.266098,
+              31.352706
+            ],
+            [
+              34.266549,
+              31.352524
+            ],
+            [
+              34.267231,
+              31.352145
+            ],
+            [
+              34.267742,
+              31.352693
+            ],
+            [
+              34.268357,
+              31.353416
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "site_code": "KYS1718",
+        "name": "KYS1718",
+        "description": "Ajyal Al-Karama    <br>       <br>   OID   9    <br>   Name   Ajyal Al-Karama    <br>   FolderPath   Sites_for_GFM    <br>   SymbolID   0    <br>   AltMode   0    <br>   Base   0    <br>   Clamped   -1    <br>   Extruded   0    <br>   Snippet       <br>   PopupInfo   Ajyal Al-Karama    <br>       <br>   SHAPE   Polygon    <br>   Name   Ajyal Al-Karama    <br>   Area       <br>   Site Code   KYS1718    <br>   SHAPE_Length   0.007444    <br>   SHAPE_Area   0.000002"
+      }
+    }
+  ]
+}

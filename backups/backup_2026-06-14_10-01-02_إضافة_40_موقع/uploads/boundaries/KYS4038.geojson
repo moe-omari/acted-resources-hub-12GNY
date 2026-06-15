@@ -1,0 +1,88 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              34.264482,
+              31.358161
+            ],
+            [
+              34.263522,
+              31.359018
+            ],
+            [
+              34.262906,
+              31.35962
+            ],
+            [
+              34.262244,
+              31.359166
+            ],
+            [
+              34.261753,
+              31.358784
+            ],
+            [
+              34.260779,
+              31.358028
+            ],
+            [
+              34.262122,
+              31.35631
+            ],
+            [
+              34.262422,
+              31.356652
+            ],
+            [
+              34.262985,
+              31.356299
+            ],
+            [
+              34.263331,
+              31.356056
+            ],
+            [
+              34.263358,
+              31.356086
+            ],
+            [
+              34.264095,
+              31.356339
+            ],
+            [
+              34.264534,
+              31.356148
+            ],
+            [
+              34.264808,
+              31.356241
+            ],
+            [
+              34.264954,
+              31.356241
+            ],
+            [
+              34.263945,
+              31.356809
+            ],
+            [
+              34.264482,
+              31.358161
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "site_code": "KYS4038",
+        "name": "KYS4038",
+        "description": "Al Ihsan camp    <br>       <br>   OID   5    <br>   Name   Al Ihsan camp    <br>   FolderPath   Sites_for_GFM    <br>   SymbolID   0    <br>   AltMode   0    <br>   Base   0    <br>   Clamped   -1    <br>   Extruded   0    <br>   Snippet       <br>   PopupInfo   Al Ihsan camp    <br>       <br>   SHAPE   Polygon    <br>   Name   Al Ihsan camp    <br>   Area       <br>   Site Code   KYS4038    <br>   SHAPE_Length   0.012979    <br>   SHAPE_Area   0.000008"
+      }
+    }
+  ]
+}

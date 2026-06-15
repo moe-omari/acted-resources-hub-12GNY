@@ -1,0 +1,100 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              34.258281,
+              31.352705
+            ],
+            [
+              34.257703,
+              31.353118
+            ],
+            [
+              34.25733,
+              31.353381
+            ],
+            [
+              34.256796,
+              31.353578
+            ],
+            [
+              34.256737,
+              31.353491
+            ],
+            [
+              34.256581,
+              31.353264
+            ],
+            [
+              34.256433,
+              31.353084
+            ],
+            [
+              34.256142,
+              31.352703
+            ],
+            [
+              34.256324,
+              31.352405
+            ],
+            [
+              34.256513,
+              31.352103
+            ],
+            [
+              34.256613,
+              31.351959
+            ],
+            [
+              34.256818,
+              31.351664
+            ],
+            [
+              34.257123,
+              31.351875
+            ],
+            [
+              34.257302,
+              31.351989
+            ],
+            [
+              34.257447,
+              31.3521
+            ],
+            [
+              34.257583,
+              31.352227
+            ],
+            [
+              34.257702,
+              31.352319
+            ],
+            [
+              34.257872,
+              31.352439
+            ],
+            [
+              34.258046,
+              31.352559
+            ],
+            [
+              34.258281,
+              31.352705
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "site_code": "KYS4095",
+        "name": "KYS4095",
+        "description": "Al-tahrir    <br>       <br>   OID   19    <br>   Name   Al-tahrir    <br>   FolderPath   Sites_for_GFM    <br>   SymbolID   0    <br>   AltMode   0    <br>   Base   0    <br>   Clamped   -1    <br>   Extruded   0    <br>   Snippet       <br>   PopupInfo   Al-tahrir    <br>       <br>   SHAPE   Polygon    <br>   Name   Al-tahrir    <br>   Area       <br>   Site Code   KYS4095    <br>   SHAPE_Length   0.005868    <br>   SHAPE_Area   0.000002"
+      }
+    }
+  ]
+}
